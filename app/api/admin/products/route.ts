@@ -1,98 +1,32 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { connectDB } from "@/app/lib/db";
-import Product from "@/app/models/Product";
-import { getSessionUserRole } from "@/app/lib/verifyAuth";
-
-export async function GET(req: NextRequest) {
-  const { user } = await getSessionUserRole();
-  if (user.role !== "Owner" && user.role !== "Manager") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-  }
-  await connectDB();
-  const products = await Product.find({});
-  return NextResponse.json(products);
-}
+import { NextRequest, NextResponse } from 'next/server'
+import connectDB from '@/lib/db'
+import Product from '@/models/Product'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
 export async function POST(req: NextRequest) {
-  const { user } = await getSessionUserRole();
-  if (user.role !== "Owner" && user.role !== "Manager") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-  }
-  const {
-    name,
-    sku,
-    brand,
-    category,
-    description,
-    notes,
-    fragranceNotes,
-    longevity,
-    sillage,
-    price,
-    discountPrice,
-    costPrice,
-    sizes,
-    quantity,
-    images,
-    featured,
-    status,
-  } = await req.json();
+  try {
+    await connectDB()
+    const session = await getServerSession(authOptions)
+    
+    if (!session || session.user.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 })
+    }
 
-  await connectDB();
-  const product = await Product.create({
-    name,
-    sku,
-    brand,
-    category,
-    description,
-    notes,
-    fragranceNotes,
-    longevity,
-    sillage,
-    price,
-    discountPrice,
-    costPrice,
-    sizes,
-    quantity,
-    images,
-    featured,
-    status,
-  });
-  return NextResponse.json(product, { status: 201 });
-}
+    const body = await req.json()
+    
+    // Basic validation
+    if (!body.name || !body.price || !body.category) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    }
 
-export async function PUT(req: NextRequest) {
-  const { user } = await getSessionUserRole();
-  if (user.role !== "Owner" && user.role !== "Manager") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-  }
-  const { id, ...data } = await req.json();
-  if (!id) {
-    return NextResponse.json({ error: "Product ID required" }, { status: 400 });
-  }
-  await connectDB();
-  const product = await Product.findByIdAndUpdate(id, data, { new: true });
-  if (!product) {
-    return NextResponse.json({ error: "Product not found" }, { status: 404 });
-  }
-  return NextResponse.json(product);
-}
+    const product = await Product.create({
+      ...body,
+      slug: body.name.toLowerCase().replace(/ /g, '-'),
+    })
 
-export async function DELETE(req: NextRequest) {
-  const { user } = await getSessionUserRole();
-  if (user.role !== "Owner" && user.role !== "Manager") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    return NextResponse.json(product, { status: 201 })
+  } catch (error: any) {
+    return NextResponse.json({ error: 'Failed to create product' }, { status: 500 })
   }
-  const { id } = await req.json();
-  if (!id) {
-    return NextResponse.json({ error: "Product ID required" }, { status: 400 });
-  }
-  await connectDB();
-  const product = await Product.findByIdAndDelete(id);
-  if (!product) {
-    return NextResponse.json({ error: "Product not found" }, { status: 404 });
-  }
-  return NextResponse.json({ success: true });
 }
