@@ -52,7 +52,7 @@ export function NewsletterSignup() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mx-auto"
         >
-          <div className="relative bg-gradient-to-b from-kartel-black-900/30 to-transparent rounded-[2.5rem] p-10 md:p-14 lg:p-16 border border-white/[0.03] overflow-hidden">
+          <div className="relative bg-gradient-to-b from-kartel-black-900/30 to-transparent rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-14 lg:p-16 border border-white/[0.03] overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute top-10 left-10 w-14 h-14 rounded-full border border-kartel-gold/[0.06] flex items-center justify-center">
               <div className="w-3.5 h-3.5 rounded-full bg-kartel-gold/15" />

@@ -45,16 +45,16 @@ export function BrandStory() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-kartel-gold/15 to-transparent" />
 
       <div className="container-luxury relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
           {/* Image Section */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
+            className="relative order-2 lg:order-1"
           >
-            <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/[0.04] shadow-luxury-xl">
+            <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] overflow-hidden border border-white/[0.04] shadow-luxury-xl">
               <Image
                 src="https://images.unsplash.com/photo-1626090710609-b68733cc8564?q=80&w=1974&auto=format&fit=crop"
                 alt="KARTEL Brand Story"
@@ -89,7 +89,7 @@ export function BrandStory() {
           </motion.div>
 
           {/* Content Section */}
-          <div className="space-y-8 lg:space-y-10">
+          <div className="space-y-6 lg:space-y-10 order-1 lg:order-2">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -61,7 +61,7 @@ export function FeaturedCollections() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
           {featuredCollections.map((collection, index) => (
             <motion.div
               key={collection.id}
@@ -75,9 +75,9 @@ export function FeaturedCollections() {
               }}
             >
               <Link href={collection.link} className="group block h-full">
-                <div className="relative h-full bg-gradient-to-b from-kartel-black-900/40 to-transparent rounded-[2rem] overflow-hidden border border-white/[0.04] hover:border-kartel-gold/[0.12] transition-all duration-700">
+                <div className="relative h-full bg-gradient-to-b from-kartel-black-900/40 to-transparent rounded-2xl sm:rounded-[2rem] overflow-hidden border border-white/[0.04] hover:border-kartel-gold/[0.12] transition-all duration-700">
                   {/* Image container */}
-                  <div className="relative h-80 sm:h-96 w-full overflow-hidden">
+                  <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden">
                     <Image
                       src={collection.image}
                       alt={collection.name}
