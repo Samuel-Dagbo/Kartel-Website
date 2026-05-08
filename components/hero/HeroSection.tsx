@@ -30,7 +30,7 @@ export function HeroSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-amber-500/[0.03] to-transparent rounded-full pointer-events-none" />
 
       {/* Main container */}
-      <div className="container-luxury w-full relative z-10 py-16 lg:py-0">
+      <div className="container-luxury w-full relative z-10 pt-20 lg:pt-0">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-16 w-full">
       
           {/* LEFT: Content */}
