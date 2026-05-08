@@ -10,7 +10,7 @@ import { Product } from '@/types'
 
 export default async function HomePage() {
   await connectDB()
-  const products = await ProductModel.find({ featured: true }).limit(5).lean()
+  const products = await ProductModel.find().sort({ createdAt: -1 }).limit(10).lean()
   const serializedProducts: Product[] = products.map((p: Record<string, unknown>) => ({
     name: (p.name as string) || '',
     slug: (p.slug as string) || '',
