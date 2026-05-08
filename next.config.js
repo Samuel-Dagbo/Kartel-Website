@@ -2,7 +2,6 @@
 const nextConfig = {
   images: {
     unoptimized: true,
-    domains: ['images.unsplash.com', 'plus.unsplash.com', 'tbn2.gstatic.com', 'tbn3.gstatic.com', 'encrypted-tbn2.gstatic.com', 'encrypted-tbn3.gstatic.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,7 +13,19 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '*.gstatic.com',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.gstatic.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.amazonaws.com',
       },
     ],
   },
