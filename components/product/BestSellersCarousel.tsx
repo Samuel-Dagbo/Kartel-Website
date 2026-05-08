@@ -75,20 +75,20 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-14 md:mb-20"
+          className="text-center mb-10 md:mb-16"
         >
-          <span className="inline-block text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/70 mb-6 px-5 py-2 border border-kartel-gold/[0.12] rounded-full backdrop-blur-sm">
+          <span className="inline-block text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/70 mb-4 sm:mb-6 px-4 sm:px-5 py-2 border border-kartel-gold/[0.12] rounded-full backdrop-blur-sm">
             Most Loved
           </span>
-          <h2 className="font-serif text-display-md font-bold text-white leading-[1.05] tracking-[-0.02em]">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.05] tracking-[-0.02em]">
             Best <span className="text-gradient">Sellers</span>
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-white/35 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-3 sm:mt-5 text-sm sm:text-base text-white/35 max-w-lg mx-auto leading-relaxed">
             Our customers&apos; favorite fragrances, curated for you.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
           {/* Content - Left Side */}
           <div className="relative order-2 lg:order-1">
             <AnimatePresence mode="wait" custom={direction}>
@@ -100,21 +100,21 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-7"
+                className="space-y-5 sm:space-y-7"
               >
                 <div>
-                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-kartel-gold/60">
+                  <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-kartel-gold/60">
                     {product.brand || 'KARTEL'}
                   </span>
-                  <h3 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-white mt-3 leading-[1.15] text-balance">
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-[2.75rem] font-bold text-white mt-2 sm:mt-3 leading-[1.15] text-balance">
                     {product.name}
                   </h3>
-                  <div className="flex items-center gap-3 mt-5">
-                    <div className="flex gap-1">
+                  <div className="flex items-center gap-2 sm:gap-3 mt-3 sm:mt-5">
+                    <div className="flex gap-0.5 sm:gap-1">
                       {Array.from({ length: 5 }).map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-4 h-4 ${
+                          className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
                             i < rating
                               ? 'text-kartel-gold fill-kartel-gold'
                               : 'text-white/10'
@@ -122,38 +122,38 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-white/35">
-                      {product.rating} ({product.reviewCount || 0} reviews)
+                    <span className="text-xs sm:text-sm text-white/35">
+                      {product.rating} ({product.reviewCount || 0})
                     </span>
                   </div>
                 </div>
 
-                <p className="text-base sm:text-lg text-white/40 leading-[1.8] max-w-md">
+                <p className="text-sm sm:text-base text-white/40 leading-[1.7] sm:leading-[1.8] line-clamp-2 sm:line-clamp-none max-w-md">
                   {product.description}
                 </p>
 
-                <div className="flex items-baseline gap-4">
-                  <span className="text-3xl font-bold text-white tracking-tight">
+                <div className="flex items-baseline gap-3 sm:gap-4">
+                  <span className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                     ${product.price}
                   </span>
                   {product.comparePrice && (
-                    <span className="text-lg text-white/25 line-through">
+                    <span className="text-base sm:text-lg text-white/25 line-through">
                       ${product.comparePrice}
                     </span>
                   )}
                 </div>
 
-                <div className="flex flex-wrap gap-4 pt-2">
+                <div className="flex flex-wrap gap-3 sm:gap-4 pt-1 sm:pt-2">
                   <Link
                     href={`/product/${product.slug || product._id}`}
-                    className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black text-sm font-semibold px-7 py-3.5 rounded-full overflow-hidden shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-500"
+                    className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black text-xs sm:text-sm font-semibold px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full overflow-hidden shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-500"
                   >
                     <span className="relative z-10">View Details</span>
                     <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
                   </Link>
                   <button
                     onClick={handleAddToCart}
-                    className="group inline-flex items-center gap-2 bg-white/[0.04] hover:bg-kartel-gold/[0.08] border border-white/[0.06] hover:border-kartel-gold/25 text-white/80 hover:text-kartel-gold text-sm font-medium px-7 py-3.5 rounded-full transition-all duration-300"
+                    className="group inline-flex items-center gap-2 bg-white/[0.04] hover:bg-kartel-gold/[0.08] border border-white/[0.06] hover:border-kartel-gold/25 text-white/80 hover:text-kartel-gold text-xs sm:text-sm font-medium px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full transition-all duration-300"
                   >
                     <ShoppingBag className="w-4 h-4 transition-transform group-hover:scale-110" strokeWidth={2} />
                     Add to Bag
