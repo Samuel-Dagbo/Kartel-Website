@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Package, Heart, Star, Clock } from 'lucide-react'
+import { Package, Heart, Star, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { ProductCard } from '@/components/product/ProductCard'
@@ -20,7 +20,6 @@ interface Order {
 export default function CustomerOverview() {
   const { data: session } = useSession()
   const [orders, setOrders] = useState<Order[]>([])
-  const [wishlistCount, setWishlistCount] = useState(0)
   const [recommendations, setRecommendations] = useState<ProductType[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -55,8 +54,11 @@ export default function CustomerOverview() {
 
   if (!session) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-white/60">Please sign in to view your dashboard.</p>
+      <div className="min-h-[50vh] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-white/40 mb-4">Please sign in to view your dashboard.</p>
+          <Link href="/login" className="text-kartel-gold hover:text-kartel-gold/80">Sign In →</Link>
+        </div>
       </div>
     )
   }
@@ -66,103 +68,158 @@ export default function CustomerOverview() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
+      <div className="flex items-center justify-center h-[50vh]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
+          <span className="text-white/40 text-sm">Loading your dashboard...</span>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
+      {/* Welcome Header */}
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+        className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
       >
         <div>
-          <h1 className="font-serif text-4xl font-bold text-white mb-2">Welcome back, {session.user?.name?.split(' ')[0] || 'Customer'}</h1>
-          <p className="text-white/60">Manage your orders and explore new fragrance discoveries.</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white">
+            Welcome back, <span className="text-gradient">{session.user?.name?.split(' ')[0] || 'Customer'}</span>
+          </h1>
+          <p className="text-white/40 text-sm mt-1">Manage your orders and discover new fragrances.</p>
         </div>
-        <Link href="/shop" className="btn-primary px-6 py-3 text-sm">
+        <Link 
+          href="/shop" 
+          className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black text-sm font-semibold hover:brightness-110 transition-all"
+        >
           Explore Collection
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
         {[
-          { label: 'Total Orders', value: orders.length.toString(), icon: Package, color: 'text-blue-400' },
-          { label: 'Total Spent', value: formatPrice(totalSpent), icon: Heart, color: 'text-pink-400' },
-          { label: 'Delivered', value: deliveredOrders.toString(), icon: Star, color: 'text-kartel-gold' },
+          { label: 'Total Orders', value: orders.length.toString(), icon: Package, gradient: 'from-blue-500/20 to-blue-500/5' },
+          { label: 'Total Spent', value: formatPrice(totalSpent), icon: Heart, gradient: 'from-pink-500/20 to-pink-500/5' },
+          { label: 'Delivered', value: deliveredOrders.toString(), icon: Star, gradient: 'from-kartel-gold/20 to-kartel-gold/5' },
         ].map((stat, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="luxury-card p-6 flex items-center gap-4"
+            className="group p-5 rounded-2xl bg-gradient-to-b from-kartel-black-900/50 to-kartel-black-950/50 border border-white/[0.06] hover:border-kartel-gold/20 transition-all duration-500"
           >
-            <div className={`p-3 rounded-xl bg-white/5 ${stat.color}`}>
-              <stat.icon className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-white/60 text-xs uppercase tracking-wider">{stat.label}</p>
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
+            <div className="flex items-center gap-4">
+              <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.gradient} border border-white/[0.06]`}>
+                <stat.icon className="w-5 h-5 text-kartel-gold" />
+              </div>
+              <div>
+                <p className="text-white/50 text-xs uppercase tracking-wider">{stat.label}</p>
+                <p className="text-xl font-bold text-white">{stat.value}</p>
+              </div>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div className="lg:col-span-1 space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="font-serif text-2xl font-bold text-white flex items-center gap-2">
-              <Clock className="w-6 h-6 text-kartel-gold" />
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Recent Orders */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="lg:col-span-1"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-serif text-lg font-semibold text-white flex items-center gap-2">
+              <Clock className="w-5 h-5 text-kartel-gold" />
               Recent Orders
             </h2>
-            <Link href="/customer/orders" className="text-sm text-kartel-gold hover:underline">View all</Link>
+            <Link href="/customer/orders" className="text-xs text-kartel-gold hover:text-kartel-gold/80">View all →</Link>
           </div>
-          <div className="space-y-4">
+          
+          <div className="space-y-3">
             {orders.length > 0 ? (
-              orders.slice(0, 3).map((order) => (
-                <div key={order._id} className="luxury-card p-4 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-white">{order.orderNumber || `KARTEL-${order._id.slice(-6).toUpperCase()}`}</p>
-                    <p className="text-xs text-white/60">{new Date(order.createdAt).toLocaleDateString()}</p>
+              orders.slice(0, 4).map((order, i) => (
+                <motion.div
+                  key={order._id}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + i * 0.1 }}
+                  className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.1] transition-all"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-white">
+                      {order.orderNumber || `KRT-${order._id.slice(-6).toUpperCase()}`}
+                    </span>
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase ${
+                      order.status === 'delivered' ? 'bg-green-500/15 text-green-400 border border-green-500/20' :
+                      order.status === 'shipped' ? 'bg-blue-500/15 text-blue-400 border border-blue-500/20' :
+                      'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20'
+                    }`}>
+                      {order.status || 'processing'}
+                    </span>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    order.status === 'delivered' ? 'bg-green-500/10 text-green-400' :
-                    order.status === 'shipped' ? 'bg-blue-500/10 text-blue-400' :
-                    'bg-yellow-500/10 text-yellow-400'
-                  }`}>
-                    {order.status}
-                  </span>
-                </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-white/40">{order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'N/A'}</span>
+                    <span className="text-sm font-semibold text-white">{formatPrice(order.totalAmount)}</span>
+                  </div>
+                </motion.div>
               ))
             ) : (
-              <div className="luxury-card p-6 text-center">
-                <p className="text-white/60 text-sm">No orders yet</p>
-                <Link href="/shop" className="text-kartel-gold text-sm hover:underline mt-2 inline-block">
-                  Start Shopping
+              <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center">
+                <div className="w-12 h-12 rounded-full bg-white/[0.03] flex items-center justify-center mx-auto mb-3">
+                  <Package className="w-5 h-5 text-white/20" />
+                </div>
+                <p className="text-white/40 text-sm">No orders yet</p>
+                <Link href="/shop" className="text-kartel-gold text-sm mt-2 inline-block hover:text-kartel-gold/80">
+                  Start Shopping →
                 </Link>
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="lg:col-span-2 space-y-6">
-          <h2 className="font-serif text-2xl font-bold text-white">Curated for You</h2>
+        {/* Recommended Products */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="lg:col-span-2"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-serif text-lg font-semibold text-white">Curated for You</h2>
+            <Link href="/shop" className="text-xs text-kartel-gold hover:text-kartel-gold/80">View all →</Link>
+          </div>
+          
           {recommendations.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {recommendations.slice(0, 4).map((product) => (
-                <ProductCard key={product._id} product={product} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {recommendations.slice(0, 4).map((product, i) => (
+                <motion.div
+                  key={product._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + i * 0.1 }}
+                >
+                  <ProductCard product={product} />
+                </motion.div>
               ))}
             </div>
           ) : (
-            <div className="luxury-card p-6 text-center">
-              <p className="text-white/60">No products available</p>
+            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center">
+              <div className="w-12 h-12 rounded-full bg-white/[0.03] flex items-center justify-center mx-auto mb-3">
+                <Heart className="w-5 h-5 text-white/20" />
+              </div>
+              <p className="text-white/40 text-sm">No products available yet</p>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   )

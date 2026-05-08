@@ -4,23 +4,21 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { LayoutDashboard, Package, ShoppingCart, Users, BarChart3, Settings, LogOut, ChevronRight, Zap } from 'lucide-react'
+import { User, Package, Heart, LogOut, Settings, Zap } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
-export function AdminLayout({ children }: { children: React.ReactNode }) {
+export function CustomerLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   const navItems = [
-    { href: '/admin', label: 'Overview', icon: LayoutDashboard },
-    { href: '/admin/products', label: 'Inventory', icon: Package },
-    { href: '/admin/orders', label: 'Orders', icon: ShoppingCart },
-    { href: '/admin/customers', label: 'Customers', icon: Users },
-    { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+    { href: '/customer', label: 'Overview', icon: User },
+    { href: '/customer/orders', label: 'My Orders', icon: Package },
+    { href: '/customer/wishlist', label: 'Wishlist', icon: Heart },
   ]
 
   return (
     <div className="min-h-screen flex bg-kartel-black-950">
-      {/* Premium Sidebar */}
+      {/* Premium Customer Sidebar */}
       <aside className="w-72 border-r border-white/[0.06] bg-gradient-to-b from-kartel-black-900 to-kartel-black-950 flex flex-col sticky top-0 h-screen">
         {/* Logo */}
         <div className="p-6 border-b border-white/[0.06]">
@@ -28,15 +26,28 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             <span className="text-2xl font-serif font-bold tracking-[0.25em] bg-gradient-to-r from-kartel-gold via-kartel-gold-light to-kartel-champagne bg-clip-text text-transparent">
               KARTEL
             </span>
-            <span className="text-[10px] text-kartel-gold/60 block tracking-[0.3em] mt-1 font-medium">ADMIN PANEL</span>
+            <span className="text-[10px] text-white/40 block tracking-[0.3em] mt-1 font-medium">MY ACCOUNT</span>
           </Link>
+        </div>
+
+        {/* User Info */}
+        <div className="p-6 border-b border-white/[0.06]">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-kartel-gold/20 to-kartel-gold/5 border border-kartel-gold/20 flex items-center justify-center">
+              <User className="w-5 h-5 text-kartel-gold" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-white">Welcome Back</p>
+              <p className="text-xs text-white/40">VIP Member</p>
+            </div>
+          </div>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 px-4 py-6 space-y-1">
-          <div className="text-[9px] font-bold text-white/25 uppercase tracking-[0.2em] px-4 mb-3">Main Menu</div>
+          <div className="text-[9px] font-bold text-white/25 uppercase tracking-[0.2em] px-4 mb-3">Menu</div>
           {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href))
+            const isActive = pathname === item.href
             return (
               <Link
                 key={item.href}
@@ -68,7 +79,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/50 hover:bg-white/[0.03] hover:text-white/80 transition-all"
           >
             <Zap className="w-4 h-4" />
-            <span className="text-sm">View Website</span>
+            <span className="text-sm">Continue Shopping</span>
           </Link>
           <button
             onClick={() => signOut({ callbackUrl: '/' })}
@@ -83,7 +94,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto bg-kartel-black-950">
         <div className="p-8">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             {children}
           </div>
         </div>
