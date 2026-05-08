@@ -8,6 +8,7 @@ import { Star, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react'
 import { useCart } from '@/components/providers/CartProvider'
 import { toast } from '@/components/ui/use-toast'
 import { Product } from '@/types'
+import { formatPrice } from '@/lib/utils'
 
 interface BestSellersCarouselProps {
   products?: Product[]
@@ -134,11 +135,11 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
 
                 <div className="flex items-baseline gap-3 sm:gap-4">
                   <span className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                    ${product.price}
+                    {formatPrice(product.price)}
                   </span>
                   {product.comparePrice && (
                     <span className="text-base sm:text-lg text-white/25 line-through">
-                      ${product.comparePrice}
+                      {formatPrice(product.comparePrice)}
                     </span>
                   )}
                 </div>

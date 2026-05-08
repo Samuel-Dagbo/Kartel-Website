@@ -5,8 +5,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
 import { ArrowRight, Sparkles, Star } from 'lucide-react'
+import { Product } from '@/types'
 
-export function HeroSection() {
+interface HeroSectionProps {
+  featuredProduct?: Product | null
+}
+
+export function HeroSection({ featuredProduct }: HeroSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -16,6 +21,11 @@ export function HeroSection() {
   const imageY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 30]), { stiffness: 50, damping: 20 })
   const textY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 10]), { stiffness: 50, damping: 20 })
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
+  const heroImage = featuredProduct?.images?.[0] || 'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&auto=format&fit=crop&q=80'
+  const productName = featuredProduct?.name || 'Signature'
+  const productBrand = featuredProduct?.brand || 'KARTEL'
+  const productRating = featuredProduct?.rating || 4.9
 
   return (
     <section
@@ -154,8 +164,8 @@ export function HeroSection() {
                   className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl"
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&auto=format&fit=crop&q=80"
-                    alt="KARTEL Signature Perfume"
+                    src={heroImage}
+                    alt={productName}
                     fill
                     className="object-cover object-center"
                     priority
@@ -173,7 +183,7 @@ export function HeroSection() {
                   {/* Rating */}
                   <div className="absolute bottom-5 right-5 flex items-center gap-2 px-3.5 py-2 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30">
                     <Star className="w-4 h-4 text-amber-400 fill-amber-400" strokeWidth={0} />
-                    <span className="text-sm font-bold text-white">4.9</span>
+                    <span className="text-sm font-bold text-white">{productRating}</span>
                   </div>
                 </motion.div>
               </div>

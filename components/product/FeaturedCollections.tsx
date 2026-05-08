@@ -4,8 +4,13 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import { Product } from '@/types'
 
-const featuredCollections = [
+interface FeaturedCollectionsProps {
+  products?: Product[]
+}
+
+const defaultCollections = [
   {
     id: '1',
     name: 'Signature Collection',
@@ -32,14 +37,23 @@ const featuredCollections = [
   },
 ]
 
-export function FeaturedCollections() {
+export function FeaturedCollections({ products = [] }: FeaturedCollectionsProps) {
+  const collections = products.length > 0
+    ? products.slice(0, 3).map((product) => ({
+        id: product._id,
+        name: product.name,
+        description: product.description.slice(0, 100) + '...',
+        image: product.images?.[0] || defaultCollections[0].image,
+        link: `/product/${product.slug || product._id}`,
+        productCount: 1,
+      }))
+    : defaultCollections
+
   return (
     <section className="section-padding bg-kartel-black relative overflow-hidden">
-      {/* Ambient lighting */}
       <div className="absolute top-[20%] left-[-10%] w-[50%] h-[60%] bg-kartel-gold/[0.025] blur-[200px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[50%] bg-kartel-gold/[0.015] blur-[180px] rounded-full pointer-events-none" />
 
-      {/* Subtle top divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-kartel-gold/15 to-transparent" />
 
       <div className="container-luxury relative">
@@ -62,7 +76,7 @@ export function FeaturedCollections() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
-          {featuredCollections.map((collection, index) => (
+          {collections.map((collection, index) => (
             <motion.div
               key={collection.id}
               initial={{ opacity: 0, y: 50 }}
@@ -76,7 +90,6 @@ export function FeaturedCollections() {
             >
               <Link href={collection.link} className="group block h-full">
                 <div className="relative h-full bg-gradient-to-b from-kartel-black-900/40 to-transparent rounded-2xl sm:rounded-[2rem] overflow-hidden border border-white/[0.04] hover:border-kartel-gold/[0.12] transition-all duration-700">
-                  {/* Image container */}
                   <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden">
                     <Image
                       src={collection.image}
@@ -85,29 +98,24 @@ export function FeaturedCollections() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[1.2s] ease-out brightness-90 group-hover:brightness-100"
                     />
-                    {/* Multi-layer gradient overlays */}
                     <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/20 to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-kartel-black/70" />
 
-                    {/* Product count badge */}
                     <div className="absolute top-6 left-6 px-4 py-2 rounded-full bg-kartel-black/50 backdrop-blur-xl border border-white/[0.06]">
                       <span className="text-xs font-medium text-white/80">
-                        {collection.productCount} scents
+                        {collection.productCount} scent{collection.productCount !== 1 ? 's' : ''}
                       </span>
                     </div>
 
-                    {/* Hover arrow */}
                     <div className="absolute top-6 right-6 p-3 rounded-full bg-kartel-gold/15 backdrop-blur-xl opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 border border-kartel-gold/[0.15]">
                       <ArrowUpRight className="w-4 h-4 text-kartel-gold" strokeWidth={1.5} />
                     </div>
 
-                    {/* Decorative element */}
                     <div className="absolute bottom-6 right-6 w-10 h-10 rounded-full border border-kartel-gold/[0.1] flex items-center justify-center">
                       <div className="w-2.5 h-2.5 rounded-full bg-kartel-gold/30" />
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="p-5 sm:p-6 lg:p-8 space-y-2 sm:space-y-3">
                     <h3 className="font-serif text-lg sm:text-xl font-semibold text-white/90 group-hover:text-kartel-gold transition-colors duration-500">
                       {collection.name}

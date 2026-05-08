@@ -7,7 +7,7 @@ import { ShoppingBag, Heart, Star } from 'lucide-react'
 import { Product } from '@/types'
 import { useCart } from '@/components/providers/CartProvider'
 import { toast } from '@/components/ui/use-toast'
-import { cn } from '@/lib/utils'
+import { cn, formatPrice } from '@/lib/utils'
 
 interface ProductCardProps {
   product: Product
@@ -128,11 +128,11 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
             {/* Price */}
             <div className="flex items-baseline gap-3 pt-1">
               <span className="text-xl font-bold text-white tracking-tight">
-                ${product.price}
+                {formatPrice(product.price)}
               </span>
               {product.comparePrice && (
                 <span className="text-sm text-white/30 line-through">
-                  ${product.comparePrice}
+                  {formatPrice(product.comparePrice)}
                 </span>
               )}
             </div>
