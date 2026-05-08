@@ -12,7 +12,7 @@ import { signOut } from 'next-auth/react'
 
 const adminNavItems = [
   { href: '/admin', label: 'Overview', icon: LayoutDashboard },
-  { href: '/admin/products', label: 'Inventory', icon: Package },
+  { href: '/admin/products', label: 'Products', icon: Package },
   { href: '/admin/orders', label: 'Orders', icon: ShoppingCart },
 ]
 
