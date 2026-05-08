@@ -8,7 +8,12 @@ export async function GET(
 ) {
   try {
     await connectDB()
-    const product = await Product.findById(params.id)
+    
+    let product = await Product.findById(params.id)
+    
+    if (!product) {
+      product = await Product.findOne({ slug: params.id })
+    }
     
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
