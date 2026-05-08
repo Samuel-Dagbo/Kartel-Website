@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Edit, Trash2, Search, Package, X, Eye, Tag } from 'lucide-react'
+import { Plus, Edit, Trash2, Search, Package, X, Eye, Tag, Upload, Link as LinkIcon } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 import { Product as ProductType } from '@/types'
 import Image from 'next/image'
@@ -32,6 +32,8 @@ function ProductsContent() {
     images: [''],
     notes: { top: [''], middle: [''], base: [''] }
   })
+  const [imageMode, setImageMode] = useState<'url' | 'upload'>('url')
+  const [uploading, setUploading] = useState(false)
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
@@ -480,15 +482,94 @@ function ProductsContent() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs text-white/50 uppercase tracking-wider">Image URL</label>
-                  <input
-                    type="url"
-                    value={formData.images[0]}
-                    onChange={(e) => setFormData({ ...formData, images: [e.target.value] })}
-                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
-                    placeholder="https://example.com/image.jpg"
-                  />
-                </div>
+                    <label className="text-xs text-white/50 uppercase tracking-wider">Product Image</label>
+                    <div className="flex gap-2 mb-3">
+                      <button
+                        type="button"
+                        onClick={() => setImageMode('url')}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all ${
+                          imageMode === 'url'
+                            ? 'bg-kartel-gold text-kartel-black'
+                            : 'bg-white/[0.03] text-white/50 hover:text-white'
+                        }`}
+                      >
+                        <LinkIcon className="w-4 h-4" />
+                        URL
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setImageMode('upload')}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all ${
+                          imageMode === 'upload'
+                            ? 'bg-kartel-gold text-kartel-black'
+                            : 'bg-white/[0.03] text-white/50 hover:text-white'
+                        }`}
+                      >
+                        <Upload className="w-4 h-4" />
+                        Upload
+                      </button>
+                    </div>
+                    {imageMode === 'url' ? (
+                      <input
+                        type="url"
+                        value={formData.images[0]}
+                        onChange={(e) => setFormData({ ...formData, images: [e.target.value] })}
+                        className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                        placeholder="https://example.com/image.jpg"
+                      />
+                    ) : (
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0]
+                            if (!file) return
+                            setUploading(true)
+                            const reader = new FileReader()
+                            reader.onload = async () => {
+                              try {
+                                const res = await fetch('/api/upload', {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ image: reader.result })
+                                })
+                                const data = await res.json()
+                                if (data.url) {
+                                  setFormData({ ...formData, images: [data.url] })
+                                  toast({ title: 'Upload Successful', description: 'Image uploaded to Cloudinary' })
+                                }
+                              } catch {
+                                toast({ title: 'Upload Failed', description: 'Please try again', variant: 'destructive' })
+                              }
+                              setUploading(false)
+                            }
+                            reader.readAsDataURL(file)
+                          }}
+                          className="hidden"
+                          id="image-upload"
+                        />
+                        <label
+                          htmlFor="image-upload"
+                          className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/[0.1] rounded-xl cursor-pointer hover:border-kartel-gold/30 transition-all"
+                        >
+                          {uploading ? (
+                            <div className="w-8 h-8 border-2 border-kartel-gold/30 border-t-kartel-gold rounded-full animate-spin" />
+                          ) : formData.images[0] ? (
+                            <div className="relative w-full h-full">
+                              <Image src={formData.images[0]} alt="Preview" fill className="object-contain p-2" />
+                              <span className="absolute bottom-2 right-2 text-xs bg-black/50 px-2 py-1 rounded text-white/70">Click to change</span>
+                            </div>
+                          ) : (
+                            <>
+                              <Upload className="w-8 h-8 text-white/30 mb-2" />
+                              <span className="text-white/40 text-sm">Click to upload image</span>
+                            </>
+                          )}
+                        </label>
+                      </div>
+                    )}
+                  </div>
 
                 <div className="flex gap-3 pt-4">
                   <button

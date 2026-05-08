@@ -18,8 +18,6 @@ const footerLinks = {
     { label: 'Shop All', href: '/shop' },
     { label: 'New Arrivals', href: '/shop?sort=newest' },
     { label: 'Best Sellers', href: '/shop?sort=popular' },
-    { label: 'Gift Sets', href: '/shop?category=gift-sets' },
-    { label: 'Sale', href: '/shop?sort=sale' },
   ],
   support: [
     { label: 'Contact Us', href: '/contact' },
@@ -30,9 +28,6 @@ const footerLinks = {
   ],
   company: [
     { label: 'About Us', href: '/about' },
-    { label: 'Our Story', href: '/about#story' },
-    { label: 'Careers', href: '/careers' },
-    { label: 'Press', href: '/press' },
   ],
 }
 
@@ -204,26 +199,6 @@ export function Footer() {
           <p className="text-xs text-white/20 tracking-wide">
             &copy; {new Date().getFullYear()} KARTEL. All rights reserved.
           </p>
-          <div className="flex gap-8">
-            <Link
-              href="/privacy"
-              className="text-xs text-white/20 hover:text-kartel-gold/60 transition-colors tracking-wide"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-xs text-white/20 hover:text-kartel-gold/60 transition-colors tracking-wide"
-            >
-              Terms of Service
-            </Link>
-            <Link
-              href="/cookies"
-              className="text-xs text-white/20 hover:text-kartel-gold/60 transition-colors tracking-wide"
-            >
-              Cookies
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

@@ -13,7 +13,7 @@ export default function ShopPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [category, setCategory] = useState('all')
   const [brand, setBrand] = useState('')
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000])
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 15000])
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('featured')
   const [showMobileFilters, setShowMobileFilters] = useState(false)
@@ -200,7 +200,7 @@ export default function ShopPage() {
                   onClick={() => setPriceRange([0, 1000])}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kartel-gold/10 border border-kartel-gold/20 text-xs text-kartel-gold hover:bg-kartel-gold/20 transition-colors"
                 >
-                  Under ${priceRange[1]}
+                  Under GHS {priceRange[1]}
                   <X className="w-3 h-3" strokeWidth={2} />
                 </button>
               )}
