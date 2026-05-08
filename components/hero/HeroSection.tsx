@@ -20,7 +20,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[100dvh] flex items-center overflow-hidden bg-kartel-black-950"
+      className="relative min-h-[100dvh] lg:h-[100dvh] flex items-center overflow-hidden bg-kartel-black-950"
     >
       {/* Dramatic ambient lighting */}
       <div className="absolute -top-[10%] right-[5%] w-[60%] h-[60%] bg-kartel-gold/[0.04] blur-[300px] rounded-full pointer-events-none" />
@@ -48,13 +48,13 @@ export function HeroSection() {
       }} />
 
       {/* Main grid layout */}
-      <div className="container-luxury w-full relative z-10 pt-20 lg:pt-24 pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-12 items-center w-full">
+      <div className="container-luxury w-full relative z-10 pt-16 lg:pt-24 pb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-center w-full">
       
           {/* LEFT: Content */}
           <motion.div
             style={{ y: textY, opacity }}
-            className="flex flex-col justify-center space-y-4 lg:space-y-5 order-2 lg:order-1"
+            className="flex flex-col justify-center space-y-4 lg:space-y-5 order-1 lg:order-1"
           >
             {/* Premium badge */}
             <motion.div
@@ -76,13 +76,13 @@ export function HeroSection() {
               transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-0"
             >
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-bold text-white leading-[1.05] tracking-[-0.03em]">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-bold text-white leading-[1.05] tracking-[-0.03em]">
                 Define Your{' '}
                 <span className="italic font-light bg-gradient-to-r from-kartel-gold via-kartel-gold-light to-kartel-champagne bg-clip-text text-transparent">
                   Invisible
                 </span>
               </h1>
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.25rem] font-bold text-white/90 leading-[1.1] tracking-[-0.02em]">
+              <h1 className="font-serif text-2.5xl sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-[3.25rem] font-bold text-white/90 leading-[1.1] tracking-[-0.02em]">
                 Signature
               </h1>
             </motion.div>
@@ -92,7 +92,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm sm:text-base text-white/45 max-w-md leading-[1.7]"
+              className="text-sm text-white/50 max-w-sm sm:max-w-md leading-[1.7]"
             >
               KARTEL blends rare botanicals with avant-garde chemistry. Each scent
               transcends time—a symphony of luxury for the discerning few.
@@ -129,7 +129,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-6 pt-2"
+              className="hidden sm:flex items-center gap-6 pt-2"
             >
               <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/[0.06]" />
               <div className="flex gap-8 sm:gap-10">
@@ -154,13 +154,13 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex justify-center lg:justify-end items-center order-1 lg:order-2"
+            className="relative flex justify-center lg:justify-end items-center order-2 lg:order-2"
           >
             {/* Atmospheric glow */}
             <div className="absolute inset-0 -m-16 bg-kartel-gold/[0.035] blur-[120px] rounded-full" />
 
             {/* Image container */}
-            <div className="relative z-10 w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[340px] xl:max-w-[380px]">
+            <div className="relative z-10 w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[340px] xl:max-w-[380px] mt-8 lg:mt-0">
               {/* Decorative rings */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] border border-kartel-gold/[0.04] rounded-full pointer-events-none animate-spin-slow" />
 
