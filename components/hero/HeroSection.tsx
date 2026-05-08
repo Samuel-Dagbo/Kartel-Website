@@ -136,49 +136,44 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex justify-center lg:justify-end items-center order-2 mt-10 lg:mt-0"
+            className="relative flex justify-center lg:justify-end items-center order-2 mt-12 lg:mt-0"
           >
-            {/* Glow behind image */}
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-yellow-400/10 to-amber-600/20 blur-[80px] rounded-full" />
+            {/* Large ambient glow */}
+            <div className="absolute inset-0 -m-20 lg:-m-32 bg-gradient-to-br from-amber-500/15 via-yellow-400/10 to-amber-600/15 blur-[100px] rounded-full" />
 
-            {/* Main perfume bottle */}
-            <div className="relative z-10 w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[340px]">
-              {/* Bottle container with glow */}
-              <div className="relative">
-                {/* Decorative rings */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] border border-amber-500/10 rounded-full pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] border border-amber-500/5 rounded-full pointer-events-none" />
-                
-                {/* Main image */}
+            {/* Main perfume bottle container */}
+            <div className="relative z-10">
+              {/* Decorative outer ring */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] border border-amber-500/10 rounded-full pointer-events-none hidden lg:block" />
+              
+              {/* Image wrapper with explicit size */}
+              <div className="relative w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] h-[320px] sm:h-[380px] md:h-[430px] lg:h-[480px]">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-full aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] border border-white/[0.1]"
+                  className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl"
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&auto=format&fit=crop&q=80"
                     alt="KARTEL Signature Perfume"
                     fill
-                    sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, (max-width: 1024px) 320px, 340px"
-                    className="object-cover"
+                    className="object-cover object-center"
                     priority
                   />
 
-                  {/* Gradient overlays for depth */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   
-                  {/* Premium badge */}
-                  <div className="absolute top-5 left-5 px-4 py-2 rounded-xl bg-black/40 backdrop-blur-xl border border-white/[0.1]">
+                  {/* Badge */}
+                  <div className="absolute top-6 left-6 px-4 py-2.5 rounded-xl bg-black/50 backdrop-blur-md border border-white/[0.15]">
                     <p className="text-[10px] uppercase tracking-[0.15em] text-amber-300 font-semibold">Signature</p>
                     <p className="font-serif text-white text-xs mt-0.5">Collection</p>
                   </div>
 
-                  {/* Rating badge */}
-                  <div className="absolute bottom-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-amber-500/30">
-                    <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" strokeWidth={0} />
+                  {/* Rating */}
+                  <div className="absolute bottom-5 right-5 flex items-center gap-2 px-3.5 py-2 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30">
+                    <Star className="w-4 h-4 text-amber-400 fill-amber-400" strokeWidth={0} />
                     <span className="text-sm font-bold text-white">4.9</span>
-                    <span className="text-[10px] text-white/50">(250+)</span>
                   </div>
                 </motion.div>
               </div>
