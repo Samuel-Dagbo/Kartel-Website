@@ -98,7 +98,7 @@ export default function AdminDashboard() {
       <div className="flex items-center justify-center h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
-          <span className="text-white/40 text-sm">Loading dashboard...</span>
+          <span className="text-white/40 text-sm">Loading dashboard&hellip;</span>
         </div>
       </div>
     )
@@ -155,7 +155,7 @@ export default function AdminDashboard() {
       >
         <div>
           <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white">Dashboard Overview</h1>
-          <p className="text-white/40 text-sm mt-1">Welcome back! Here's what's happening with your store.</p>
+          <p className="text-white/40 text-sm mt-1">Welcome back! Here&apos;s what&apos;s happening with your store.</p>
         </div>
         <div className="flex gap-3">
           <Link 

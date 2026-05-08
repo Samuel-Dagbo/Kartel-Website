@@ -78,7 +78,7 @@ export default function ContactPage() {
               Contact <span className="text-gradient">Us</span>
             </h1>
             <p className="mt-6 text-lg text-white/50 max-w-xl mx-auto leading-relaxed">
-              Have questions about our fragrances? We'd love to hear from you.
+              Have questions about our fragrances? We&apos;d love to hear from you.
             </p>
           </motion.div>
         </div>
@@ -130,7 +130,7 @@ export default function ContactPage() {
                 Send a <span className="text-gradient">Message</span>
               </h2>
               <p className="mt-4 text-white/40">
-                Fill out the form below and we'll get back to you within 24 hours.
+                Fill out the form below and we&apos;ll get back to you within 24 hours.
               </p>
             </motion.div>
 

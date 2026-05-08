@@ -1,11 +1,12 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { ShoppingCart, Package, CheckCircle, Clock, Search, Filter, MoreVertical, Eye, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ShoppingCart, Package, CheckCircle, Clock, Search, Eye, X, ChevronDown } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 interface OrderItem {
   product: {
@@ -47,6 +48,7 @@ export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [updating, setUpdating] = useState(false)
 
@@ -93,16 +95,22 @@ export default function AdminOrdersPage() {
     }
   }
 
-  const filteredOrders = orders.filter(order => 
-    order.orderNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    order.user?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    order._id.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  const filteredOrders = orders.filter(order => {
+    const matchesSearch = 
+      order.orderNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.user?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order._id.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesStatus = statusFilter === 'all' || order.status === statusFilter
+    return matchesSearch && matchesStatus
+  })
 
   if (status === 'loading' || loading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
+      <div className="flex items-center justify-center h-[60vh]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
+          <span className="text-white/40 text-sm">Loading orders...</span>
+        </div>
       </div>
     )
   }
@@ -111,182 +119,291 @@ export default function AdminOrdersPage() {
     return null
   }
 
-  const getStatusColor = (orderStatus: string) => {
-    switch (orderStatus) {
-      case 'delivered':
-        return 'bg-green-500/20 text-green-400'
-      case 'shipped':
-        return 'bg-blue-500/20 text-blue-400'
-      case 'processing':
-        return 'bg-yellow-500/20 text-yellow-400'
-      case 'cancelled':
-        return 'bg-red-500/20 text-red-400'
-      default:
-        return 'bg-white/10 text-white/60'
-    }
-  }
+  const statusStats = [
+    { label: 'Total Orders', value: orders.length, color: 'from-blue-500/20' },
+    { label: 'Pending', value: orders.filter(o => o.status === 'pending').length, color: 'from-yellow-500/20' },
+    { label: 'Processing', value: orders.filter(o => o.status === 'processing').length, color: 'from-purple-500/20' },
+    { label: 'Delivered', value: orders.filter(o => o.status === 'delivered').length, color: 'from-green-500/20' },
+  ]
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+      {/* Header */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+      >
         <div>
-          <h1 className="font-serif text-4xl font-bold text-white mb-2">Orders Management</h1>
-          <p className="text-white/60">Process, track, and manage all customer transactions.</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white">Orders Management</h1>
+          <p className="text-white/40 text-sm mt-1">Track and process customer orders</p>
         </div>
+      </motion.div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {statusStats.map((stat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+          >
+            <div className="flex items-center gap-3">
+              <div className={`p-2.5 rounded-xl bg-gradient-to-br ${stat.color}`}>
+                <ShoppingCart className="w-4 h-4 text-kartel-gold" />
+              </div>
+              <div>
+                <p className="text-white/50 text-xs">{stat.label}</p>
+                <p className="text-lg font-bold text-white">{stat.value}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
 
-      <div className="flex flex-col md:flex-row gap-4">
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
           <input 
             type="text" 
-            placeholder="Search orders by ID, customer, or status..." 
+            placeholder="Search by order ID or customer..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:border-kartel-gold/50 outline-none transition-all" 
+            className="w-full pl-11 pr-4 py-3 bg-white/[0.02] border border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-kartel-gold/30 focus:outline-none transition-all text-sm" 
           />
         </div>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="px-4 py-3 bg-white/[0.02] border border-white/[0.08] rounded-xl text-white/70 focus:border-kartel-gold/30 focus:outline-none transition-all text-sm"
+        >
+          <option value="all">All Status</option>
+          {STATUSES.map(s => (
+            <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
+          ))}
+        </select>
       </div>
 
-      <div className="luxury-card overflow-hidden">
+      {/* Orders Table */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="rounded-2xl bg-white/[0.02] border border-white/[0.06] overflow-hidden"
+      >
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left">
             <thead>
-              <tr className="bg-white/5 text-white/60 text-xs uppercase tracking-wider">
-                <th className="px-6 py-4 font-medium">Order ID</th>
-                <th className="px-6 py-4 font-medium">Customer</th>
-                <th className="px-6 py-4 font-medium">Total</th>
-                <th className="px-6 py-4 font-medium">Status</th>
-                <th className="px-6 py-4 font-medium">Payment</th>
-                <th className="px-6 py-4 font-medium">Date</th>
-                <th className="px-6 py-4 font-medium text-right">Actions</th>
+              <tr className="bg-white/[0.02]">
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Order ID</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Customer</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Total</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Payment</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Date</th>
+                <th className="px-5 py-4 text-right text-[10px] font-semibold text-white/40 uppercase tracking-wider">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
-              {filteredOrders.map((order) => (
-                <tr key={order._id} className="hover:bg-white/5 transition-colors group">
-                  <td className="px-6 py-4 text-sm font-bold text-white">
-                    {order.orderNumber || `KARTEL-${order._id.slice(-6).toUpperCase()}`}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-white/80">
-                    <div>
-                      <p>{order.user?.name || 'Unknown'}</p>
-                      <p className="text-xs text-white/40">{order.user?.email}</p>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-sm font-bold text-white">{formatPrice(order.totalAmount)}</td>
-                  <td className="px-6 py-4">
-                    <span className={`px-2 py-1 rounded-full text-[10px] uppercase font-bold ${getStatusColor(order.status)}`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`px-2 py-1 rounded-full text-[10px] uppercase font-bold ${
-                      order.paymentStatus === 'paid' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'
-                    }`}>
-                      {order.paymentStatus || 'pending'}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-white/60">
-                    {new Date(order.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex items-center justify-end gap-2">
+            <tbody className="divide-y divide-white/[0.04]">
+              {filteredOrders.length > 0 ? (
+                filteredOrders.map((order, i) => (
+                  <motion.tr 
+                    key={order._id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 + i * 0.05 }}
+                    className="hover:bg-white/[0.02] transition-colors"
+                  >
+                    <td className="px-5 py-4">
+                      <span className="text-sm font-medium text-white">
+                        {order.orderNumber || `KRT-${order._id.slice(-6).toUpperCase()}`}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4">
+                      <div>
+                        <p className="text-sm text-white/80">{order.user?.name || 'Guest'}</p>
+                        <p className="text-xs text-white/40">{order.user?.email || 'No email'}</p>
+                      </div>
+                    </td>
+                    <td className="px-5 py-4">
+                      <span className="text-sm font-semibold text-white">{formatPrice(order.totalAmount)}</span>
+                    </td>
+                    <td className="px-5 py-4">
+                      <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide ${
+                        order.status === 'delivered' ? 'bg-green-500/15 text-green-400 border border-green-500/20' :
+                        order.status === 'shipped' ? 'bg-blue-500/15 text-blue-400 border border-blue-500/20' :
+                        order.status === 'processing' ? 'bg-purple-500/15 text-purple-400 border border-purple-500/20' :
+                        order.status === 'cancelled' ? 'bg-red-500/15 text-red-400 border border-red-500/20' :
+                        'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20'
+                      }`}>
+                        {order.status || 'pending'}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4">
+                      <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide ${
+                        order.paymentStatus === 'paid' ? 'bg-green-500/15 text-green-400 border border-green-500/20' : 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20'
+                      }`}>
+                        {order.paymentStatus || 'pending'}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4">
+                      <span className="text-sm text-white/50">
+                        {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'N/A'}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 text-right">
                       <button 
                         onClick={() => setSelectedOrder(order)}
-                        className="p-2 text-white/40 hover:text-kartel-gold transition-colors" 
-                        title="View Details"
+                        className="p-2 rounded-lg bg-white/[0.03] text-white/40 hover:text-kartel-gold hover:bg-white/[0.06] transition-all"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
+                    </td>
+                  </motion.tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={7} className="px-5 py-16 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-full bg-white/[0.03] flex items-center justify-center mb-4">
+                        <ShoppingCart className="w-6 h-6 text-white/20" />
+                      </div>
+                      <p className="text-white/40">No orders found</p>
+                      <p className="text-white/20 text-sm mt-1">Orders will appear here when customers purchase</p>
                     </div>
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
-        {filteredOrders.length === 0 && (
-          <div className="p-12 text-center text-white/60">
-            No orders found
-          </div>
-        )}
-      </div>
+      </motion.div>
 
-      {selectedOrder && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      {/* Order Detail Modal */}
+      <AnimatePresence>
+        {selectedOrder && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
             onClick={() => setSelectedOrder(null)}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          />
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="relative w-full max-w-2xl luxury-card p-8 max-h-[90vh] overflow-y-auto"
           >
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="font-serif text-2xl font-bold text-white">
-                Order {selectedOrder.orderNumber || `KARTEL-${selectedOrder._id.slice(-6).toUpperCase()}`}
-              </h2>
-              <button onClick={() => setSelectedOrder(null)} className="p-2 text-white/60 hover:text-white">
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-kartel-black-900 border border-white/[0.1]"
+            >
+              <div className="p-6 border-b border-white/[0.08] flex items-center justify-between">
+                <div>
+                  <h2 className="font-serif text-xl font-semibold text-white">
+                    Order {selectedOrder.orderNumber || `KRT-${selectedOrder._id.slice(-6).toUpperCase()}`}
+                  </h2>
+                  <p className="text-white/40 text-sm mt-1">
+                    {selectedOrder.createdAt ? new Date(selectedOrder.createdAt).toLocaleString() : ''}
+                  </p>
+                </div>
+                <button 
+                  onClick={() => setSelectedOrder(null)}
+                  className="p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/[0.06] transition-all"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-            <div className="space-y-6">
-              <div className="flex flex-wrap gap-4">
-                <div className="luxury-card p-4 flex-1 min-w-[200px]">
-                  <p className="text-white/60 text-xs uppercase mb-1">Customer</p>
-                  <p className="text-white font-medium">{selectedOrder.user?.name}</p>
-                  <p className="text-white/60 text-sm">{selectedOrder.user?.email}</p>
-                </div>
-                <div className="luxury-card p-4 flex-1 min-w-[200px]">
-                  <p className="text-white/60 text-xs uppercase mb-1">Total</p>
-                  <p className="text-white font-bold text-xl">{formatPrice(selectedOrder.totalAmount)}</p>
-                </div>
-                <div className="luxury-card p-4 flex-1 min-w-[200px]">
-                  <p className="text-white/60 text-xs uppercase mb-1">Status</p>
-                  <select
-                    value={selectedOrder.status}
-                    onChange={(e) => updateOrderStatus(selectedOrder._id, e.target.value)}
-                    disabled={updating}
-                    className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white mt-1"
-                  >
-                    {STATUSES.map(status => (
-                      <option key={status} value={status}>{status}</option>
+              <div className="p-6 space-y-6">
+                {/* Status Update */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div>
+                    <p className="text-white/50 text-xs uppercase tracking-wider mb-1">Current Status</p>
+                    <span className={`inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold uppercase ${
+                      selectedOrder.status === 'delivered' ? 'bg-green-500/15 text-green-400' :
+                      selectedOrder.status === 'shipped' ? 'bg-blue-500/15 text-blue-400' :
+                      selectedOrder.status === 'processing' ? 'bg-purple-500/15 text-purple-400' :
+                      selectedOrder.status === 'cancelled' ? 'bg-red-500/15 text-red-400' :
+                      'bg-yellow-500/15 text-yellow-400'
+                    }`}>
+                      {selectedOrder.status || 'pending'}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {STATUSES.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => updateOrderStatus(selectedOrder._id, s)}
+                        disabled={updating || selectedOrder.status === s}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                          selectedOrder.status === s 
+                            ? 'bg-kartel-gold text-kartel-black' 
+                            : 'bg-white/[0.05] text-white/60 hover:bg-white/[0.1]'
+                        } disabled:opacity-40`}
+                      >
+                        {s}
+                      </button>
                     ))}
-                  </select>
+                  </div>
+                </div>
+
+                {/* Customer Info */}
+                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Customer</p>
+                  <p className="text-white font-medium">{selectedOrder.user?.name || 'Guest'}</p>
+                  <p className="text-white/60 text-sm">{selectedOrder.user?.email || 'No email'}</p>
+                </div>
+
+                {/* Shipping Address */}
+                {selectedOrder.shippingAddress && (
+                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                    <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Shipping Address</p>
+                    <p className="text-white/80 text-sm">
+                      {selectedOrder.shippingAddress.street}<br />
+                      {selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.state} {selectedOrder.shippingAddress.zip}<br />
+                      {selectedOrder.shippingAddress.country}
+                    </p>
+                    {selectedOrder.shippingAddress.phone && (
+                      <p className="text-white/60 text-sm mt-2">Phone: {selectedOrder.shippingAddress.phone}</p>
+                    )}
+                  </div>
+                )}
+
+                {/* Order Items */}
+                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Items</p>
+                  <div className="space-y-3">
+                    {selectedOrder.items?.map((item, i) => (
+                      <div key={i} className="flex items-center gap-4">
+                        <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-white/[0.02] shrink-0">
+                          {item.product?.images?.[0] ? (
+                            <Image src={item.product.images[0]} alt={item.product.name} fill className="object-cover" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <Package className="w-5 h-5 text-white/20" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-sm truncate">{item.product?.name || 'Product'}</p>
+                          <p className="text-white/40 text-xs">Qty: {item.quantity} × {formatPrice(item.price)}</p>
+                        </div>
+                        <p className="text-white font-medium text-sm">{formatPrice(item.price * item.quantity)}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-white/[0.06] flex justify-between">
+                    <span className="text-white/60">Total</span>
+                    <span className="text-lg font-bold text-white">{formatPrice(selectedOrder.totalAmount)}</span>
+                  </div>
                 </div>
               </div>
-
-              {selectedOrder.shippingAddress && (
-                <div className="luxury-card p-4">
-                  <p className="text-white/60 text-xs uppercase mb-2">Shipping Address</p>
-                  <p className="text-white">{selectedOrder.shippingAddress.street}</p>
-                  <p className="text-white/80">{selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.state} {selectedOrder.shippingAddress.zip}</p>
-                  <p className="text-white/60">{selectedOrder.shippingAddress.phone}</p>
-                </div>
-              )}
-
-              <div className="luxury-card p-4">
-                <p className="text-white/60 text-xs uppercase mb-2">Items</p>
-                <div className="space-y-2">
-                  {selectedOrder.items.map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center">
-                      <span className="text-white">{item.product?.name || 'Product'} x{item.quantity}</span>
-                      <span className="text-white/80">{formatPrice(item.price * item.quantity)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   )
 }

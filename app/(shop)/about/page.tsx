@@ -118,7 +118,7 @@ export default function AboutPage() {
                 Our <span className="text-gradient">Mission</span>
               </h2>
               <p className="text-base sm:text-lg text-white/40 leading-[1.8]">
-                At KARTEL, we believe that fragrance is more than a scent—it's an expression of identity, a memory in a bottle, an invisible accessory that leaves a lasting impression.
+                At KARTEL, we believe that fragrance is more than a scent&mdash;it&apos;s an expression of identity, a memory in a bottle, an invisible accessory that leaves a lasting impression.
               </p>
               <p className="text-base sm:text-lg text-white/40 leading-[1.8]">
                 Our mission is to create fragrances that transcend time, blending rare botanicals with avant-garde chemistry to produce scents that are both timeless and innovative.
