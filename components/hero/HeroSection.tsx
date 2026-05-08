@@ -154,7 +154,7 @@ export function HeroSection() {
                   className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl"
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&auto=format&fit=crop&q=80"
+                    src="https://images.unsplash.com/photo-1622618991746-fe6004db3a47?w=600&auto=format&fit=crop&q=60"
                     alt="KARTEL Signature Perfume"
                     fill
                     className="object-cover object-center"
