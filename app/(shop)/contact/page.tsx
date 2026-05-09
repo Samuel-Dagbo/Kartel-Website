@@ -55,11 +55,11 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="bg-kartel-black min-h-screen">
+    <div className="bg-primary min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[50vh] lg:h-[60vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-kartel-black-950">
-          <div className="absolute inset-0 bg-gradient-to-br from-kartel-black-900 via-kartel-black to-kartel-black-900" />
+        <div className="absolute inset-0 bg-secondary">
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-primary to-secondary" />
           <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-kartel-gold/[0.03] blur-[150px] rounded-full" />
           <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-kartel-gold/[0.02] blur-[120px] rounded-full" />
         </div>

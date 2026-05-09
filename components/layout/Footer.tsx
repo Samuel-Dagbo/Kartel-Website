@@ -39,7 +39,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-kartel-black-900 border-t border-white/[0.03] overflow-hidden">
+    <footer className="relative footer-bg border-t border-white/[0.03] overflow-hidden">
       {/* Main glow line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px">
         <div className="w-full h-full bg-gradient-to-r from-transparent via-kartel-gold/30 to-transparent" />
@@ -59,7 +59,7 @@ export function Footer() {
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-kartel-gold to-transparent group-hover:w-full transition-all duration-500 ease-luxury" />
             </Link>
-            <p className="text-white/35 text-sm leading-[1.85] max-w-sm">
+            <p className="footer-text text-sm leading-[1.85] max-w-sm">
               Curating the world&apos;s finest collection of luxury perfumes. Each
               fragrance tells a story of artistry, passion, and timeless elegance.
             </p>
@@ -68,7 +68,7 @@ export function Footer() {
                 <a
                   key={label}
                   href={href}
-                  className="group p-3 rounded-full border border-white/[0.05] text-white/35 hover:text-kartel-gold hover:border-kartel-gold/25 transition-all duration-300"
+                  className="group p-3 rounded-full border border-white/[0.05] footer-text-muted hover:text-kartel-gold hover:border-kartel-gold/25 transition-all duration-300"
                   aria-label={label}
                 >
                   <Icon
@@ -85,7 +85,7 @@ export function Footer() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 lg:gap-14">
               {/* Explore */}
               <div>
-                <h3 className="text-overline font-semibold text-white/80 mb-6 tracking-[0.12em]">
+                <h3 className="text-overline font-semibold footer-text mb-6 tracking-[0.12em]">
                   EXPLORE
                 </h3>
                 <ul className="space-y-3.5">
@@ -93,7 +93,7 @@ export function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="group inline-flex items-center gap-1.5 text-sm text-white/35 hover:text-kartel-gold transition-colors duration-300"
+                        className="group inline-flex items-center gap-1.5 text-sm footer-text-muted hover:text-kartel-gold transition-colors duration-300"
                       >
                         {item.label}
                         <ArrowUpRight
@@ -107,7 +107,7 @@ export function Footer() {
 
               {/* Support */}
               <div>
-                <h3 className="text-overline font-semibold text-white/80 mb-6 tracking-[0.12em]">
+                <h3 className="text-overline font-semibold footer-text mb-6 tracking-[0.12em]">
                   SUPPORT
                 </h3>
                 <ul className="space-y-3.5">
@@ -115,7 +115,7 @@ export function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="group inline-flex items-center gap-1.5 text-sm text-white/35 hover:text-kartel-gold transition-colors duration-300"
+                        className="group inline-flex items-center gap-1.5 text-sm footer-text-muted hover:text-kartel-gold transition-colors duration-300"
                       >
                         {item.label}
                         <ArrowUpRight
@@ -129,7 +129,7 @@ export function Footer() {
 
               {/* Company */}
               <div>
-                <h3 className="text-overline font-semibold text-white/80 mb-6 tracking-[0.12em]">
+                <h3 className="text-overline font-semibold footer-text mb-6 tracking-[0.12em]">
                   COMPANY
                 </h3>
                 <ul className="space-y-3.5">
@@ -137,7 +137,7 @@ export function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="group inline-flex items-center gap-1.5 text-sm text-white/35 hover:text-kartel-gold transition-colors duration-300"
+                        className="group inline-flex items-center gap-1.5 text-sm footer-text-muted hover:text-kartel-gold transition-colors duration-300"
                       >
                         {item.label}
                         <ArrowUpRight
@@ -156,13 +156,13 @@ export function Footer() {
         <div className="py-12 border-b border-white/[0.03]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-5">
-              <h3 className="text-overline font-semibold text-white/80 tracking-[0.12em]">
+              <h3 className="text-overline font-semibold footer-text tracking-[0.12em]">
                 GET IN TOUCH
               </h3>
               <div className="flex flex-wrap gap-8">
                 <a
                   href="mailto:contact@kartel.com"
-                  className="flex items-center gap-2.5 text-sm text-white/35 hover:text-kartel-gold transition-colors"
+                  className="flex items-center gap-2.5 text-sm footer-text-muted hover:text-kartel-gold transition-colors"
                 >
                   <Mail
                     className="w-4 h-4 text-kartel-gold/50"
@@ -172,7 +172,7 @@ export function Footer() {
                 </a>
                 <a
                   href="tel:+15551234567"
-                  className="flex items-center gap-2.5 text-sm text-white/35 hover:text-kartel-gold transition-colors"
+                  className="flex items-center gap-2.5 text-sm footer-text-muted hover:text-kartel-gold transition-colors"
                 >
                   <Phone
                     className="w-4 h-4 text-kartel-gold/50"
@@ -183,7 +183,7 @@ export function Footer() {
               </div>
             </div>
             <div className="lg:text-right">
-              <p className="text-sm text-white/25">
+              <p className="text-sm footer-text-muted">
                 <MapPin
                   className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5 text-kartel-gold/40"
                   strokeWidth={1.5}
@@ -196,7 +196,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-white/20 tracking-wide">
+          <p className="text-xs text-white/20 dark:text-white/20 tracking-wide footer-text-muted">
             &copy; {new Date().getFullYear()} KARTEL. All rights reserved.
           </p>
         </div>

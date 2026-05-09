@@ -62,7 +62,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
   }
 
   return (
-    <section className="section-padding bg-kartel-black-900 relative overflow-hidden">
+    <section className="section-padding bg-secondary relative overflow-hidden">
       {/* Ambient glow effects */}
       <div className="absolute top-1/2 left-[-10%] w-[500px] h-[500px] bg-kartel-gold/[0.02] rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute top-1/3 right-[-5%] w-[400px] h-[400px] bg-kartel-gold/[0.015] rounded-full blur-[120px] pointer-events-none" />
@@ -81,10 +81,10 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
           <span className="inline-block text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/70 mb-4 sm:mb-6 px-4 sm:px-5 py-2 border border-kartel-gold/[0.12] rounded-full backdrop-blur-sm">
             Most Loved
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.05] tracking-[-0.02em]">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-heading leading-[1.05] tracking-[-0.02em]">
             Best <span className="text-gradient">Sellers</span>
           </h2>
-          <p className="mt-3 sm:mt-5 text-sm sm:text-base text-white/35 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-3 sm:mt-5 text-sm sm:text-base text-muted max-w-lg mx-auto leading-relaxed">
             Our customers&apos; favorite fragrances, curated for you.
           </p>
         </motion.div>
@@ -107,7 +107,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                   <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-kartel-gold/60">
                     {product.brand || 'KARTEL'}
                   </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-[2.75rem] font-bold text-white mt-2 sm:mt-3 leading-[1.15] text-balance">
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-[2.75rem] font-bold text-heading mt-2 sm:mt-3 leading-[1.15] text-balance">
                     {product.name}
                   </h3>
                   <div className="flex items-center gap-2 sm:gap-3 mt-3 sm:mt-5">

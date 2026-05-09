@@ -50,7 +50,7 @@ export function FeaturedCollections({ products = [] }: FeaturedCollectionsProps)
     : defaultCollections
 
   return (
-    <section className="section-padding bg-kartel-black relative overflow-hidden">
+    <section className="section-padding bg-primary relative overflow-hidden">
       <div className="absolute top-[20%] left-[-10%] w-[50%] h-[60%] bg-kartel-gold/[0.025] blur-[200px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[50%] bg-kartel-gold/[0.015] blur-[180px] rounded-full pointer-events-none" />
 
@@ -67,10 +67,10 @@ export function FeaturedCollections({ products = [] }: FeaturedCollectionsProps)
           <span className="inline-block text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/70 mb-4 sm:mb-6 px-4 sm:px-5 py-2 border border-kartel-gold/[0.12] rounded-full backdrop-blur-sm">
             Curated For You
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.05] tracking-[-0.02em]">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-heading leading-[1.05] tracking-[-0.02em]">
             Our <span className="text-gradient">Collections</span>
           </h2>
-          <p className="mt-3 sm:mt-5 text-sm sm:text-base text-white/35 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-3 sm:mt-5 text-sm sm:text-base text-muted max-w-lg mx-auto leading-relaxed">
             Handpicked selections to guide your olfactory journey through luxury.
           </p>
         </motion.div>
@@ -89,7 +89,7 @@ export function FeaturedCollections({ products = [] }: FeaturedCollectionsProps)
               }}
             >
               <Link href={collection.link} className="group block h-full">
-                <div className="relative h-full bg-gradient-to-b from-kartel-black-900/40 to-transparent rounded-2xl sm:rounded-[2rem] overflow-hidden border border-white/[0.04] hover:border-kartel-gold/[0.12] transition-all duration-700">
+                <div className="relative h-full glass-card rounded-2xl sm:rounded-[2rem] overflow-hidden border hover:border-kartel-gold/[0.12] transition-all duration-700">
                   <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden">
                     <Image
                       src={collection.image}
@@ -117,10 +117,10 @@ export function FeaturedCollections({ products = [] }: FeaturedCollectionsProps)
                   </div>
 
                   <div className="p-5 sm:p-6 lg:p-8 space-y-2 sm:space-y-3">
-                    <h3 className="font-serif text-lg sm:text-xl font-semibold text-white/90 group-hover:text-kartel-gold transition-colors duration-500">
+                    <h3 className="font-serif text-lg sm:text-xl font-semibold text-heading group-hover:text-kartel-gold transition-colors duration-500">
                       {collection.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-white/35 leading-relaxed line-clamp-2">
+                    <p className="text-xs sm:text-sm text-muted leading-relaxed line-clamp-2">
                       {collection.description}
                     </p>
                     <div className="pt-2 sm:pt-3 flex items-center gap-2 text-kartel-gold/70 text-xs sm:text-sm font-medium tracking-wide group-hover:text-kartel-gold transition-colors duration-300">

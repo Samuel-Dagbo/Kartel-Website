@@ -20,7 +20,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[100dvh] lg:min-h-[100dvh] flex items-center overflow-hidden bg-gradient-to-b from-[#0a0908] via-[#0d0b09] to-[#0a0908]"
+      className="relative min-h-[100dvh] lg:min-h-[100dvh] flex items-center overflow-hidden hero-gradient"
     >
       {/* Ambient glow effects */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/10 via-yellow-500/5 to-transparent rounded-full blur-[150px] pointer-events-none" />
@@ -58,13 +58,13 @@ export function HeroSection() {
               transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-2"
             >
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3rem] xl:text-[3.5rem] font-bold text-white leading-[1.1] tracking-[-0.02em]">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3rem] xl:text-[3.5rem] font-bold text-heading leading-[1.1] tracking-[-0.02em]">
                 Define Your{' '}
-                <span className="italic font-light bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-200 bg-clip-text text-transparent">
+                <span className="italic font-light bg-gradient-to-r from-kartel-gold via-kartel-gold-light to-kartel-champagne bg-clip-text text-transparent">
                   Invisible
                 </span>
               </h1>
-              <h1 className="font-serif text-2.5xl sm:text-3xl md:text-4xl lg:text-[2.5rem] xl:text-[3rem] font-bold text-white/85 leading-[1.15] tracking-[-0.02em]">
+              <h1 className="font-serif text-2.5xl sm:text-3xl md:text-4xl lg:text-[2.5rem] xl:text-[3rem] font-bold text-heading/85 leading-[1.15] tracking-[-0.02em]">
                 Signature
               </h1>
             </motion.div>
@@ -74,7 +74,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg text-white/50 max-w-xl leading-[1.75]"
+              className="text-base sm:text-lg text-muted max-w-xl leading-[1.75]"
             >
               KARTEL blends rare botanicals with avant-garde chemistry. Each scent
               transcends time—a symphony of luxury for the discerning few.
@@ -113,7 +113,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
               className="hidden md:flex items-center gap-6 pt-4"
             >
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/[0.08]" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/[0.08] dark:to-white/[0.08]" />
               <div className="flex gap-10 lg:gap-12">
                 {[
                   { value: '200+', label: 'Scents' },
@@ -121,12 +121,12 @@ export function HeroSection() {
                   { value: '4.9', label: 'Rating' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
-                    <p className="text-xl font-serif font-bold text-white">{stat.value}</p>
-                    <p className="text-[9px] uppercase tracking-[0.2em] text-white/35 mt-1">{stat.label}</p>
+                    <p className="text-xl font-serif font-bold text-heading">{stat.value}</p>
+                    <p className="text-[9px] uppercase tracking-[0.2em] text-muted mt-1">{stat.label}</p>
                   </div>
                 ))}
               </div>
-              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.08] to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.08] to-transparent dark:from-white/[0.08]" />
             </motion.div>
           </motion.div>
 
@@ -183,7 +183,7 @@ export function HeroSection() {
       </div>
 
       {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0908] via-[#0a0908]/80 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 hero-bottom-gradient pointer-events-none" />
 
       {/* Scroll indicator */}
       <motion.div
@@ -192,11 +192,11 @@ export function HeroSection() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
-        <span className="text-[9px] uppercase tracking-[0.25em] text-white/20">Scroll</span>
+        <span className="text-[9px] uppercase tracking-[0.25em] text-muted">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-px h-8 bg-gradient-to-b from-amber-400/40 to-transparent"
+          className="w-px h-8 bg-gradient-to-b from-kartel-gold/40 to-transparent"
         />
       </motion.div>
     </section>

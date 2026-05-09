@@ -52,17 +52,17 @@ const timeline = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-kartel-black min-h-screen">
+    <div className="bg-primary min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[60vh] lg:h-[70vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-kartel-black-950">
+        <div className="absolute inset-0 bg-secondary">
           <Image
             src="https://images.unsplash.com/photo-1626090710609-b68733cc8564?q=80&w=1974&auto=format&fit=crop"
             alt="KARTEL About"
             fill
             className="object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
         </div>
         
         <div className="container-luxury relative z-10 pt-20">
@@ -75,10 +75,10 @@ export default function AboutPage() {
             <span className="inline-block text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/70 mb-6 px-5 py-2 border border-kartel-gold/[0.12] rounded-full backdrop-blur-sm">
               Our Journey
             </span>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-[-0.02em]">
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-heading leading-[1.1] tracking-[-0.02em]">
               The <span className="text-gradient">Story</span> of KARTEL
             </h1>
-            <p className="mt-6 text-lg text-white/50 max-w-xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-muted max-w-xl mx-auto leading-relaxed">
               Crafting extraordinary fragrances since 2009, blending artistry with science to create scents that define you.
             </p>
           </motion.div>
@@ -86,7 +86,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="section-padding bg-kartel-black-900">
+      <section className="section-padding bg-secondary">
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div

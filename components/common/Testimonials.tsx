@@ -39,7 +39,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="section-padding bg-kartel-black-900 relative overflow-hidden">
+    <section className="section-padding bg-secondary relative overflow-hidden">
       {/* Ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-kartel-gold/[0.02] blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-[-10%] w-[400px] h-[400px] bg-kartel-gold/[0.012] blur-[120px] rounded-full pointer-events-none" />
@@ -58,10 +58,10 @@ export function Testimonials() {
           <span className="inline-block text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/70 mb-6 px-5 py-2 border border-kartel-gold/[0.12] rounded-full backdrop-blur-sm">
             Testimonials
           </span>
-          <h2 className="font-serif text-display-md font-bold text-white leading-[1.05] tracking-[-0.02em]">
+          <h2 className="font-serif text-display-md font-bold text-heading leading-[1.05] tracking-[-0.02em]">
             What Our <span className="text-gradient">Clients Say</span>
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-white/35 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-muted max-w-lg mx-auto leading-relaxed">
             Real experiences from our valued customers around the world.
           </p>
         </motion.div>
@@ -79,7 +79,7 @@ export function Testimonials() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              <div className="relative bg-gradient-to-b from-kartel-black-800/25 to-transparent rounded-[2rem] p-8 lg:p-10 h-full border border-white/[0.03] hover:border-kartel-gold/[0.08] transition-all duration-700 group">
+              <div className="relative glass-card rounded-[2rem] p-8 lg:p-10 h-full border hover:border-kartel-gold/[0.08] transition-all duration-700 group">
                 {/* Quote icon with glow */}
                 <div className="relative mb-8">
                   <div className="absolute -top-2 -left-2 w-14 h-14 bg-kartel-gold/[0.04] rounded-full blur-xl" />
@@ -101,7 +101,7 @@ export function Testimonials() {
                 </div>
 
                 {/* Quote text */}
-                <p className="text-base sm:text-lg text-white/40 leading-[1.85] flex-1 mb-10 group-hover:text-white/50 transition-colors duration-500">
+                <p className="text-base sm:text-lg text-muted leading-[1.85] flex-1 mb-10 group-hover:text-body transition-colors duration-500">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
 
@@ -119,10 +119,10 @@ export function Testimonials() {
                     <div className="absolute inset-0 bg-kartel-gold/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-base font-semibold text-white/85 group-hover:text-kartel-gold transition-colors duration-500">
+                    <h3 className="font-serif text-base font-semibold text-heading group-hover:text-kartel-gold transition-colors duration-500">
                       {testimonial.name}
                     </h3>
-                    <p className="text-[11px] text-kartel-gold/40 mt-1 tracking-wide">
+                    <p className="text-[11px] text-muted mt-1 tracking-wide">
                       {testimonial.title}
                     </p>
                   </div>

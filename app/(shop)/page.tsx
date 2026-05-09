@@ -35,7 +35,7 @@ export default async function HomePage() {
   })) as Product[]
 
   return (
-    <div className="bg-kartel-black">
+    <div className="page-section">
       <HeroSection />
       <FeaturedCollections products={serializedProducts} />
       <BestSellersCarousel products={serializedProducts} />

@@ -28,12 +28,12 @@ const highlights = [
 
 export function BrandStory() {
   return (
-    <section className="section-padding bg-kartel-black relative overflow-hidden">
+    <section className="section-padding bg-primary relative overflow-hidden">
       {/* Subtle background texture */}
       <div
-        className="absolute inset-0 opacity-[0.012] pointer-events-none"
+        className="absolute inset-0 opacity-[0.015] pointer-events-none dark:opacity-[0.012]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)`,
           backgroundSize: '40px 40px',
         }}
       />
@@ -56,11 +56,11 @@ export function BrandStory() {
           >
             <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] overflow-hidden border border-white/[0.04] shadow-luxury-xl">
               <Image
-                src="https://images.unsplash.com/photo-1626090710609-b68733cc8564?q=80&w=1974&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1705338670422-01133208eab9?w=600&auto=format&fit=crop&q=60"
                 alt="KARTEL Brand Story"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover brightness-[0.88]"
+                className="object-cover"
               />
               {/* Gradient overlays */}
               <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/20 to-transparent" />
@@ -72,10 +72,10 @@ export function BrandStory() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.7, duration: 0.8 }}
-                className="absolute bottom-8 left-8 bg-kartel-black/50 backdrop-blur-2xl p-6 rounded-2xl border border-kartel-gold/[0.1] shadow-luxury"
+                className="absolute bottom-8 left-8 glass-dark p-6 rounded-2xl border border-kartel-gold/[0.1] shadow-luxury"
               >
                 <p className="text-3xl font-serif font-bold text-kartel-gold">15+</p>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mt-1.5">Years of Craft</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-muted mt-1.5">Years of Craft</p>
               </motion.div>
 
               {/* Decorative element */}

@@ -13,12 +13,16 @@ import {
   Search,
   ChevronRight,
   LogOut,
+  Sun,
+  Moon,
 } from 'lucide-react'
 import { useCart } from '@/components/providers/CartProvider'
+import { useTheme } from '@/components/providers/ThemeProvider'
 
 export function Navbar() {
   const { data: session } = useSession()
   const { totalItems, toggleCart } = useCart()
+  const { theme, toggleTheme } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -46,10 +50,10 @@ export function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 border-b ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 border-b navbar-glass ${
           isScrolled
-            ? 'bg-kartel-black/95 backdrop-blur-2xl border-white/[0.06] shadow-2xl shadow-black/40'
-            : 'bg-kartel-black/60 backdrop-blur-xl border-transparent'
+            ? 'shadow-2xl shadow-black/40'
+            : ''
         }`}
       >
         <div className="container-luxury">
@@ -68,12 +72,12 @@ export function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center">
-              <div className="flex items-center bg-white/[0.03] backdrop-blur-sm border border-white/[0.05] rounded-full px-1.5 py-1.5">
+              <div className="flex items-center glass rounded-full px-1.5 py-1.5">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="relative px-5 py-2.5 text-[13px] font-medium tracking-wide text-white/50 hover:text-white transition-colors duration-300 group"
+                    className="relative px-5 py-2.5 text-[13px] font-medium tracking-wide navbar-text hover:text-kartel-gold transition-colors duration-300 group"
                   >
                     {link.label}
                     <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-px bg-kartel-gold rounded-full transition-all duration-500 ease-luxury group-hover:w-1/2" />
@@ -87,7 +91,7 @@ export function Navbar() {
               {/* Search */}
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2.5 rounded-full text-white/50 hover:text-kartel-gold hover:bg-white/[0.05] transition-all duration-300"
+                className="p-2.5 rounded-full navbar-text hover:text-kartel-gold hover:bg-white/[0.05] dark:hover:bg-white/[0.05] transition-all duration-300"
                 aria-label="Search"
               >
                 <Search
@@ -97,10 +101,23 @@ export function Navbar() {
                 />
               </button>
 
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2.5 rounded-full navbar-text hover:text-kartel-gold hover:bg-white/[0.05] dark:hover:bg-white/[0.05] transition-all duration-300"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-[18px] h-[18px]" strokeWidth={1.5} />
+                ) : (
+                  <Moon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+                )}
+              </button>
+
               {/* Wishlist */}
               <Link
                 href="/wishlist"
-                className="hidden sm:flex p-2.5 rounded-full text-white/50 hover:text-kartel-gold hover:bg-white/[0.05] transition-all duration-300"
+                className="hidden sm:flex p-2.5 rounded-full navbar-text hover:text-kartel-gold hover:bg-white/[0.05] dark:hover:bg-white/[0.05] transition-all duration-300"
                 aria-label="Wishlist"
               >
                 <Heart
@@ -113,7 +130,7 @@ export function Navbar() {
               {/* Cart */}
               <button
                 onClick={toggleCart}
-                className="relative p-2.5 rounded-full text-white/50 hover:text-kartel-gold hover:bg-white/[0.05] transition-all duration-300"
+                className="relative p-2.5 rounded-full navbar-text hover:text-kartel-gold hover:bg-white/[0.05] dark:hover:bg-white/[0.05] transition-all duration-300"
                 aria-label="Cart"
               >
                 <ShoppingBag
@@ -137,7 +154,7 @@ export function Navbar() {
                 <div className="hidden sm:flex items-center gap-1 ml-1">
                   <Link
                     href={isAdmin ? '/admin' : '/customer'}
-                    className="p-2.5 rounded-full text-white/50 hover:text-kartel-gold hover:bg-white/[0.05] transition-all duration-300"
+                    className="p-2.5 rounded-full navbar-text hover:text-kartel-gold hover:bg-white/[0.05] dark:hover:bg-white/[0.05] transition-all duration-300"
                     aria-label="Account"
                   >
                     <User
@@ -159,7 +176,7 @@ export function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2.5 rounded-full text-white/50 hover:text-white hover:bg-white/[0.04] transition-all duration-300 ml-1"
+                className="md:hidden p-2.5 rounded-full navbar-text hover:text-kartel-gold hover:bg-white/[0.04] transition-all duration-300 ml-1"
                 aria-label="Menu"
               >
                 {isMobileMenuOpen ? (
@@ -180,18 +197,18 @@ export function Navbar() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="border-t border-white/[0.03] overflow-hidden bg-kartel-black/98 backdrop-blur-2xl"
+              className="border-t border-white/[0.03] overflow-hidden glass-dark navbar-glass"
             >
               <div className="container-luxury py-6">
                 <div className="max-w-2xl mx-auto relative">
                   <Search
-                    className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25"
+                    className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 search-icon"
                     strokeWidth={1.5}
                   />
                   <input
                     type="text"
                     placeholder="Search for perfumes, brands, notes..."
-                    className="w-full bg-white/[0.03] border border-white/[0.06] rounded-full pl-12 pr-6 py-3.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 transition-all duration-300"
+                    className="w-full search-input rounded-full pl-12 pr-6 py-3.5 text-sm focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 transition-all duration-300"
                     autoFocus
                   />
                 </div>
@@ -208,7 +225,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="md:hidden border-t border-white/[0.03] overflow-hidden bg-kartel-black/98 backdrop-blur-2xl"
+              className="md:hidden border-t border-white/[0.03] overflow-hidden mobile-menu navbar-glass"
             >
               <div className="container-luxury py-8 space-y-1">
                 {navLinks.map((link, i) => (
@@ -225,7 +242,7 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center justify-between py-3.5 text-lg text-white/70 hover:text-kartel-gold transition-colors group"
+                      className="flex items-center justify-between py-3.5 text-lg mobile-menu-text hover:text-kartel-gold transition-colors group"
                     >
                       {link.label}
                       <ChevronRight
@@ -241,7 +258,7 @@ export function Navbar() {
                         setIsMobileMenuOpen(false)
                         signOut()
                       }}
-                      className="w-full py-3 text-left text-white/50 hover:text-kartel-gold transition-colors flex items-center gap-2"
+                      className="w-full py-3 text-left mobile-menu-text hover:text-kartel-gold transition-colors flex items-center gap-2"
                     >
                       <LogOut className="w-4 h-4" strokeWidth={1.5} />
                       Sign Out

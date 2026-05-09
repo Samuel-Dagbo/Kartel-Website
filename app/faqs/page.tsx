@@ -45,7 +45,7 @@ export default function FAQsPage() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0)
 
   return (
-    <div className="min-h-screen bg-kartel-black">
+    <div className="min-h-screen bg-primary">
       <Navbar />
       
       <main className="pt-32 pb-20">

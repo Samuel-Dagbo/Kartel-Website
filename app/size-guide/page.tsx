@@ -8,7 +8,7 @@ import { Navbar } from '@/components/layout/Navbar'
 
 export default function SizeGuidePage() {
   return (
-    <div className="min-h-screen bg-kartel-black">
+    <div className="min-h-screen bg-primary">
       <Navbar />
       
       <main className="pt-32 pb-20">

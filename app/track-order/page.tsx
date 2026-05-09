@@ -35,7 +35,7 @@ export default function TrackOrderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-kartel-black">
+    <div className="min-h-screen bg-primary">
       <Navbar />
       
       <main className="pt-32 pb-20">

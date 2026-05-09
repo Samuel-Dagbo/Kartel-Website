@@ -78,10 +78,10 @@ export default function ShopPage() {
           <span className="inline-block text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/80 mb-5 px-4 py-1.5 border border-kartel-gold/[0.15] rounded-full">
             The Collection
           </span>
-          <h1 className="font-serif text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] font-bold text-white leading-[1.1] tracking-[-0.02em]">
+          <h1 className="font-serif text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] font-bold text-heading leading-[1.1] tracking-[-0.02em]">
             Fragrance <span className="text-gradient">Gallery</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/40 max-w-2xl leading-relaxed">
+          <p className="text-base sm:text-lg text-muted max-w-2xl leading-relaxed">
             Explore our curated collection of the finest perfumes. From timeless
             classics to modern avant-garde scents.
           </p>
@@ -92,13 +92,13 @@ export default function ShopPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-8 pb-6 border-b border-white/[0.04]"
+          className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-8 pb-6 border-b border-white/[0.04] dark:border-white/[0.04]"
         >
           <div className="flex items-center gap-4 w-full sm:w-auto">
             {/* Mobile Filter Toggle */}
             <button
               onClick={() => setShowMobileFilters(!showMobileFilters)}
-              className="lg:hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.06] text-white/70 hover:text-kartel-gold hover:border-kartel-gold/30 transition-all duration-300 text-sm"
+              className="lg:hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass border text-sm navbar-text hover:text-kartel-gold hover:border-kartel-gold/30 transition-all duration-300"
             >
               <SlidersHorizontal className="w-4 h-4" strokeWidth={1.5} />
               Filters
@@ -109,13 +109,13 @@ export default function ShopPage() {
 
             {/* Quick search */}
             <div className="relative flex-1 sm:w-72">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" strokeWidth={1.5} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 search-icon" strokeWidth={1.5} />
               <input
                 type="text"
                 placeholder="Search fragrances..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-white/[0.03] border border-white/[0.06] rounded-full text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-kartel-gold/30 focus:ring-1 focus:ring-kartel-gold/10 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 glass border rounded-full text-sm placeholder:text-muted focus:outline-none focus:border-kartel-gold/30 focus:ring-1 focus:ring-kartel-gold/10 transition-all"
               />
             </div>
           </div>
