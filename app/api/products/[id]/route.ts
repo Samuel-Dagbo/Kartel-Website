@@ -1,6 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import connectDB from '@/lib/db'
+import mongoose from 'mongoose'
 import Product from '@/models/Product'
+
+async function connectDB() {
+  const MONGODB_URI = process.env.MONGODB_URI
+  if (!MONGODB_URI) {
+    throw new Error('Please define the MONGODB_URI environment variable')
+  }
+  
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection
+  }
+  
+  await mongoose.connect(MONGODB_URI)
+  return mongoose.connection
+}
 
 export async function GET(
   req: NextRequest,
@@ -9,10 +23,10 @@ export async function GET(
   try {
     await connectDB()
     
-    let product = await Product.findById(params.id)
+    let product = await Product.findById(params.id).lean()
     
     if (!product) {
-      product = await Product.findOne({ slug: params.id })
+      product = await Product.findOne({ slug: params.id }).lean()
     }
     
     if (!product) {
@@ -21,7 +35,11 @@ export async function GET(
     
     return NextResponse.json(product, { status: 200 })
   } catch (error: any) {
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+    console.error('Product API Error:', error)
+    if (error.message.includes('MONGODB_URI')) {
+      return NextResponse.json({ error: 'Database configuration error' }, { status: 500 })
+    }
+    return NextResponse.json({ error: 'Failed to load product' }, { status: 500 })
   }
 }
 

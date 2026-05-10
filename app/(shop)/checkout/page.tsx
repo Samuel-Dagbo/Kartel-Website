@@ -1,21 +1,26 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useCart } from '@/components/providers/CartProvider'
 import { useTheme } from '@/components/providers/ThemeProvider'
 import { formatPrice } from '@/lib/utils'
-import { CreditCard, Truck, CheckCircle2, ShoppingBag } from 'lucide-react'
+import { CreditCard, Truck, CheckCircle2, ShoppingBag, Lock } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export default function CheckoutPage() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const { items, totalPrice, clearCart } = useCart()
   const [step, setStep] = useState(1)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,6 +31,74 @@ export default function CheckoutPage() {
     country: 'United States',
     phone: '',
   })
+
+  useEffect(() => {
+    if (status === 'loading') return
+    
+    if (!session) {
+      setLoading(false)
+    } else {
+      setLoading(false)
+      if (session.user) {
+        setFormData(prev => ({
+          ...prev,
+          name: session.user.name || prev.name,
+          email: session.user.email || prev.email
+        }))
+      }
+    }
+  }, [session, status])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-32 flex items-center justify-center bg-primary">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
+          <span className="text-muted text-sm">Loading...</span>
+        </div>
+      </div>
+    )
+  }
+
+  if (!session) {
+    return (
+      <div className="min-h-screen pt-32 pb-16 flex items-center justify-center bg-primary px-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md w-full text-center"
+        >
+          <div className="w-20 h-20 rounded-full glass-card flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-kartel-gold" />
+          </div>
+          <h1 className="font-serif text-3xl font-bold text-heading mb-4">Sign In Required</h1>
+          <p className="text-body mb-8">
+            Please sign in to complete your purchase. You can also create an account if you don&apos;t have one.
+          </p>
+          <div className="space-y-4">
+            <Link
+              href="/login?callbackUrl=/checkout"
+              className="btn-primary w-full py-4 block"
+            >
+              Sign In to Checkout
+            </Link>
+            <Link
+              href="/register?callbackUrl=/checkout"
+              className="btn-ghost w-full py-4 block"
+            >
+              Create an Account
+            </Link>
+          </div>
+          <Link
+            href="/shop"
+            className="inline-flex items-center gap-2 mt-8 text-sm text-muted hover:text-kartel-gold transition-colors"
+          >
+            ← Continue Shopping
+          </Link>
+        </motion.div>
+      </div>
+    )
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -46,6 +119,8 @@ export default function CheckoutPage() {
             price: item.product.price,
           })),
           shippingAddress: {
+            email: formData.email,
+            name: formData.name,
             street: formData.street,
             city: formData.city,
             state: formData.state || 'NY',

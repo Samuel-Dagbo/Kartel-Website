@@ -8,6 +8,8 @@ export interface IOrder extends Document {
     price: number
   }[]
   shippingAddress: {
+    email?: string
+    name?: string
     street: string
     city: string
     state: string

@@ -3,6 +3,7 @@ import connectDB from '@/lib/db'
 import Order from '@/models/Order'
 import Product from '@/models/Product'
 import InventoryLog from '@/models/InventoryLog'
+import User from '@/models/User'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 
@@ -10,49 +11,73 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB()
     const session = await getServerSession(authOptions)
-    
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
 
     const body = await req.json()
     const { items, shippingAddress, totalAmount } = body
 
-    // 1. Validate stock and update inventory
+    let userId = null
+    let guestEmail = null
+
+    if (session?.user?.id) {
+      userId = session.user.id
+    } else if (shippingAddress?.email) {
+      guestEmail = shippingAddress.email
+      const existingUser = await User.findOne({ email: shippingAddress.email })
+      if (existingUser) {
+        userId = existingUser._id
+      }
+    }
+
+    if (!userId && !guestEmail) {
+      return NextResponse.json({ error: 'Please provide email or login to place order' }, { status: 400 })
+    }
+
     for (const item of items) {
       const product = await Product.findById(item.product)
-      if (!product || product.quantity < item.quantity) {
-        return NextResponse.json({ error: `Insufficient stock for ${product?.name || 'product'}` }, { status: 400 })
+      if (!product) {
+        return NextResponse.json({ error: `Product not found` }, { status: 400 })
+      }
+      if (product.quantity < item.quantity) {
+        return NextResponse.json({ error: `Insufficient stock for ${product.name}` }, { status: 400 })
       }
       
       product.quantity -= item.quantity
       if (product.quantity === 0) product.inStock = false
       await product.save()
 
-      // Log inventory change
-      await InventoryLog.create({
-        product: product._id,
-        type: 'removal',
-        quantity: item.quantity,
-        previousQuantity: product.quantity + item.quantity,
-        newQuantity: product.quantity,
-        reason: `Order ${body.orderId || 'Pending'}`,
-        user: session.user.id,
-      })
+      if (userId) {
+        await InventoryLog.create({
+          product: product._id,
+          type: 'removal',
+          quantity: item.quantity,
+          previousQuantity: product.quantity + item.quantity,
+          newQuantity: product.quantity,
+          reason: 'Order',
+          user: userId,
+        })
+      }
     }
 
-    // 2. Create order
-    const order = await Order.create({
-      user: session.user.id,
+    const orderData: any = {
       items,
       shippingAddress,
       totalAmount,
       status: 'pending',
       paymentStatus: 'pending',
-    })
+    }
+    
+    if (userId) {
+      orderData.user = userId
+    }
 
-    return NextResponse.json(order, { status: 201 })
+    const order = await Order.create(orderData)
+
+    return NextResponse.json({ 
+      ...order.toObject(),
+      guestEmail: guestEmail || (session?.user?.email)
+    }, { status: 201 })
   } catch (error: any) {
+    console.error('Order error:', error)
     return NextResponse.json({ error: 'Order creation failed' }, { status: 500 })
   }
 }

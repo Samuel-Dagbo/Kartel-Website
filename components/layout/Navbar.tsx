@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -12,9 +12,12 @@ import {
   User,
   Search,
   ChevronRight,
+  ChevronDown,
   LogOut,
   Sun,
   Moon,
+  Package,
+  ShoppingCart,
 } from 'lucide-react'
 import { useCart } from '@/components/providers/CartProvider'
 import { useTheme } from '@/components/providers/ThemeProvider'
@@ -26,8 +29,20 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  const userMenuRef = useRef<HTMLDivElement>(null)
 
   const isAdmin = session?.user?.role === 'admin'
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -181,9 +196,9 @@ export function Navbar() {
 
               {/* User */}
               {session ? (
-                <div className="hidden sm:flex items-center gap-1 ml-1">
-                  <Link
-                    href={isAdmin ? '/admin' : '/customer'}
+                <div className="hidden sm:flex items-center gap-1 ml-1 relative" ref={userMenuRef}>
+                  <button
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                     className={`p-2.5 rounded-full transition-all duration-300 ${
                       theme === 'dark'
                         ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.05]'
@@ -196,7 +211,79 @@ export function Navbar() {
                       strokeWidth={1.5}
                       stroke="currentColor"
                     />
-                  </Link>
+                  </button>
+                  <AnimatePresence>
+                    {isUserMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className={`absolute top-full right-0 mt-2 py-2 rounded-xl border shadow-xl min-w-[180px] ${
+                          theme === 'dark'
+                            ? 'bg-kartel-black-950 border-white/[0.08]'
+                            : 'bg-white border-black/[0.08]'
+                        }`}
+                      >
+                        <div className={`px-4 py-3 border-b ${
+                          theme === 'dark' ? 'border-white/[0.06]' : 'border-black/[0.06]'
+                        }`}>
+                          <p className={`text-sm font-medium ${
+                            theme === 'dark' ? 'text-white' : 'text-kartel-black-900'
+                          }`}>
+                            {session.user?.name || 'User'}
+                          </p>
+                          <p className={`text-xs ${
+                            theme === 'dark' ? 'text-white/40' : 'text-kartel-black-400'
+                          }`}>
+                            {session.user?.email}
+                          </p>
+                        </div>
+                        <div className="py-2">
+                          <Link
+                            href={isAdmin ? '/admin' : '/customer'}
+                            onClick={() => setIsUserMenuOpen(false)}
+                            className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                              theme === 'dark'
+                                ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.04]'
+                                : 'text-kartel-black-700 hover:text-kartel-gold hover:bg-black/[0.04]'
+                            }`}
+                          >
+                            <User className="w-4 h-4" />
+                            {isAdmin ? 'Admin Dashboard' : 'My Account'}
+                          </Link>
+                          {!isAdmin && (
+                            <Link
+                              href="/customer/orders"
+                              onClick={() => setIsUserMenuOpen(false)}
+                              className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                                theme === 'dark'
+                                  ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.04]'
+                                  : 'text-kartel-black-700 hover:text-kartel-gold hover:bg-black/[0.04]'
+                              }`}
+                            >
+                              <ShoppingCart className="w-4 h-4" />
+                              My Orders
+                            </Link>
+                          )}
+                          <button
+                            onClick={() => {
+                              setIsUserMenuOpen(false)
+                              signOut({ callbackUrl: '/' })
+                            }}
+                            className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                              theme === 'dark'
+                                ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.04]'
+                                : 'text-kartel-black-700 hover:text-kartel-gold hover:bg-black/[0.04]'
+                            }`}
+                          >
+                            <LogOut className="w-4 h-4" />
+                            Sign Out
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ) : (
                 <Link

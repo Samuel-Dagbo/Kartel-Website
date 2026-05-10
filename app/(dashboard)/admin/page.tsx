@@ -13,6 +13,7 @@ import {
   Eye,
   Sun,
   Moon,
+  UserCog,
 } from 'lucide-react'
 import { 
   XAxis, 
@@ -314,6 +315,7 @@ export default function AdminDashboard() {
             {[
               { label: 'View Products', icon: Package, href: '/admin/products', color: 'from-blue-500/20' },
               { label: 'Manage Orders', icon: ShoppingBag, href: '/admin/orders', color: 'from-purple-500/20' },
+              { label: 'Manage Users', icon: UserCog, href: '/admin/users', color: 'from-green-500/20' },
               { label: 'Add New Product', icon: Plus, href: '/admin/products?action=add', color: 'from-kartel-gold/20' },
             ].map((action, i) => (
               <Link 
