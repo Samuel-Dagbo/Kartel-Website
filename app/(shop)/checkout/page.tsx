@@ -220,6 +220,10 @@ export default function CheckoutPage() {
                   >
                     Review Order
                   </button>
+                  <p className="text-xs text-muted mt-4 flex items-center gap-2">
+                    <span>💡</span>
+                    Check your spam or junk folder for order emails
+                  </p>
                 </form>
               </div>
             </div>

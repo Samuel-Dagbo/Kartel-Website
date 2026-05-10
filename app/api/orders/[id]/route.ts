@@ -3,6 +3,7 @@ import connectDB from '@/lib/db'
 import Order from '@/models/Order'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { sendOrderStatusUpdateEmail } from '@/lib/email'
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -23,6 +24,14 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+    }
+
+    const customerEmail = order.user?.email || order.shippingAddress?.email
+    const customerName = order.user?.name || order.shippingAddress?.name || 'Customer'
+
+    if (customerEmail) {
+      sendOrderStatusUpdateEmail(customerEmail, customerName, order.orderNumber || `KRT-${order._id.toString().slice(-6).toUpperCase()}`, status)
+        .catch(err => console.error('Status update email failed:', err))
     }
 
     return NextResponse.json(order)

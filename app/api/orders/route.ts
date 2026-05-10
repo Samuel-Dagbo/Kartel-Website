@@ -6,6 +6,7 @@ import InventoryLog from '@/models/InventoryLog'
 import User from '@/models/User'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { sendOrderConfirmationEmail } from '@/lib/email'
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,14 +18,21 @@ export async function POST(req: NextRequest) {
 
     let userId = null
     let guestEmail = null
+    let userName = shippingAddress?.name || 'Customer'
 
     if (session?.user?.id) {
       userId = session.user.id
+      const user = await User.findById(userId)
+      if (user) {
+        userName = user.name
+        guestEmail = user.email
+      }
     } else if (shippingAddress?.email) {
       guestEmail = shippingAddress.email
       const existingUser = await User.findOne({ email: shippingAddress.email })
       if (existingUser) {
         userId = existingUser._id
+        userName = existingUser.name
       }
     }
 
@@ -58,7 +66,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    const orderNumber = `KRT-${Date.now().toString(36).toUpperCase()}`
+
     const orderData: any = {
+      orderNumber,
       items,
       shippingAddress,
       totalAmount,
@@ -71,6 +82,19 @@ export async function POST(req: NextRequest) {
     }
 
     const order = await Order.create(orderData)
+
+    const populatedOrder = await Order.findById(order._id).populate('items.product', 'name price')
+
+    if (guestEmail) {
+      const itemDetails = populatedOrder.items.map((item: any) => ({
+        name: item.product?.name || 'Product',
+        quantity: item.quantity,
+        price: item.price,
+      }))
+
+      sendOrderConfirmationEmail(guestEmail, userName, orderNumber, totalAmount, itemDetails)
+        .catch(err => console.error('Order confirmation email failed:', err))
+    }
 
     return NextResponse.json({ 
       ...order.toObject(),
