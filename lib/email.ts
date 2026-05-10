@@ -1,12 +1,12 @@
-import Mailjet from 'node-mailjet'
+import { Client } from 'node-mailjet'
 
 const FROM_EMAIL = 'kartelperfumes@gmail.com'
 const FROM_NAME = 'Kartel Perfumes'
 
 function getMailjet() {
-  return new Mailjet({
-    apiKey: process.env.MAILJET_APIKEY || process.env.MJ_APIKEY_PUBLIC,
-    apiSecret: process.env.MAILJET_SECRETKEY || process.env.MJ_APIKEY_PRIVATE,
+  return new Client({
+    apiKey: process.env.MJ_APIKEY_PUBLIC,
+    apiSecret: process.env.MJ_APIKEY_PRIVATE
   })
 }
 
