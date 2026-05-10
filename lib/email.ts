@@ -1,6 +1,6 @@
 import { Client } from 'node-mailjet'
 
-const FROM_EMAIL = 'kartelperfumes@gmail.com'
+const FROM_EMAIL = 'romeovilleproperties20@gmail.com'
 const FROM_NAME = 'Kartel Perfumes'
 
 function getMailjet() {
