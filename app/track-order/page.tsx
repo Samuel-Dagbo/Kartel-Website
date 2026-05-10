@@ -2,9 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Package, Search, ChevronRight, Clock, CheckCircle } from 'lucide-react'
-import { Footer } from '@/components/layout/Footer'
-import { Navbar } from '@/components/layout/Navbar'
+import { Package, Search, CheckCircle } from 'lucide-react'
 
 export default function TrackOrderPage() {
   const [orderId, setOrderId] = useState('')
@@ -36,8 +34,6 @@ export default function TrackOrderPage() {
 
   return (
     <div className="min-h-screen bg-primary">
-      <Navbar />
-      
       <main className="pt-32 pb-20">
         <div className="container-luxury">
           <motion.div
@@ -48,10 +44,10 @@ export default function TrackOrderPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-kartel-gold/10 mb-6">
               <Package className="w-8 h-8 text-kartel-gold" />
             </div>
-            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-heading mb-4">
               Track Your Order
             </h1>
-            <p className="text-white/50">
+            <p className="text-muted">
               Enter your order details to see real-time tracking information.
             </p>
           </motion.div>
@@ -61,35 +57,33 @@ export default function TrackOrderPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="max-w-xl mx-auto p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+              className="max-w-xl mx-auto glass-card p-8"
             >
               <form onSubmit={handleTrack} className="space-y-6">
                 <div>
-                  <label className="block text-sm text-white/50 mb-2">Order ID</label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={orderId}
-                      onChange={(e) => setOrderId(e.target.value)}
-                      placeholder="KTL-2024-XXXXXX"
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
-                    />
-                  </div>
+                  <label className="block text-sm text-muted mb-2">Order ID</label>
+                  <input
+                    type="text"
+                    value={orderId}
+                    onChange={(e) => setOrderId(e.target.value)}
+                    placeholder="KTL-2024-XXXXXX"
+                    className="input-luxury w-full px-4 py-3 rounded-xl"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm text-white/50 mb-2">Email Address</label>
+                  <label className="block text-sm text-muted mb-2">Email Address</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                    className="input-luxury w-full px-4 py-3 rounded-xl"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isSearching}
-                  className="w-full px-6 py-3.5 rounded-xl bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black font-semibold hover:brightness-110 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="btn-primary w-full px-6 py-3.5 flex items-center justify-center gap-2"
                 >
                   {isSearching ? (
                     <>
@@ -113,24 +107,24 @@ export default function TrackOrderPage() {
             >
               <div className="p-6 rounded-2xl bg-kartel-gold/10 border border-kartel-gold/20">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-white/40 text-sm">Order ID</span>
-                  <span className="text-white font-medium">{order.id}</span>
+                  <span className="text-muted text-sm">Order ID</span>
+                  <span className="text-heading font-medium">{order.id}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/40 text-sm">Estimated Delivery</span>
+                  <span className="text-muted text-sm">Estimated Delivery</span>
                   <span className="text-kartel-gold font-semibold">{order.estimatedDelivery}</span>
                 </div>
               </div>
 
-              <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                <h2 className="font-serif text-xl font-semibold text-white mb-8">Delivery Progress</h2>
+              <div className="p-8 glass-card">
+                <h2 className="font-serif text-xl font-semibold text-heading mb-8">Delivery Progress</h2>
                 <div className="space-y-6">
                   {order.timeline.map((step: any, i: number) => (
                     <div key={i} className="flex items-start gap-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                         step.completed 
                           ? 'bg-kartel-gold text-kartel-black' 
-                          : 'bg-white/[0.05] text-white/30'
+                          : 'bg-white/[0.05] text-muted'
                       }`}>
                         {step.completed ? (
                           <CheckCircle className="w-5 h-5" />
@@ -139,11 +133,11 @@ export default function TrackOrderPage() {
                         )}
                       </div>
                       <div className="flex-1 pt-2">
-                        <h3 className={`font-medium ${step.completed ? 'text-white' : 'text-white/40'}`}>
+                        <h3 className={`font-medium ${step.completed ? 'text-heading' : 'text-muted'}`}>
                           {step.status}
                         </h3>
                         {step.date && (
-                          <p className="text-white/30 text-sm mt-1">{step.date}</p>
+                          <p className="text-muted/70 text-sm mt-1">{step.date}</p>
                         )}
                       </div>
                     </div>
@@ -153,7 +147,7 @@ export default function TrackOrderPage() {
 
               <button
                 onClick={() => setOrder(null)}
-                className="text-white/40 hover:text-white transition-colors text-sm"
+                className="text-muted hover:text-heading transition-colors text-sm"
               >
                 Track another order
               </button>
@@ -161,8 +155,6 @@ export default function TrackOrderPage() {
           )}
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

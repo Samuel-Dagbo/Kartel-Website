@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingCart, Package, CheckCircle, Clock, Search, Eye, X, ChevronDown } from 'lucide-react'
+import { ShoppingCart, Package, Eye, X } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -109,7 +109,7 @@ export default function AdminOrdersPage() {
       <div className="flex items-center justify-center h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
-          <span className="text-white/40 text-sm">Loading orders...</span>
+          <span className="text-muted text-sm">Loading orders...</span>
         </div>
       </div>
     )
@@ -135,8 +135,8 @@ export default function AdminOrdersPage() {
         className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
       >
         <div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white">Orders Management</h1>
-          <p className="text-white/40 text-sm mt-1">Track and process customer orders</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-heading">Orders Management</h1>
+          <p className="text-muted text-sm mt-1">Track and process customer orders</p>
         </div>
       </motion.div>
 
@@ -148,15 +148,15 @@ export default function AdminOrdersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+            className="p-4 glass-card rounded-2xl"
           >
             <div className="flex items-center gap-3">
               <div className={`p-2.5 rounded-xl bg-gradient-to-br ${stat.color}`}>
                 <ShoppingCart className="w-4 h-4 text-kartel-gold" />
               </div>
               <div>
-                <p className="text-white/50 text-xs">{stat.label}</p>
-                <p className="text-lg font-bold text-white">{stat.value}</p>
+                <p className="text-muted text-xs">{stat.label}</p>
+                <p className="text-lg font-bold text-heading">{stat.value}</p>
               </div>
             </div>
           </motion.div>
@@ -166,19 +166,19 @@ export default function AdminOrdersPage() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+          <Eye className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
           <input 
             type="text" 
             placeholder="Search by order ID or customer..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-white/[0.02] border border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-kartel-gold/30 focus:outline-none transition-all text-sm" 
+            className="input-luxury w-full pl-11 pr-4 py-3 rounded-xl text-sm" 
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-3 bg-white/[0.02] border border-white/[0.08] rounded-xl text-white/70 focus:border-kartel-gold/30 focus:outline-none transition-all text-sm"
+          className="input-luxury px-4 py-3 rounded-xl text-sm"
         >
           <option value="all">All Status</option>
           {STATUSES.map(s => (
@@ -192,22 +192,22 @@ export default function AdminOrdersPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="rounded-2xl bg-white/[0.02] border border-white/[0.06] overflow-hidden"
+        className="glass-card rounded-2xl overflow-hidden"
       >
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-white/[0.02]">
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Order ID</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Customer</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Total</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Payment</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Date</th>
-                <th className="px-5 py-4 text-right text-[10px] font-semibold text-white/40 uppercase tracking-wider">Action</th>
+              <tr className="bg-kartel-cream dark:bg-kartel-black">
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Order ID</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Customer</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Total</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Payment</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Date</th>
+                <th className="px-5 py-4 text-right text-[10px] font-semibold text-muted uppercase tracking-wider">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.04]">
+            <tbody className="divide-y divide-black/[0.04] dark:divide-white/[0.04]">
               {filteredOrders.length > 0 ? (
                 filteredOrders.map((order, i) => (
                   <motion.tr 
@@ -215,21 +215,21 @@ export default function AdminOrdersPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 + i * 0.05 }}
-                    className="hover:bg-white/[0.02] transition-colors"
+                    className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
                   >
                     <td className="px-5 py-4">
-                      <span className="text-sm font-medium text-white">
+                      <span className="text-sm font-medium text-heading">
                         {order.orderNumber || `KRT-${order._id.slice(-6).toUpperCase()}`}
                       </span>
                     </td>
                     <td className="px-5 py-4">
                       <div>
-                        <p className="text-sm text-white/80">{order.user?.name || 'Guest'}</p>
-                        <p className="text-xs text-white/40">{order.user?.email || 'No email'}</p>
+                        <p className="text-sm text-body">{order.user?.name || 'Guest'}</p>
+                        <p className="text-xs text-muted">{order.user?.email || 'No email'}</p>
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm font-semibold text-white">{formatPrice(order.totalAmount)}</span>
+                      <span className="text-sm font-semibold text-heading">{formatPrice(order.totalAmount)}</span>
                     </td>
                     <td className="px-5 py-4">
                       <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide ${
@@ -250,14 +250,14 @@ export default function AdminOrdersPage() {
                       </span>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm text-white/50">
+                      <span className="text-sm text-muted">
                         {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'N/A'}
                       </span>
                     </td>
                     <td className="px-5 py-4 text-right">
                       <button 
                         onClick={() => setSelectedOrder(order)}
-                        className="p-2 rounded-lg bg-white/[0.03] text-white/40 hover:text-kartel-gold hover:bg-white/[0.06] transition-all"
+                        className="p-2 rounded-lg glass-card text-muted hover:text-kartel-gold hover:border-kartel-gold/20 transition-all"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
@@ -268,11 +268,11 @@ export default function AdminOrdersPage() {
                 <tr>
                   <td colSpan={7} className="px-5 py-16 text-center">
                     <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 rounded-full bg-white/[0.03] flex items-center justify-center mb-4">
-                        <ShoppingCart className="w-6 h-6 text-white/20" />
+                      <div className="w-14 h-14 rounded-full glass-card flex items-center justify-center mb-4">
+                        <ShoppingCart className="w-6 h-6 text-muted" />
                       </div>
-                      <p className="text-white/40">No orders found</p>
-                      <p className="text-white/20 text-sm mt-1">Orders will appear here when customers purchase</p>
+                      <p className="text-muted">No orders found</p>
+                      <p className="text-muted/50 text-sm mt-1">Orders will appear here when customers purchase</p>
                     </div>
                   </td>
                 </tr>
@@ -297,20 +297,20 @@ export default function AdminOrdersPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-kartel-black-900 border border-white/[0.1]"
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto glass-card rounded-2xl"
             >
-              <div className="p-6 border-b border-white/[0.08] flex items-center justify-between">
+              <div className="p-6 border-b border-black/[0.08] dark:border-white/[0.08] flex items-center justify-between">
                 <div>
-                  <h2 className="font-serif text-xl font-semibold text-white">
+                  <h2 className="font-serif text-xl font-semibold text-heading">
                     Order {selectedOrder.orderNumber || `KRT-${selectedOrder._id.slice(-6).toUpperCase()}`}
                   </h2>
-                  <p className="text-white/40 text-sm mt-1">
+                  <p className="text-muted text-sm mt-1">
                     {selectedOrder.createdAt ? new Date(selectedOrder.createdAt).toLocaleString() : ''}
                   </p>
                 </div>
                 <button 
                   onClick={() => setSelectedOrder(null)}
-                  className="p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/[0.06] transition-all"
+                  className="p-2 rounded-lg glass-card text-muted hover:text-heading hover:border-kartel-gold/20 transition-all"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -318,9 +318,9 @@ export default function AdminOrdersPage() {
 
               <div className="p-6 space-y-6">
                 {/* Status Update */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl glass">
                   <div>
-                    <p className="text-white/50 text-xs uppercase tracking-wider mb-1">Current Status</p>
+                    <p className="text-muted text-xs uppercase tracking-wider mb-1">Current Status</p>
                     <span className={`inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold uppercase ${
                       selectedOrder.status === 'delivered' ? 'bg-green-500/15 text-green-400' :
                       selectedOrder.status === 'shipped' ? 'bg-blue-500/15 text-blue-400' :
@@ -339,8 +339,8 @@ export default function AdminOrdersPage() {
                         disabled={updating || selectedOrder.status === s}
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                           selectedOrder.status === s 
-                            ? 'bg-kartel-gold text-kartel-black' 
-                            : 'bg-white/[0.05] text-white/60 hover:bg-white/[0.1]'
+                            ? 'btn-primary' 
+                            : 'glass text-muted hover:text-heading'
                         } disabled:opacity-40`}
                       >
                         {s}
@@ -350,53 +350,53 @@ export default function AdminOrdersPage() {
                 </div>
 
                 {/* Customer Info */}
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Customer</p>
-                  <p className="text-white font-medium">{selectedOrder.user?.name || 'Guest'}</p>
-                  <p className="text-white/60 text-sm">{selectedOrder.user?.email || 'No email'}</p>
+                <div className="p-4 rounded-xl glass-card">
+                  <p className="text-muted text-xs uppercase tracking-wider mb-3">Customer</p>
+                  <p className="text-heading font-medium">{selectedOrder.user?.name || 'Guest'}</p>
+                  <p className="text-body text-sm">{selectedOrder.user?.email || 'No email'}</p>
                 </div>
 
                 {/* Shipping Address */}
                 {selectedOrder.shippingAddress && (
-                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Shipping Address</p>
-                    <p className="text-white/80 text-sm">
+                  <div className="p-4 rounded-xl glass-card">
+                    <p className="text-muted text-xs uppercase tracking-wider mb-3">Shipping Address</p>
+                    <p className="text-body text-sm">
                       {selectedOrder.shippingAddress.street}<br />
                       {selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.state} {selectedOrder.shippingAddress.zip}<br />
                       {selectedOrder.shippingAddress.country}
                     </p>
                     {selectedOrder.shippingAddress.phone && (
-                      <p className="text-white/60 text-sm mt-2">Phone: {selectedOrder.shippingAddress.phone}</p>
+                      <p className="text-muted text-sm mt-2">Phone: {selectedOrder.shippingAddress.phone}</p>
                     )}
                   </div>
                 )}
 
                 {/* Order Items */}
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Items</p>
+                <div className="p-4 rounded-xl glass-card">
+                  <p className="text-muted text-xs uppercase tracking-wider mb-3">Items</p>
                   <div className="space-y-3">
                     {selectedOrder.items?.map((item, i) => (
                       <div key={i} className="flex items-center gap-4">
-                        <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-white/[0.02] shrink-0">
+                        <div className="relative w-12 h-12 rounded-lg overflow-hidden glass shrink-0">
                           {item.product?.images?.[0] ? (
                             <Image src={item.product.images[0]} alt={item.product.name} fill className="object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center">
-                              <Package className="w-5 h-5 text-white/20" />
+                              <Package className="w-5 h-5 text-muted" />
                             </div>
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm truncate">{item.product?.name || 'Product'}</p>
-                          <p className="text-white/40 text-xs">Qty: {item.quantity} × {formatPrice(item.price)}</p>
+                          <p className="text-heading text-sm truncate">{item.product?.name || 'Product'}</p>
+                          <p className="text-muted text-xs">Qty: {item.quantity} × {formatPrice(item.price)}</p>
                         </div>
-                        <p className="text-white font-medium text-sm">{formatPrice(item.price * item.quantity)}</p>
+                        <p className="text-heading font-medium text-sm">{formatPrice(item.price * item.quantity)}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="mt-4 pt-4 border-t border-white/[0.06] flex justify-between">
-                    <span className="text-white/60">Total</span>
-                    <span className="text-lg font-bold text-white">{formatPrice(selectedOrder.totalAmount)}</span>
+                  <div className="mt-4 pt-4 border-t border-black/[0.06] dark:border-white/[0.06] flex justify-between">
+                    <span className="text-muted">Total</span>
+                    <span className="text-lg font-bold text-heading">{formatPrice(selectedOrder.totalAmount)}</span>
                   </div>
                 </div>
               </div>

@@ -3,8 +3,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Lock } from 'lucide-react'
-import { Footer } from '@/components/layout/Footer'
-import { Navbar } from '@/components/layout/Navbar'
 import Link from 'next/link'
 
 export default function ForgotPasswordPage() {
@@ -17,9 +15,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-kartel-black">
-      <Navbar />
-      
+    <div className="min-h-screen bg-primary">
       <main className="pt-32 pb-20">
         <div className="container-luxury">
           <motion.div
@@ -31,31 +27,31 @@ export default function ForgotPasswordPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-kartel-gold/10 mb-6">
                 <Lock className="w-8 h-8 text-kartel-gold" />
               </div>
-              <h1 className="font-serif text-3xl font-bold text-white mb-3">
+              <h1 className="font-serif text-3xl font-bold text-heading mb-3">
                 Forgot Password
               </h1>
-              <p className="text-white/50">
+              <p className="text-muted">
                 Enter your email and we&apos;ll send you a reset link.
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <div className="glass-card p-8">
               {!submitted ? (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm text-white/50 mb-2">Email Address</label>
+                    <label className="block text-sm text-muted mb-2">Email Address</label>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="your@email.com"
                       required
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                      className="input-luxury w-full px-4 py-3 rounded-xl"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full px-6 py-3.5 rounded-xl bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black font-semibold hover:brightness-110 transition-all"
+                    className="btn-primary w-full px-6 py-3.5"
                   >
                     Send Reset Link
                   </button>
@@ -63,10 +59,10 @@ export default function ForgotPasswordPage() {
               ) : (
                 <div className="text-center py-4">
                   <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-green-400 text-2xl">✓</span>
+                    <span className="text-green-500 text-2xl">✓</span>
                   </div>
-                  <h3 className="text-white font-semibold mb-2">Check your email</h3>
-                  <p className="text-white/40 text-sm mb-6">
+                  <h3 className="text-heading font-semibold mb-2">Check your email</h3>
+                  <p className="text-muted text-sm mb-6">
                     We&apos;ve sent a password reset link to {email}
                   </p>
                   <Link
@@ -79,7 +75,7 @@ export default function ForgotPasswordPage() {
               )}
             </div>
 
-            <p className="text-center text-white/40 text-sm mt-6">
+            <p className="text-center text-muted text-sm mt-6">
               Remember your password?{' '}
               <Link href="/login" className="text-kartel-gold hover:text-kartel-gold/80">
                 Sign in
@@ -88,8 +84,6 @@ export default function ForgotPasswordPage() {
           </motion.div>
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

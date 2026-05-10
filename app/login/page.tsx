@@ -6,11 +6,13 @@ import Image from 'next/image'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, ArrowLeft } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, ArrowLeft, Sun, Moon } from 'lucide-react'
+import { useTheme } from '@/components/providers/ThemeProvider'
 
 export default function LoginPage() {
   const router = useRouter()
   const { data: session, status } = useSession()
+  const { theme, toggleTheme } = useTheme()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -49,22 +51,26 @@ export default function LoginPage() {
     }
   }
 
-  // Show loading while checking session
+  const isDark = theme === 'dark'
+
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-kartel-black flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-kartel-cream'}`}>
         <div className="w-8 h-8 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
 
-  // Already logged in - redirect handled by useEffect
   if (session?.user) {
     return null
   }
 
   return (
-    <div className="min-h-[100dvh] bg-kartel-black relative overflow-hidden flex">
+    <div className={`min-h-[100dvh] relative overflow-hidden flex ${
+      isDark 
+        ? 'bg-kartel-black' 
+        : 'bg-gradient-to-br from-kartel-cream via-white to-kartel-cream'
+    }`}>
       <div className="absolute top-[-10%] right-[-5%] w-[50%] h-[50%] bg-kartel-gold/[0.03] blur-[250px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-kartel-gold/[0.015] blur-[200px] rounded-full pointer-events-none" />
 
@@ -74,7 +80,9 @@ export default function LoginPage() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="hidden lg:flex lg:w-[42%] relative items-center justify-center p-8"
       >
-        <div className="relative w-full max-w-md aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/[0.06] shadow-luxury-xl">
+        <div className={`relative w-full max-w-md aspect-[4/5] rounded-[2rem] overflow-hidden ${
+          isDark ? 'border border-white/[0.06] shadow-luxury-xl' : 'border border-black/[0.06] shadow-luxury-lg'
+        }`}>
           <Image
             src="https://images.unsplash.com/photo-1622618991746-fe6004db3a47?w=600&auto=format&fit=crop&q=60"
             alt="Luxury Perfume"
@@ -112,42 +120,103 @@ export default function LoginPage() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="w-full max-w-sm"
         >
-          <Link href="/" className="inline-flex items-center gap-1.5 text-white/25 hover:text-kartel-gold transition-colors text-xs mb-4 group">
+          <Link href="/" className={`inline-flex items-center gap-1.5 transition-colors text-xs mb-4 group ${
+            isDark ? 'text-white/25 hover:text-kartel-gold' : 'text-kartel-black-500 hover:text-kartel-gold'
+          }`}>
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" strokeWidth={1.5} />
             Back to home
           </Link>
 
-          <div className="mb-4">
-            <Link href="/" className="inline-block mb-3">
-              <span className="text-xl font-serif font-bold tracking-[0.3em] text-gradient-shine">KARTEL</span>
-            </Link>
-            <h1 className="font-serif text-xl sm:text-2xl font-bold text-white tracking-[-0.01em]">Welcome Back</h1>
-            <p className="mt-1 text-white/35 text-xs">Sign in to access your account.</p>
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <Link href="/" className="inline-block mb-3">
+                <span className={`text-xl font-serif font-bold tracking-[0.3em] ${
+                  isDark ? 'text-gradient-shine' : 'text-kartel-black'
+                }`}>KARTEL</span>
+              </Link>
+              <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
+                isDark ? 'text-white' : 'text-kartel-black-900'
+              }`}>Welcome Back</h1>
+              <p className={`mt-1 text-xs ${isDark ? 'text-white/35' : 'text-kartel-black-400'}`}>Sign in to access your account.</p>
+            </div>
+            <button
+              onClick={toggleTheme}
+              className={`p-2.5 rounded-full transition-all duration-300 ${
+                isDark 
+                  ? 'text-white/25 hover:text-kartel-gold hover:bg-white/[0.05]' 
+                  : 'text-kartel-black-400 hover:text-kartel-gold hover:bg-kartel-gold/10'
+              }`}
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <Sun className="w-[18px] h-[18px]" strokeWidth={1.5} />
+              ) : (
+                <Moon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+              )}
+            </button>
           </div>
 
-          <div className="relative bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-xl rounded-2xl p-5 border border-white/[0.05] shadow-luxury">
+          <div className={`relative rounded-2xl p-5 ${
+            isDark 
+              ? 'bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-xl border border-white/[0.05] shadow-luxury'
+              : 'bg-white/90 backdrop-blur-xl border border-black/[0.08] shadow-luxury-lg'
+          }`}>
             <form onSubmit={handleSubmit} className="space-y-3">
               {error && (
                 <div className="p-2.5 rounded-lg bg-red-500/8 border border-red-500/15 text-red-400/90 text-xs">{error}</div>
               )}
 
               <div className="space-y-1">
-                <label className="text-[10px] font-medium tracking-[0.15em] text-white/45 uppercase">Email</label>
+                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                  isDark ? 'text-white/45' : 'text-kartel-black-400'
+                }`}>Email</label>
                 <div className="relative group">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/15 group-focus-within:text-kartel-gold/50 transition-colors" strokeWidth={1.5} />
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-white/[0.02] border border-white/[0.05] rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder:text-white/15 focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 transition-all" placeholder="your@email.com" required />
+                  <Mail className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                  }`} strokeWidth={1.5} />
+                  <input 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
+                      isDark 
+                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.05]'
+                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
+                    }`} 
+                    placeholder="your@email.com" 
+                    required 
+                  />
                 </div>
               </div>
 
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <label className="text-[10px] font-medium tracking-[0.15em] text-white/45 uppercase">Password</label>
-                  <Link href="/forgot-password" className="text-[10px] text-kartel-gold/50 hover:text-kartel-gold transition-colors">Forgot?</Link>
+                  <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                    isDark ? 'text-white/45' : 'text-kartel-black-400'
+                  }`}>Password</label>
+                  <Link href="/forgot-password" className={`text-[10px] transition-colors ${
+                    isDark ? 'text-kartel-gold/50 hover:text-kartel-gold' : 'text-kartel-gold/70 hover:text-kartel-gold'
+                  }`}>Forgot?</Link>
                 </div>
                 <div className="relative group">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/15 group-focus-within:text-kartel-gold/50 transition-colors" strokeWidth={1.5} />
-                  <input type={showPassword ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-white/[0.02] border border-white/[0.05] rounded-lg pl-9 pr-9 py-2 text-sm text-white placeholder:text-white/15 focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 transition-all" placeholder="Enter password" required />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/15 hover:text-white/40 transition-colors">
+                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                  }`} strokeWidth={1.5} />
+                  <input 
+                    type={showPassword ? 'text' : 'password'} 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    className={`w-full rounded-lg pl-9 pr-9 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
+                      isDark 
+                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.05]'
+                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
+                    }`} 
+                    placeholder="Enter password" 
+                    required 
+                  />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors ${
+                    isDark ? 'text-white/15 hover:text-white/40' : 'text-kartel-black-300 hover:text-kartel-black-600'
+                  }`}>
                     {showPassword ? <EyeOff className="w-3.5 h-3.5" strokeWidth={1.5} /> : <Eye className="w-3.5 h-3.5" strokeWidth={1.5} />}
                   </button>
                 </div>
@@ -160,12 +229,16 @@ export default function LoginPage() {
             </form>
 
             <div className="flex items-center gap-3 my-4">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
-              <span className="text-[9px] text-white/15 uppercase tracking-[0.15em]">or</span>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
+              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.05] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.05] to-transparent'}`} />
+              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/15' : 'text-kartel-black-300'}`}>or</span>
+              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.05] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.05] to-transparent'}`} />
             </div>
 
-            <button onClick={() => signIn('google', { callbackUrl: '/customer' })} className="w-full py-2 bg-white/[0.02] border border-white/[0.05] rounded-lg text-white/50 hover:text-white/80 hover:border-white/[0.08] hover:bg-white/[0.04] transition-all duration-300 flex items-center justify-center gap-2 text-xs font-medium">
+            <button onClick={() => signIn('google', { callbackUrl: '/customer' })} className={`w-full py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-xs font-medium ${
+              isDark 
+                ? 'bg-white/[0.02] border border-white/[0.05] text-white/50 hover:text-white/80 hover:border-white/[0.08] hover:bg-white/[0.04]'
+                : 'bg-black/[0.03] border border-black/[0.08] text-kartel-black-500 hover:text-kartel-black-700 hover:border-kartel-gold/30 hover:bg-kartel-gold/5'
+            }`}>
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -176,9 +249,9 @@ export default function LoginPage() {
             </button>
           </div>
 
-          <p className="mt-5 text-center text-white/25 text-xs">
+          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/25' : 'text-kartel-black-400'}`}>
             Don&apos;t have an account?{' '}
-            <Link href="/register" className="text-kartel-gold/60 hover:text-kartel-gold font-medium transition-colors">Create account</Link>
+            <Link href="/register" className={`font-medium transition-colors ${isDark ? 'text-kartel-gold/60 hover:text-kartel-gold' : 'text-kartel-gold hover:text-kartel-gold/80'}`}>Create account</Link>
           </p>
         </motion.div>
       </div>

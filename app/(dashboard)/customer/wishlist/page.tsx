@@ -109,18 +109,18 @@ export default function WishlistPage() {
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-heading flex items-center gap-3">
             <Heart className="w-7 h-7 text-kartel-gold" />
             My Wishlist
           </h1>
-          <p className="text-white/40 text-sm mt-1">Your saved fragrances</p>
+          <p className="text-muted text-sm mt-1">Your saved fragrances</p>
         </div>
         {wishlist.length > 0 && (
-          <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+          <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl glass-card">
             <Sparkles className="w-4 h-4 text-kartel-gold" />
-            <span className="text-white/60 text-sm">{wishlist.length} fragrance{wishlist.length !== 1 ? 's' : ''}</span>
-            <span className="text-white/30">•</span>
-            <span className="text-white/80 text-sm font-medium">{formatPrice(totalValue)}</span>
+            <span className="text-muted text-sm">{wishlist.length} fragrance{wishlist.length !== 1 ? 's' : ''}</span>
+            <span className="text-muted/30">•</span>
+            <span className="text-heading text-sm font-medium">{formatPrice(totalValue)}</span>
           </div>
         )}
       </motion.div>
@@ -129,18 +129,18 @@ export default function WishlistPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-12 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center"
+          className="p-12 rounded-2xl glass-card text-center"
         >
           <div className="w-24 h-24 rounded-full bg-gradient-to-br from-kartel-gold/10 to-kartel-gold/5 flex items-center justify-center mx-auto mb-6">
             <Heart className="w-10 h-10 text-kartel-gold/40" />
           </div>
-          <h3 className="text-xl font-semibold text-white mb-3">Your wishlist is empty</h3>
-          <p className="text-white/40 mb-8 max-w-sm mx-auto">
+          <h3 className="text-xl font-semibold text-heading mb-3">Your wishlist is empty</h3>
+          <p className="text-muted mb-8 max-w-sm mx-auto">
             Save fragrances you love to easily find them later and keep track of your favorite scents.
           </p>
           <Link 
             href="/shop" 
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black font-semibold hover:brightness-110 transition-all"
+            className="btn-primary inline-flex items-center gap-2"
           >
             Discover Fragrances
             <ChevronRight className="w-4 h-4" />
@@ -193,15 +193,15 @@ export default function WishlistPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="pt-8 border-t border-white/[0.06]"
+          className="pt-8 border-t border-black/[0.06] dark:border-white/[0.06]"
         >
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-serif text-lg font-semibold text-white">You might also like</h2>
+            <h2 className="font-serif text-lg font-semibold text-heading">You might also like</h2>
             <Link href="/shop" className="text-sm text-kartel-gold hover:text-kartel-gold/80 flex items-center gap-1">
               View All <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
-          <p className="text-white/40 text-sm">Explore more fragrances from our collection</p>
+          <p className="text-muted text-sm">Explore more fragrances from our collection</p>
         </motion.div>
       )}
     </div>

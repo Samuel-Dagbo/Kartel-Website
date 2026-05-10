@@ -17,7 +17,6 @@ export function NewsletterSignup() {
     setIsSubmitting(true)
     setMessage(null)
 
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
     if (email.includes('@') && email.includes('.')) {
@@ -36,7 +35,7 @@ export function NewsletterSignup() {
   }
 
   return (
-    <section className="section-padding bg-primary relative overflow-hidden">
+    <section className="section-padding transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black relative overflow-hidden">
       {/* Dramatic ambient glow */}
       <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[900px] h-[350px] bg-kartel-gold/[0.015] blur-[200px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-10%] w-[400px] h-[300px] bg-kartel-gold/[0.01] blur-[180px] rounded-full pointer-events-none" />
@@ -93,7 +92,7 @@ export function NewsletterSignup() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="font-serif text-display-sm font-bold text-white leading-[1.1] tracking-[-0.02em] mt-4"
+                className="font-serif text-display-sm font-bold text-heading leading-[1.1] tracking-[-0.02em] mt-4"
               >
                 Stay Connected with <br /><span className="text-gradient">KARTEL</span>
               </motion.h2>
@@ -103,7 +102,7 @@ export function NewsletterSignup() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="mt-6 text-base sm:text-lg text-white/35 leading-relaxed max-w-lg mx-auto"
+                className="mt-6 text-base sm:text-lg text-body leading-relaxed max-w-lg mx-auto"
               >
                 Be the first to discover new arrivals, exclusive offers, and the
                 latest from the world of luxury fragrances.
@@ -123,19 +122,19 @@ export function NewsletterSignup() {
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-7 py-4 bg-white/[0.025] border border-white/[0.05] rounded-full text-white placeholder:text-white/20 focus:outline-none focus:border-kartel-gold/30 focus:ring-1 focus:ring-kartel-gold/10 transition-all duration-300 text-sm"
+                    className="input-luxury w-full px-7 py-4 rounded-full text-sm"
                     required
                     aria-label="Email for newsletter signup"
                   />
                 </div>
                 <motion.button
                   type="submit"
-                  className="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black text-sm font-semibold px-8 py-4 rounded-full overflow-hidden whitespace-nowrap shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-500"
+                  className="group relative inline-flex items-center justify-center gap-2 shadow-gold-glow hover:shadow-gold-glow-lg"
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="relative z-10">
+                  <span className="btn-primary px-8 py-4 flex items-center gap-2">
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
                         <span className="w-4 h-4 border-2 border-kartel-black/30 border-t-kartel-black rounded-full animate-spin" />
@@ -151,7 +150,6 @@ export function NewsletterSignup() {
                       </span>
                     )}
                   </span>
-                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700" />
                 </motion.button>
               </motion.form>
 
@@ -184,7 +182,7 @@ export function NewsletterSignup() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.8, duration: 0.6 }}
-                className="mt-6 text-[11px] text-white/20 tracking-wide"
+                className="mt-6 text-[11px] text-muted tracking-wide"
               >
                 No spam, ever. Unsubscribe at any time.
               </motion.p>

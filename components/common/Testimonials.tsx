@@ -61,7 +61,7 @@ export function Testimonials() {
           <h2 className="font-serif text-display-md font-bold text-heading leading-[1.05] tracking-[-0.02em]">
             What Our <span className="text-gradient">Clients Say</span>
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-muted max-w-lg mx-auto leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-body max-w-lg mx-auto leading-relaxed">
             Real experiences from our valued customers around the world.
           </p>
         </motion.div>
@@ -94,19 +94,19 @@ export function Testimonials() {
                       className={`w-3.5 h-3.5 ${
                         i < testimonial.rating
                           ? 'text-kartel-gold fill-kartel-gold'
-                          : 'text-white/8'
+                          : 'text-white/8 dark:text-white/8'
                       }`}
                     />
                   ))}
                 </div>
 
                 {/* Quote text */}
-                <p className="text-base sm:text-lg text-muted leading-[1.85] flex-1 mb-10 group-hover:text-body transition-colors duration-500">
+                <p className="text-base sm:text-lg text-body leading-[1.85] flex-1 mb-10 group-hover:text-body transition-colors duration-500">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-4 pt-6 border-t border-white/[0.03]">
+                <div className="flex items-center gap-4 pt-6 border-t border-black/[0.03] dark:border-white/[0.03]">
                   <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-kartel-gold/[0.1] group-hover:ring-kartel-gold/[0.25] transition-all duration-500">
                     <Image
                       src={testimonial.avatar}

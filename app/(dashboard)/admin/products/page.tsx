@@ -172,7 +172,7 @@ function ProductsContent() {
       <div className="flex items-center justify-center h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
-          <span className="text-white/40 text-sm">Loading inventory...</span>
+          <span className="text-muted text-sm">Loading inventory...</span>
         </div>
       </div>
     )
@@ -191,12 +191,12 @@ function ProductsContent() {
         className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
       >
         <div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white">Inventory Management</h1>
-          <p className="text-white/40 text-sm mt-1">Manage your fragrance collection</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-heading">Inventory Management</h1>
+          <p className="text-muted text-sm mt-1">Manage your fragrance collection</p>
         </div>
         <button 
           onClick={() => { resetForm(); setEditingProduct(null); setIsModalOpen(true) }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black text-sm font-semibold hover:brightness-110 transition-all shadow-lg shadow-kartel-gold/20"
+          className="btn-primary inline-flex items-center gap-2 px-5 py-2.5"
         >
           <Plus className="w-4 h-4" />
           Add Product
@@ -216,15 +216,15 @@ function ProductsContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+            className="p-4 glass-card rounded-2xl"
           >
             <div className="flex items-center gap-3">
               <div className={`p-2.5 rounded-xl bg-gradient-to-br ${stat.color}`}>
                 <stat.icon className="w-4 h-4 text-kartel-gold" />
               </div>
               <div>
-                <p className="text-white/50 text-xs">{stat.label}</p>
-                <p className="text-lg font-bold text-white">{stat.value}</p>
+                <p className="text-muted text-xs">{stat.label}</p>
+                <p className="text-lg font-bold text-heading">{stat.value}</p>
               </div>
             </div>
           </motion.div>
@@ -234,19 +234,19 @@ function ProductsContent() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
           <input 
             type="text" 
             placeholder="Search by name or brand..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-white/[0.02] border border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-kartel-gold/30 focus:outline-none transition-all text-sm" 
+            className="input-luxury w-full pl-11 pr-4 py-3 rounded-xl text-sm" 
           />
         </div>
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-4 py-3 bg-white/[0.02] border border-white/[0.08] rounded-xl text-white/70 focus:border-kartel-gold/30 focus:outline-none transition-all text-sm"
+          className="input-luxury px-4 py-3 rounded-xl text-sm"
         >
           <option value="all">All Categories</option>
           <option value="mens">Men&apos;s</option>
@@ -261,21 +261,21 @@ function ProductsContent() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="rounded-2xl bg-white/[0.02] border border-white/[0.06] overflow-hidden"
+        className="glass-card rounded-2xl overflow-hidden"
       >
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-white/[0.02]">
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Product</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Category</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Price</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Stock</th>
-                <th className="px-5 py-4 text-left text-[10px] font-semibold text-white/40 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-4 text-right text-[10px] font-semibold text-white/40 uppercase tracking-wider">Actions</th>
+              <tr className="bg-kartel-cream dark:bg-kartel-black">
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Product</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Category</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Price</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Stock</th>
+                <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-right text-[10px] font-semibold text-muted uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.04]">
+            <tbody className="divide-y divide-black/[0.04] dark:divide-white/[0.04]">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product, i) => (
                   <motion.tr 
@@ -283,33 +283,33 @@ function ProductsContent() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 + i * 0.05 }}
-                    className="hover:bg-white/[0.02] transition-colors"
+                    className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
                   >
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-white/[0.08] shrink-0 bg-white/[0.02]">
+                        <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-black/[0.05] dark:border-white/[0.05] glass shrink-0">
                           {product.images?.[0] ? (
                             <Image src={product.images[0]} alt={product.name} fill className="object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center">
-                              <Package className="w-5 h-5 text-white/20" />
+                              <Package className="w-5 h-5 text-muted" />
                             </div>
                           )}
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-white">{product.name}</p>
-                          <p className="text-xs text-white/40">{product.brand}</p>
+                          <p className="text-sm font-medium text-heading">{product.name}</p>
+                          <p className="text-xs text-muted">{product.brand}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm text-white/60 capitalize">{product.category}</span>
+                      <span className="text-sm text-body capitalize">{product.category}</span>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm font-semibold text-white">{formatPrice(product.price)}</span>
+                      <span className="text-sm font-semibold text-heading">{formatPrice(product.price)}</span>
                     </td>
                     <td className="px-5 py-4">
-                      <span className={`text-sm ${product.quantity < 10 ? 'text-yellow-400' : 'text-white/60'}`}>
+                      <span className={`text-sm ${product.quantity < 10 ? 'text-yellow-400' : 'text-body'}`}>
                         {product.quantity} units
                       </span>
                     </td>
@@ -328,14 +328,14 @@ function ProductsContent() {
                       <div className="flex items-center justify-end gap-2">
                         <button 
                           onClick={() => openEditModal(product)}
-                          className="p-2 rounded-lg bg-white/[0.03] text-white/40 hover:text-kartel-gold hover:bg-white/[0.06] transition-all"
+                          className="p-2 rounded-lg glass-card text-muted hover:text-kartel-gold hover:border-kartel-gold/20 transition-all"
                           title="Edit"
                         >
                           <Edit className="w-4 h-4" />
                         </button>
                         <button 
                           onClick={() => handleDelete(product._id)}
-                          className="p-2 rounded-lg bg-white/[0.03] text-white/40 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                          className="p-2 rounded-lg glass-card text-muted hover:text-red-400 hover:border-red-500/20 transition-all"
                           title="Delete"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -348,11 +348,11 @@ function ProductsContent() {
                 <tr>
                   <td colSpan={6} className="px-5 py-16 text-center">
                     <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 rounded-full bg-white/[0.03] flex items-center justify-center mb-4">
-                        <Package className="w-6 h-6 text-white/20" />
+                      <div className="w-14 h-14 rounded-full glass-card flex items-center justify-center mb-4">
+                        <Package className="w-6 h-6 text-muted" />
                       </div>
-                      <p className="text-white/40">No products found</p>
-                      <p className="text-white/20 text-sm mt-1">Try adjusting your search or filters</p>
+                      <p className="text-muted">No products found</p>
+                      <p className="text-muted/50 text-sm mt-1">Try adjusting your search or filters</p>
                     </div>
                   </td>
                 </tr>
@@ -377,15 +377,15 @@ function ProductsContent() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-kartel-black-900 border border-white/[0.1]"
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto glass-card rounded-2xl"
             >
-              <div className="p-6 border-b border-white/[0.08] flex items-center justify-between">
-                <h2 className="font-serif text-xl font-semibold text-white">
+              <div className="p-6 border-b border-black/[0.08] dark:border-white/[0.08] flex items-center justify-between">
+                <h2 className="font-serif text-xl font-semibold text-heading">
                   {editingProduct ? 'Edit Product' : 'Add New Product'}
                 </h2>
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/[0.06] transition-all"
+                  className="p-2 rounded-lg glass-card text-muted hover:text-heading hover:border-kartel-gold/20 transition-all"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -394,71 +394,71 @@ function ProductsContent() {
               <form onSubmit={handleSubmit} className="p-6 space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-xs text-white/50 uppercase tracking-wider">Product Name</label>
+                    <label className="text-xs text-muted uppercase tracking-wider">Product Name</label>
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                      className="input-luxury w-full px-4 py-3 rounded-xl"
                       placeholder="Enter product name"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs text-white/50 uppercase tracking-wider">Brand</label>
+                    <label className="text-xs text-muted uppercase tracking-wider">Brand</label>
                     <input
                       type="text"
                       required
                       value={formData.brand}
                       onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                      className="input-luxury w-full px-4 py-3 rounded-xl"
                       placeholder="Enter brand name"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs text-white/50 uppercase tracking-wider">Description</label>
+                  <label className="text-xs text-muted uppercase tracking-wider">Description</label>
                   <textarea
                     required
                     rows={3}
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all resize-none"
+                    className="input-luxury w-full px-4 py-3 rounded-xl resize-none"
                     placeholder="Enter product description"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="space-y-2">
-                    <label className="text-xs text-white/50 uppercase tracking-wider">Price</label>
+                    <label className="text-xs text-muted uppercase tracking-wider">Price</label>
                     <input
                       type="number"
                       step="0.01"
                       required
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                      className="input-luxury w-full px-4 py-3 rounded-xl"
                       placeholder="0.00"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs text-white/50 uppercase tracking-wider">Quantity</label>
+                    <label className="text-xs text-muted uppercase tracking-wider">Quantity</label>
                     <input
                       type="number"
                       required
                       value={formData.quantity}
                       onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                      className="input-luxury w-full px-4 py-3 rounded-xl"
                       placeholder="0"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs text-white/50 uppercase tracking-wider">Category</label>
+                    <label className="text-xs text-muted uppercase tracking-wider">Category</label>
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white focus:border-kartel-gold/30 focus:outline-none transition-all"
+                      className="input-luxury w-full px-4 py-3 rounded-xl"
                     >
                       <option value="unisex">Unisex</option>
                       <option value="mens">Men&apos;s</option>
@@ -467,11 +467,11 @@ function ProductsContent() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs text-white/50 uppercase tracking-wider">Size</label>
+                    <label className="text-xs text-muted uppercase tracking-wider">Size</label>
                     <select
                       value={formData.size}
                       onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white focus:border-kartel-gold/30 focus:outline-none transition-all"
+                      className="input-luxury w-full px-4 py-3 rounded-xl"
                     >
                       <option value="50ml">50ml</option>
                       <option value="100ml">100ml</option>
@@ -482,15 +482,15 @@ function ProductsContent() {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-xs text-white/50 uppercase tracking-wider">Product Image</label>
+                    <label className="text-xs text-muted uppercase tracking-wider">Product Image</label>
                     <div className="flex gap-2 mb-3">
                       <button
                         type="button"
                         onClick={() => setImageMode('url')}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all ${
                           imageMode === 'url'
-                            ? 'bg-kartel-gold text-kartel-black'
-                            : 'bg-white/[0.03] text-white/50 hover:text-white'
+                            ? 'btn-primary'
+                            : 'glass-card text-muted hover:text-heading'
                         }`}
                       >
                         <LinkIcon className="w-4 h-4" />
@@ -501,8 +501,8 @@ function ProductsContent() {
                         onClick={() => setImageMode('upload')}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all ${
                           imageMode === 'upload'
-                            ? 'bg-kartel-gold text-kartel-black'
-                            : 'bg-white/[0.03] text-white/50 hover:text-white'
+                            ? 'btn-primary'
+                            : 'glass-card text-muted hover:text-heading'
                         }`}
                       >
                         <Upload className="w-4 h-4" />
@@ -514,7 +514,7 @@ function ProductsContent() {
                         type="url"
                         value={formData.images[0]}
                         onChange={(e) => setFormData({ ...formData, images: [e.target.value] })}
-                        className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-white/20 focus:border-kartel-gold/30 focus:outline-none transition-all"
+                        className="input-luxury w-full px-4 py-3 rounded-xl"
                         placeholder="https://example.com/image.jpg"
                       />
                     ) : (
@@ -551,19 +551,19 @@ function ProductsContent() {
                         />
                         <label
                           htmlFor="image-upload"
-                          className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/[0.1] rounded-xl cursor-pointer hover:border-kartel-gold/30 transition-all"
+                          className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-black/[0.1] dark:border-white/[0.1] rounded-xl cursor-pointer hover:border-kartel-gold/30 transition-all glass"
                         >
                           {uploading ? (
                             <div className="w-8 h-8 border-2 border-kartel-gold/30 border-t-kartel-gold rounded-full animate-spin" />
                           ) : formData.images[0] ? (
                             <div className="relative w-full h-full">
                               <Image src={formData.images[0]} alt="Preview" fill className="object-contain p-2" />
-                              <span className="absolute bottom-2 right-2 text-xs bg-black/50 px-2 py-1 rounded text-white/70">Click to change</span>
+                              <span className="absolute bottom-2 right-2 text-xs glass px-2 py-1 rounded text-muted">Click to change</span>
                             </div>
                           ) : (
                             <>
-                              <Upload className="w-8 h-8 text-white/30 mb-2" />
-                              <span className="text-white/40 text-sm">Click to upload image</span>
+                              <Upload className="w-8 h-8 text-muted mb-2" />
+                              <span className="text-muted text-sm">Click to upload image</span>
                             </>
                           )}
                         </label>
@@ -575,14 +575,14 @@ function ProductsContent() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] transition-all"
+                    className="flex-1 glass-card px-5 py-3 text-body hover:bg-black/[0.06] dark:hover:bg-white/[0.06] transition-all rounded-xl"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={saving}
-                    className="flex-1 px-5 py-3 rounded-xl bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black font-semibold hover:brightness-110 transition-all disabled:opacity-50"
+                    className="btn-primary flex-1 px-5 py-3"
                   >
                     {saving ? 'Saving...' : editingProduct ? 'Update Product' : 'Add Product'}
                   </button>
@@ -602,7 +602,7 @@ export default function AdminProductsPage() {
       <div className="flex items-center justify-center h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
-          <span className="text-white/40 text-sm">Loading...</span>
+          <span className="text-muted text-sm">Loading...</span>
         </div>
       </div>
     }>

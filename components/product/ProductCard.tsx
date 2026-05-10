@@ -39,7 +39,7 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
     >
       <Link href={`/product/${product.slug}`} className="group block">
-        <div className="relative bg-gradient-to-b from-kartel-black-900/40 to-transparent rounded-2xl overflow-hidden border border-white/[0.04] hover:border-kartel-gold/[0.15] transition-all duration-700 shadow-luxury hover:shadow-luxury-xl">
+        <div className="relative glass-card rounded-2xl overflow-hidden hover:border-kartel-gold/[0.15] transition-all duration-700 shadow-luxury hover:shadow-luxury-xl">
           {/* Decorative corner */}
           <div className="absolute top-5 right-5 w-8 h-8 rounded-full border border-kartel-gold/[0.08] flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             <div className="w-2 h-2 rounded-full bg-kartel-gold/20" />
@@ -52,7 +52,7 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
               alt={product.name}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-              className="object-cover transition-all duration-1000 ease-out scale-105 group-hover:scale-100 brightness-90 group-hover:brightness-100"
+              className="object-cover transition-all duration-1000 ease-out scale-105 group-hover:scale-100"
             />
 
             {/* Multi-layer gradient overlays */}
@@ -72,7 +72,7 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-4 rounded-full bg-white/90 text-kartel-black transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-150"
+                className="p-4 rounded-full glass-dark transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-150"
               >
                 <Heart className="w-5 h-5" strokeWidth={2} />
               </motion.button>
@@ -91,7 +91,7 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
                 </span>
               )}
               {product.new && (
-                <span className="px-4 py-1.5 bg-white/90 text-kartel-black text-[10px] font-bold rounded-full uppercase tracking-wider backdrop-blur-sm">
+                <span className="px-4 py-1.5 glass text-kartel-black text-[10px] font-bold rounded-full uppercase tracking-wider backdrop-blur-sm">
                   New
                 </span>
               )}
@@ -103,7 +103,7 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
             <p className="text-[11px] font-semibold tracking-[0.15em] uppercase text-kartel-gold/60">
               {product.brand}
             </p>
-            <h3 className="font-serif text-lg lg:text-xl font-semibold text-white/90 group-hover:text-kartel-gold transition-colors duration-500 line-clamp-2 leading-tight">
+            <h3 className="font-serif text-lg lg:text-xl font-semibold text-heading group-hover:text-kartel-gold transition-colors duration-500 line-clamp-2 leading-tight">
               {product.name}
             </h3>
 
@@ -116,29 +116,29 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
                     'w-3.5 h-3.5',
                     i < Math.floor(product.rating)
                       ? 'text-kartel-gold fill-kartel-gold'
-                      : 'text-white/15'
+                      : 'text-white/15 dark:text-white/15'
                   )}
                 />
               ))}
-              <span className="text-[11px] text-white/30 ml-1">
+              <span className="text-[11px] text-muted ml-1">
                 ({product.reviewCount || 0})
               </span>
             </div>
 
             {/* Price */}
             <div className="flex items-baseline gap-3 pt-1">
-              <span className="text-xl font-bold text-white tracking-tight">
+              <span className="text-xl font-bold text-heading tracking-tight">
                 {formatPrice(product.price)}
               </span>
               {product.comparePrice && (
-                <span className="text-sm text-white/30 line-through">
+                <span className="text-sm text-muted line-through">
                   {formatPrice(product.comparePrice)}
                 </span>
               )}
             </div>
           </div>
 
-          {/* Bottom decoratve element */}
+          {/* Bottom decorative element */}
           <div className="absolute bottom-5 right-5 w-6 h-6 rounded-full border border-kartel-gold/[0.08] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             <div className="w-1.5 h-1.5 rounded-full bg-kartel-gold/20" />
           </div>

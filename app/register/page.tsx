@@ -6,11 +6,13 @@ import Image from 'next/image'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Sparkles, ArrowLeft } from 'lucide-react'
+import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Sparkles, ArrowLeft, Sun, Moon } from 'lucide-react'
+import { useTheme } from '@/components/providers/ThemeProvider'
 
 export default function RegisterPage() {
   const router = useRouter()
   const { data: session, status } = useSession()
+  const { theme, toggleTheme } = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -78,7 +80,6 @@ export default function RegisterPage() {
       if (signInResult?.error) {
         setError('Registration successful but login failed')
       }
-      // Redirect will happen via useEffect
     } catch {
       setError('Something went wrong')
     } finally {
@@ -86,9 +87,11 @@ export default function RegisterPage() {
     }
   }
 
+  const isDark = theme === 'dark'
+
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-kartel-black flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-kartel-cream'}`}>
         <div className="w-8 h-8 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
       </div>
     )
@@ -99,21 +102,25 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-kartel-black relative overflow-hidden flex">
-      {/* Ambient lighting */}
+    <div className={`min-h-[100dvh] relative overflow-hidden flex ${
+      isDark 
+        ? 'bg-kartel-black' 
+        : 'bg-gradient-to-br from-kartel-cream via-white to-kartel-cream'
+    }`}>
       <div className="absolute top-[-10%] right-[-5%] w-[50%] h-[50%] bg-kartel-gold/[0.03] blur-[250px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-kartel-gold/[0.015] blur-[200px] rounded-full pointer-events-none" />
 
-      {/* Left Side - Image */}
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="hidden lg:flex lg:w-[42%] relative items-center justify-center p-8"
       >
-        <div className="relative w-full max-w-md aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/[0.06] shadow-luxury-xl">
+        <div className={`relative w-full max-w-md aspect-[4/5] rounded-[2rem] overflow-hidden ${
+          isDark ? 'border border-white/[0.06] shadow-luxury-xl' : 'border border-black/[0.06] shadow-luxury-lg'
+        }`}>
           <Image
-            src="https://images.unsplash.com/photo-1594035910387-fea4779421f8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0"
+            src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=600&auto=format&fit=crop&q=60"
             alt="Luxury Perfume Collection"
             fill
             className="object-cover"
@@ -122,7 +129,6 @@ export default function RegisterPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-kartel-black/60 via-transparent to-transparent" />
 
-          {/* Content overlay */}
           <div className="absolute bottom-8 left-8 right-8 z-10">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -144,7 +150,6 @@ export default function RegisterPage() {
         </div>
       </motion.div>
 
-      {/* Right Side - Form */}
       <div className="flex-1 flex items-start justify-center px-5 sm:px-8 pt-[5.5rem] lg:pt-[6.5rem] pb-10 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -152,32 +157,52 @@ export default function RegisterPage() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="w-full max-w-sm"
         >
-          {/* Back to home */}
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-white/25 hover:text-kartel-gold transition-colors text-xs mb-4 group"
+            className={`inline-flex items-center gap-1.5 transition-colors text-xs mb-4 group ${
+              isDark ? 'text-white/25 hover:text-kartel-gold' : 'text-kartel-black-500 hover:text-kartel-gold'
+            }`}
           >
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" strokeWidth={1.5} />
             Back to home
           </Link>
 
-          {/* Header */}
-          <div className="mb-4">
-            <Link href="/" className="inline-block mb-3">
-              <span className="text-xl font-serif font-bold tracking-[0.3em] text-gradient-shine">
-                KARTEL
-              </span>
-            </Link>
-            <h1 className="font-serif text-xl sm:text-2xl font-bold text-white tracking-[-0.01em]">
-              Create Account
-            </h1>
-            <p className="mt-1 text-white/35 text-xs">
-              Join the KARTEL family today.
-            </p>
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <Link href="/" className="inline-block mb-3">
+                <span className={`text-xl font-serif font-bold tracking-[0.3em] ${
+                  isDark ? 'text-gradient-shine' : 'text-kartel-black'
+                }`}>KARTEL</span>
+              </Link>
+              <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
+                isDark ? 'text-white' : 'text-kartel-black-900'
+              }`}>Create Account</h1>
+              <p className={`mt-1 text-xs ${isDark ? 'text-white/35' : 'text-kartel-black-400'}`}>
+                Join the KARTEL family today.
+              </p>
+            </div>
+            <button
+              onClick={toggleTheme}
+              className={`p-2.5 rounded-full transition-all duration-300 ${
+                isDark 
+                  ? 'text-white/25 hover:text-kartel-gold hover:bg-white/[0.05]' 
+                  : 'text-kartel-black-400 hover:text-kartel-gold hover:bg-kartel-gold/10'
+              }`}
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <Sun className="w-[18px] h-[18px]" strokeWidth={1.5} />
+              ) : (
+                <Moon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+              )}
+            </button>
           </div>
 
-          {/* Form Card */}
-          <div className="relative bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-xl rounded-2xl p-5 border border-white/[0.05] shadow-luxury">
+          <div className={`relative rounded-2xl p-5 ${
+            isDark 
+              ? 'bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-xl border border-white/[0.05] shadow-luxury'
+              : 'bg-white/90 backdrop-blur-xl border border-black/[0.08] shadow-luxury-lg'
+          }`}>
             <form onSubmit={handleSubmit} className="space-y-3">
               {error && (
                 <div className="p-2.5 rounded-lg bg-red-500/8 border border-red-500/15 text-red-400/90 text-xs">
@@ -185,90 +210,111 @@ export default function RegisterPage() {
                 </div>
               )}
 
-              {/* Name */}
               <div className="space-y-1">
-                <label className="text-[10px] font-medium tracking-[0.15em] text-white/45 uppercase">
-                  Full Name
-                </label>
+                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                  isDark ? 'text-white/45' : 'text-kartel-black-400'
+                }`}>Full Name</label>
                 <div className="relative group">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/15 group-focus-within:text-kartel-gold/50 transition-colors" strokeWidth={1.5} />
+                  <User className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                  }`} strokeWidth={1.5} />
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full bg-white/[0.02] border border-white/[0.05] rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder:text-white/15 focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 focus:bg-white/[0.03] transition-all"
+                    className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
+                      isDark 
+                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
+                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
+                    }`}
                     placeholder="Your name"
                     required
                   />
                 </div>
               </div>
 
-              {/* Email */}
               <div className="space-y-1">
-                <label className="text-[10px] font-medium tracking-[0.15em] text-white/45 uppercase">
-                  Email
-                </label>
+                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                  isDark ? 'text-white/45' : 'text-kartel-black-400'
+                }`}>Email</label>
                 <div className="relative group">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/15 group-focus-within:text-kartel-gold/50 transition-colors" strokeWidth={1.5} />
+                  <Mail className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                  }`} strokeWidth={1.5} />
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-white/[0.02] border border-white/[0.05] rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder:text-white/15 focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 focus:bg-white/[0.03] transition-all"
+                    className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
+                      isDark 
+                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
+                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
+                    }`}
                     placeholder="your@email.com"
                     required
                   />
                 </div>
               </div>
 
-              {/* Password */}
               <div className="space-y-1">
-                <label className="text-[10px] font-medium tracking-[0.15em] text-white/45 uppercase">
-                  Password
-                </label>
+                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                  isDark ? 'text-white/45' : 'text-kartel-black-400'
+                }`}>Password</label>
                 <div className="relative group">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/15 group-focus-within:text-kartel-gold/50 transition-colors" strokeWidth={1.5} />
+                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                  }`} strokeWidth={1.5} />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full bg-white/[0.02] border border-white/[0.05] rounded-lg pl-9 pr-9 py-2 text-sm text-white placeholder:text-white/15 focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 focus:bg-white/[0.03] transition-all"
+                    className={`w-full rounded-lg pl-9 pr-9 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
+                      isDark 
+                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
+                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
+                    }`}
                     placeholder="Min. 6 characters"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/15 hover:text-white/40 transition-colors"
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors ${
+                      isDark ? 'text-white/15 hover:text-white/40' : 'text-kartel-black-300 hover:text-kartel-black-600'
+                    }`}
                   >
                     {showPassword ? <EyeOff className="w-3.5 h-3.5" strokeWidth={1.5} /> : <Eye className="w-3.5 h-3.5" strokeWidth={1.5} />}
                   </button>
                 </div>
               </div>
 
-              {/* Confirm Password */}
               <div className="space-y-1">
-                <label className="text-[10px] font-medium tracking-[0.15em] text-white/45 uppercase">
-                  Confirm Password
-                </label>
+                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                  isDark ? 'text-white/45' : 'text-kartel-black-400'
+                }`}>Confirm Password</label>
                 <div className="relative group">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/15 group-focus-within:text-kartel-gold/50 transition-colors" strokeWidth={1.5} />
+                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                  }`} strokeWidth={1.5} />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className="w-full bg-white/[0.02] border border-white/[0.05] rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder:text-white/15 focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 focus:bg-white/[0.03] transition-all"
+                    className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
+                      isDark 
+                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
+                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
+                    }`}
                     placeholder="Repeat password"
                     required
                   />
                 </div>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={loading}
@@ -280,17 +326,19 @@ export default function RegisterPage() {
               </button>
             </form>
 
-            {/* Divider */}
             <div className="flex items-center gap-3 my-4">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
-              <span className="text-[9px] text-white/15 uppercase tracking-[0.15em]">or</span>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
+              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.05] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.05] to-transparent'}`} />
+              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/15' : 'text-kartel-black-300'}`}>or</span>
+              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.05] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.05] to-transparent'}`} />
             </div>
 
-            {/* Google Sign Up */}
             <button
               onClick={() => signIn('google', { callbackUrl: '/customer' })}
-              className="w-full py-2 bg-white/[0.02] border border-white/[0.05] rounded-lg text-white/50 hover:text-white/80 hover:border-white/[0.08] hover:bg-white/[0.04] transition-all duration-300 flex items-center justify-center gap-2 text-xs font-medium"
+              className={`w-full py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-xs font-medium ${
+                isDark 
+                  ? 'bg-white/[0.02] border border-white/[0.05] text-white/50 hover:text-white/80 hover:border-white/[0.08] hover:bg-white/[0.04]'
+                  : 'bg-black/[0.03] border border-black/[0.08] text-kartel-black-500 hover:text-kartel-black-700 hover:border-kartel-gold/30 hover:bg-kartel-gold/5'
+              }`}
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -302,10 +350,9 @@ export default function RegisterPage() {
             </button>
           </div>
 
-          {/* Footer link */}
-          <p className="mt-5 text-center text-white/25 text-xs">
+          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/25' : 'text-kartel-black-400'}`}>
             Already have an account?{' '}
-            <Link href="/login" className="text-kartel-gold/60 hover:text-kartel-gold font-medium transition-colors">
+            <Link href="/login" className={`font-medium transition-colors ${isDark ? 'text-kartel-gold/60 hover:text-kartel-gold' : 'text-kartel-gold hover:text-kartel-gold/80'}`}>
               Sign in
             </Link>
           </p>

@@ -81,7 +81,7 @@ export default function ShopPage() {
           <h1 className="font-serif text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] font-bold text-heading leading-[1.1] tracking-[-0.02em]">
             Fragrance <span className="text-gradient">Gallery</span>
           </h1>
-          <p className="text-base sm:text-lg text-muted max-w-2xl leading-relaxed">
+          <p className="text-base sm:text-lg text-body max-w-2xl leading-relaxed">
             Explore our curated collection of the finest perfumes. From timeless
             classics to modern avant-garde scents.
           </p>
@@ -92,7 +92,7 @@ export default function ShopPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-8 pb-6 border-b border-white/[0.04] dark:border-white/[0.04]"
+          className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-8 pb-6 border-b border-black/[0.08] dark:border-white/[0.04]"
         >
           <div className="flex items-center gap-4 w-full sm:w-auto">
             {/* Mobile Filter Toggle */}
@@ -115,20 +115,20 @@ export default function ShopPage() {
                 placeholder="Search fragrances..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 glass border rounded-full text-sm placeholder:text-muted focus:outline-none focus:border-kartel-gold/30 focus:ring-1 focus:ring-kartel-gold/10 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 glass rounded-full text-sm placeholder:text-muted focus:outline-none focus:border-kartel-gold/30 focus:ring-1 focus:ring-kartel-gold/10 transition-all"
               />
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             {/* View mode toggle */}
-            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-white/[0.03] border border-white/[0.04]">
+            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-black/[0.03] border border-black/[0.06] dark:bg-white/[0.03] dark:border-white/[0.04]">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 rounded-full transition-all duration-300 ${
                   viewMode === 'grid'
                     ? 'bg-kartel-gold/10 text-kartel-gold'
-                    : 'text-white/30 hover:text-white/50'
+                    : 'text-muted hover:text-body'
                 }`}
               >
                 <Grid3X3 className="w-4 h-4" strokeWidth={1.5} />
@@ -138,7 +138,7 @@ export default function ShopPage() {
                 className={`p-2 rounded-full transition-all duration-300 ${
                   viewMode === 'list'
                     ? 'bg-kartel-gold/10 text-kartel-gold'
-                    : 'text-white/30 hover:text-white/50'
+                    : 'text-muted hover:text-body'
                 }`}
               >
                 <LayoutList className="w-4 h-4" strokeWidth={1.5} />
@@ -147,11 +147,11 @@ export default function ShopPage() {
 
             {/* Sort */}
             <div className="flex items-center gap-3">
-              <span className="text-[11px] text-white/35 tracking-wide">Sort</span>
+              <span className="text-[11px] text-muted tracking-wide">Sort</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-white/[0.03] border border-white/[0.08] rounded-full px-4 py-2.5 text-sm text-white/70 focus:outline-none focus:border-kartel-gold/40 transition-all cursor-pointer appearance-none pr-8"
+                className="input-luxury rounded-full px-4 py-2.5 text-sm cursor-pointer appearance-none pr-8"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
@@ -206,7 +206,7 @@ export default function ShopPage() {
               )}
               <button
                 onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs text-white/40 hover:text-kartel-gold transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs text-black/40 hover:text-kartel-gold dark:text-white/40 transition-colors"
               >
                 Clear all
               </button>
@@ -225,7 +225,7 @@ export default function ShopPage() {
             }`}
           >
             <div className="lg:sticky lg:top-32">
-              <div className="bg-gradient-to-b from-kartel-black-900/50 to-transparent rounded-2xl p-6 lg:p-7 border border-white/[0.04]">
+              <div className="bg-gradient-to-b from-black/[0.03] to-transparent dark:from-kartel-black-900/50 rounded-2xl p-6 lg:p-7 border border-black/[0.06] dark:border-white/[0.04]">
                 <ProductFilters
                   categories={categories}
                   brands={brands}
@@ -247,7 +247,7 @@ export default function ShopPage() {
           <div className="flex-1 min-w-0">
             {/* Results count */}
             <div className="flex items-center justify-between mb-8">
-              <p className="text-[11px] text-white/35 tracking-wide">
+              <p className="text-[11px] text-muted tracking-wide">
                 {isLoading
                   ? 'Loading fragrances...'
                   : `${products.length} products found`}

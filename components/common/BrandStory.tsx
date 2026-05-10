@@ -54,7 +54,7 @@ export function BrandStory() {
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] overflow-hidden border border-white/[0.04] shadow-luxury-xl">
+            <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] overflow-hidden border border-black/[0.04] dark:border-white/[0.04] shadow-luxury-xl">
               <Image
                 src="https://images.unsplash.com/photo-1705338670422-01133208eab9?w=600&auto=format&fit=crop&q=60"
                 alt="KARTEL Brand Story"
@@ -99,7 +99,7 @@ export function BrandStory() {
               <span className="inline-block text-[11px] font-semibold tracking-[0.25em] uppercase text-kartel-gold/70 mb-6 px-5 py-2 border border-kartel-gold/[0.12] rounded-full backdrop-blur-sm">
                 Our Story
               </span>
-              <h2 className="font-serif text-display-md font-bold text-white leading-[1.05] tracking-[-0.02em]">
+              <h2 className="font-serif text-display-md font-bold text-heading leading-[1.05] tracking-[-0.02em]">
                 The <span className="text-gradient">Essence</span> of KARTEL
               </h2>
             </motion.div>
@@ -109,7 +109,7 @@ export function BrandStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg text-white/40 leading-[1.8]"
+              className="text-base sm:text-lg text-body leading-[1.8]"
             >
               At KARTEL, we believe that fragrance is an art form—an invisible
               accessory that speaks volumes before you utter a word. Born from a
@@ -122,7 +122,7 @@ export function BrandStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg text-white/40 leading-[1.8]"
+              className="text-base sm:text-lg text-body leading-[1.8]"
             >
               Each KARTEL perfume is a symphony of rare ingredients, carefully
               sourced from the far corners of the world and blended by master
@@ -150,10 +150,10 @@ export function BrandStory() {
                     <span className="text-kartel-gold text-sm font-bold">{item.icon}</span>
                   </div>
                   <div>
-                    <h4 className="text-base font-semibold text-white/85 mb-2">
+                    <h4 className="text-base font-semibold text-heading mb-2">
                       {item.title}
                     </h4>
-                    <p className="text-sm text-white/35 leading-relaxed">
+                    <p className="text-sm text-muted leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -175,10 +175,10 @@ export function BrandStory() {
                 { value: '50K+', label: 'Happy Clients' },
               ].map((stat) => (
                 <div key={stat.label} className="space-y-2">
-                  <p className="text-2xl sm:text-3xl font-serif font-bold text-white">
+                  <p className="text-2xl sm:text-3xl font-serif font-bold text-heading">
                     {stat.value}
                   </p>
-                  <p className="text-[11px] text-white/35 uppercase tracking-[0.15em]">{stat.label}</p>
+                  <p className="text-[11px] text-muted uppercase tracking-[0.15em]">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
@@ -191,7 +191,7 @@ export function BrandStory() {
             >
               <Link
                 href="/about"
-                className="group inline-flex items-center gap-2.5 bg-white/[0.03] hover:bg-kartel-gold/[0.06] border border-white/[0.05] hover:border-kartel-gold/25 text-white/80 hover:text-kartel-gold text-sm font-medium px-7 py-3.5 rounded-full transition-all duration-500"
+                className="group inline-flex items-center gap-2.5 glass-card hover:border-kartel-gold/25 text-heading hover:text-kartel-gold text-sm font-medium px-7 py-3.5 rounded-full transition-all duration-500"
               >
                 Learn More
                 <motion.div
