@@ -548,3 +548,99 @@ img[data-loading="true"] {
 .dark .hero-bottom-gradient {
   background: linear-gradient(to top, #0c0c0c 0%, #0c0c0c 80%, transparent 100%) !important;
 }
+
+/* ===== Better text visibility overrides ===== */
+
+/* Ensure headings are visible in both modes */
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
+  color: #1a1a1a;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #ffffff;
+}
+
+/* Light mode muted text */
+.light .text-muted {
+  color: #6b6b6b !important;
+}
+
+.dark .text-muted {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Light mode body text */
+.light .text-body {
+  color: #3a3a3a !important;
+}
+
+.dark .text-body {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Light mode heading */
+.light .text-heading {
+  color: #1a1a1a !important;
+}
+
+.dark .text-heading {
+  color: #ffffff !important;
+}
+
+/* Card backgrounds for light mode - make text readable */
+.light .glass-card {
+  color: #3a3a3a;
+}
+
+.dark .glass-card {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Button text in light mode */
+.light .btn-primary {
+  color: #1a1a1a;
+}
+
+/* Ensure carousel/product descriptions use proper contrast */
+.light .text-white\/40,
+.light .text-white\/35,
+.light .text-white\/30,
+.light .text-white\/25 {
+  color: #6b6b6b !important;
+}
+
+.dark .text-white\/40 {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.dark .text-white\/35 {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.dark .text-white\/30 {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark .text-white\/25 {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.dark .text-white\/20 {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .text-white\/15 {
+  color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark .text-white\/10 {
+  color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .text-white\/8 {
+  color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .text-white\/5 {
+  color: rgba(255, 255, 255, 0.05) !important;
+}

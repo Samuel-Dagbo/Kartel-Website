@@ -94,7 +94,7 @@ export function Testimonials() {
                       className={`w-3.5 h-3.5 ${
                         i < testimonial.rating
                           ? 'text-kartel-gold fill-kartel-gold'
-                          : 'text-white/8 dark:text-white/8'
+                          : 'dark:text-white/8 text-black/10'
                       }`}
                     />
                   ))}

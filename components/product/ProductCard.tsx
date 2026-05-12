@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ShoppingBag, Heart, Star } from 'lucide-react'
 import { Product } from '@/types'
 import { useCart } from '@/components/providers/CartProvider'
+import { useTheme } from '@/components/providers/ThemeProvider'
 import { toast } from '@/components/ui/use-toast'
 import { cn, formatPrice } from '@/lib/utils'
 
@@ -17,6 +18,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product, index = 0, variant = 'default' }: ProductCardProps) {
   const { addItem } = useCart()
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -116,7 +119,7 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
                     'w-3.5 h-3.5',
                     i < Math.floor(product.rating)
                       ? 'text-kartel-gold fill-kartel-gold'
-                      : 'text-white/15 dark:text-white/15'
+                      : isDark ? 'text-white/15' : 'text-black/15'
                   )}
                 />
               ))}

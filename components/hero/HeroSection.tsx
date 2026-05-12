@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
@@ -13,36 +13,33 @@ export function HeroSection() {
     offset: ['start start', 'end start'],
   })
 
-  const imageY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 30]), { stiffness: 50, damping: 20 })
-  const textY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 10]), { stiffness: 50, damping: 20 })
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 25])
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 8])
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0])
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[100dvh] lg:min-h-[100dvh] flex items-center overflow-hidden hero-gradient"
+      className="relative min-h-[85dvh] lg:min-h-[90dvh] flex items-center overflow-hidden hero-gradient"
     >
-      {/* Ambient glow effects */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/10 via-yellow-500/5 to-transparent rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-amber-600/8 via-amber-500/3 to-transparent rounded-full blur-[120px] pointer-events-none" />
-      
-      {/* Center glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-amber-500/[0.03] to-transparent rounded-full pointer-events-none" />
+      {/* Ambient glow - reduced to one instead of three */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/8 via-yellow-500/3 to-transparent rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-amber-600/5 via-amber-500/2 to-transparent rounded-full blur-[100px] pointer-events-none" />
 
       {/* Main container */}
-      <div className="container-luxury w-full relative z-10 pt-20 lg:pt-0">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-16 w-full">
-      
+      <div className="container-luxury w-full relative z-10 pt-16 lg:pt-0">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-16 w-full">
+
           {/* LEFT: Content */}
           <motion.div
             style={{ y: textY, opacity }}
-            className="flex flex-col justify-center space-y-6 lg:space-y-7 flex-1 lg:flex-none lg:w-[52%] order-1"
+            className="flex flex-col justify-center space-y-5 lg:space-y-6 flex-1 lg:flex-none lg:w-[52%] order-1"
           >
             {/* Premium badge */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-600/5 border border-amber-500/20 backdrop-blur-sm w-fit"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" strokeWidth={1.5} />
@@ -53,28 +50,28 @@ export function HeroSection() {
 
             {/* Main headline */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-2"
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1"
             >
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3rem] xl:text-[3.5rem] font-bold text-heading leading-[1.1] tracking-[-0.02em]">
+              <h1 className="font-serif text-[clamp(1.75rem,5vw,3.5rem)] font-bold text-heading leading-[1.1] tracking-[-0.02em]">
                 Define Your{' '}
                 <span className="italic font-light bg-gradient-to-r from-kartel-gold via-kartel-gold-light to-kartel-champagne bg-clip-text text-transparent">
                   Invisible
                 </span>
               </h1>
-              <h1 className="font-serif text-2.5xl sm:text-3xl md:text-4xl lg:text-[2.5rem] xl:text-[3rem] font-bold text-heading/85 leading-[1.15] tracking-[-0.02em]">
+              <h1 className="font-serif text-[clamp(1.5rem,4vw,3rem)] font-bold text-heading/85 leading-[1.15] tracking-[-0.02em]">
                 Signature
               </h1>
             </motion.div>
 
             {/* Description */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg text-muted max-w-xl leading-[1.75]"
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[clamp(0.875rem,2vw,1.125rem)] text-muted max-w-xl leading-[1.75]"
             >
               KARTEL blends rare botanicals with avant-garde chemistry. Each scent
               transcends time—a symphony of luxury for the discerning few.
@@ -82,9 +79,9 @@ export function HeroSection() {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-wrap items-center gap-4"
             >
               <Link
@@ -108,12 +105,12 @@ export function HeroSection() {
 
             {/* Stats */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="hidden md:flex items-center gap-6 pt-4"
+              transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden md:flex items-center gap-6 pt-3"
             >
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/[0.08] dark:to-white/[0.08]" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
               <div className="flex gap-10 lg:gap-12">
                 {[
                   { value: '200+', label: 'Scents' },
@@ -126,7 +123,7 @@ export function HeroSection() {
                   </div>
                 ))}
               </div>
-              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.08] to-transparent dark:from-white/[0.08]" />
+              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.08] to-transparent" />
             </motion.div>
           </motion.div>
 
@@ -135,47 +132,41 @@ export function HeroSection() {
             style={{ y: imageY }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex justify-center lg:justify-end items-center order-2 mt-12 lg:mt-0"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex justify-center lg:justify-end items-center order-2 mt-8 lg:mt-0"
           >
-            {/* Large ambient glow */}
+            {/* Ambient glow behind image */}
             <div className="absolute inset-0 -m-20 lg:-m-32 bg-gradient-to-br from-amber-500/15 via-yellow-400/10 to-amber-600/15 blur-[100px] rounded-full" />
 
             {/* Main perfume bottle container */}
             <div className="relative z-10">
-              {/* Decorative outer ring */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] border border-amber-500/10 rounded-full pointer-events-none hidden lg:block" />
-              
-              {/* Image wrapper with explicit size */}
-              <div className="relative w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] h-[320px] sm:h-[380px] md:h-[430px] lg:h-[480px]">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl"
-                >
+              {/* Image wrapper with responsive sizing */}
+              <div className="relative w-[220px] sm:w-[280px] md:w-[320px] lg:w-[360px] h-[280px] sm:h-[350px] md:h-[400px] lg:h-[450px]">
+                <div className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl">
                   <Image
                     src="https://images.unsplash.com/photo-1622618991746-fe6004db3a47?w=600&auto=format&fit=crop&q=60"
                     alt="KARTEL Signature Perfume"
                     fill
                     className="object-cover object-center"
                     priority
+                    sizes="(max-width: 640px) 220px, (max-width: 768px) 280px, (max-width: 1024px) 320px, 360px"
                   />
 
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  
+
                   {/* Badge */}
-                  <div className="absolute top-6 left-6 px-4 py-2.5 rounded-xl bg-black/50 backdrop-blur-md border border-white/[0.15]">
+                  <div className="absolute top-5 left-5 px-3.5 py-2 rounded-xl bg-black/50 backdrop-blur-md border border-white/[0.15]">
                     <p className="text-[10px] uppercase tracking-[0.15em] text-amber-300 font-semibold">Signature</p>
                     <p className="font-serif text-white text-xs mt-0.5">Collection</p>
                   </div>
 
                   {/* Rating */}
-                  <div className="absolute bottom-5 right-5 flex items-center gap-2 px-3.5 py-2 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30">
-                    <Star className="w-4 h-4 text-amber-400 fill-amber-400" strokeWidth={0} />
+                  <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30">
+                    <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" strokeWidth={0} />
                     <span className="text-sm font-bold text-white">4.9</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -183,21 +174,17 @@ export function HeroSection() {
       </div>
 
       {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 hero-bottom-gradient pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 hero-bottom-gradient pointer-events-none" />
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - simplified */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="text-[9px] uppercase tracking-[0.25em] text-muted">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-px h-8 bg-gradient-to-b from-kartel-gold/40 to-transparent"
-        />
+        <div className="w-px h-6 bg-gradient-to-b from-kartel-gold/40 to-transparent" />
       </motion.div>
     </section>
   )

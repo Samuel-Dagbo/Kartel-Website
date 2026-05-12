@@ -3,9 +3,10 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Star, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react'
 import { useCart } from '@/components/providers/CartProvider'
+import { useTheme } from '@/components/providers/ThemeProvider'
 import { toast } from '@/components/ui/use-toast'
 import { Product } from '@/types'
 import { formatPrice } from '@/lib/utils'
@@ -17,7 +18,10 @@ interface BestSellersCarouselProps {
 export default function BestSellersCarousel({ products = [] }: BestSellersCarouselProps) {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const { addItem } = useCart()
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const displayedProducts = products.length > 0 ? products : []
 
@@ -32,12 +36,12 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
   }, [displayedProducts.length])
 
   useEffect(() => {
-    if (displayedProducts.length === 0) return
+    if (displayedProducts.length === 0 || isPaused) return
     const timer = setInterval(() => {
       handleNext()
-    }, 6000)
+    }, 10000)
     return () => clearInterval(timer)
-  }, [displayedProducts.length, handleNext])
+  }, [displayedProducts.length, handleNext, isPaused])
 
   if (displayedProducts.length === 0) return null
 
@@ -62,7 +66,9 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
   }
 
   return (
-    <section className="section-padding bg-secondary relative overflow-hidden">
+    <section className={`section-padding relative overflow-hidden transition-colors duration-300 ${
+        isDark ? 'bg-secondary' : 'bg-kartel-cream'
+      }`}>
       {/* Ambient glow effects */}
       <div className="absolute top-1/2 left-[-10%] w-[500px] h-[500px] bg-kartel-gold/[0.02] rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute top-1/3 right-[-5%] w-[400px] h-[400px] bg-kartel-gold/[0.015] rounded-full blur-[120px] pointer-events-none" />
@@ -89,7 +95,11 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+        <div
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center"
+        >
           {/* Content - Left Side */}
           <div className="relative order-2 lg:order-1">
             <AnimatePresence mode="wait" custom={direction}>
@@ -118,27 +128,35 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                           className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
                             i < rating
                               ? 'text-kartel-gold fill-kartel-gold'
-                              : 'text-white/10'
+                              : isDark ? 'text-white/10' : 'text-black/10'
                           }`}
                         />
                       ))}
                     </div>
-                    <span className="text-xs sm:text-sm text-white/35">
+                    <span className={`text-xs sm:text-sm ${
+                      isDark ? 'text-white/40' : 'text-kartel-black-400'
+                    }`}>
                       {product.rating} ({product.reviewCount || 0})
                     </span>
                   </div>
                 </div>
 
-                <p className="text-sm sm:text-base text-white/40 leading-[1.7] sm:leading-[1.8] line-clamp-2 sm:line-clamp-none max-w-md">
+                <p className={`text-sm sm:text-base leading-[1.7] sm:leading-[1.8] line-clamp-2 sm:line-clamp-none max-w-md ${
+                  isDark ? 'text-white/40' : 'text-kartel-black-500'
+                }`}>
                   {product.description}
                 </p>
 
                 <div className="flex items-baseline gap-3 sm:gap-4">
-                  <span className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  <span className={`text-2xl sm:text-3xl font-bold tracking-tight ${
+                    isDark ? 'text-white' : 'text-kartel-black-900'
+                  }`}>
                     {formatPrice(product.price)}
                   </span>
                   {product.comparePrice && (
-                    <span className="text-base sm:text-lg text-white/25 line-through">
+                    <span className={`text-base sm:text-lg line-through ${
+                      isDark ? 'text-white/25' : 'text-kartel-black-400'
+                    }`}>
                       {formatPrice(product.comparePrice)}
                     </span>
                   )}
@@ -154,7 +172,11 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                   </Link>
                   <button
                     onClick={handleAddToCart}
-                    className="group inline-flex items-center gap-2 bg-white/[0.04] hover:bg-kartel-gold/[0.08] border border-white/[0.06] hover:border-kartel-gold/25 text-white/80 hover:text-kartel-gold text-xs sm:text-sm font-medium px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full transition-all duration-300"
+                    className={`group inline-flex items-center gap-2 border text-xs sm:text-sm font-medium px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full transition-all duration-300 ${
+                      isDark
+                        ? 'bg-white/[0.04] hover:bg-kartel-gold/[0.08] border-white/[0.06] hover:border-kartel-gold/25 text-white/80 hover:text-kartel-gold'
+                        : 'bg-black/[0.03] hover:bg-kartel-gold/[0.08] border-black/[0.08] hover:border-kartel-gold/25 text-kartel-black-500 hover:text-kartel-gold'
+                    }`}
                   >
                     <ShoppingBag className="w-4 h-4 transition-transform group-hover:scale-110" strokeWidth={2} />
                     Add to Bag
@@ -167,14 +189,22 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
             <div className="hidden lg:flex items-center gap-4 mt-14">
               <button
                 onClick={handlePrev}
-                className="group p-3.5 rounded-full bg-white/[0.03] border border-white/[0.05] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/30 hover:text-kartel-gold transition-all duration-300"
+                className={`group p-3.5 rounded-full border transition-all duration-300 ${
+                  isDark
+                    ? 'bg-white/[0.03] border-white/[0.05] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/30 hover:text-kartel-gold'
+                    : 'bg-black/[0.03] border-black/[0.06] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-kartel-black-400 hover:text-kartel-gold'
+                }`}
                 aria-label="Previous"
               >
                 <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" strokeWidth={1.5} />
               </button>
               <button
                 onClick={handleNext}
-                className="group p-3.5 rounded-full bg-white/[0.03] border border-white/[0.05] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/30 hover:text-kartel-gold transition-all duration-300"
+                className={`group p-3.5 rounded-full border transition-all duration-300 ${
+                  isDark
+                    ? 'bg-white/[0.03] border-white/[0.05] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/30 hover:text-kartel-gold'
+                    : 'bg-black/[0.03] border-black/[0.06] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-kartel-black-400 hover:text-kartel-gold'
+                }`}
                 aria-label="Next"
               >
                 <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
@@ -190,7 +220,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                     className={`h-1.5 rounded-full transition-all duration-700 ${
                       idx === current
                         ? 'w-10 bg-kartel-gold'
-                        : 'w-2 bg-white/10 hover:bg-white/25'
+                        : `w-2 ${isDark ? 'bg-white/10 hover:bg-white/25' : 'bg-black/10 hover:bg-black/25'}`
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -215,7 +245,11 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 <div className="absolute inset-0 -m-6 bg-gradient-to-tr from-kartel-gold/[0.025] via-transparent to-kartel-gold/[0.015] rounded-full blur-[80px]" />
 
                 <div className="relative z-10 w-full h-full p-5 sm:p-8">
-                  <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-white/[0.05] bg-gradient-to-b from-white/[0.03] to-transparent shadow-luxury-xl">
+                  <div className={`relative w-full h-full rounded-[2.5rem] overflow-hidden border shadow-luxury-xl ${
+                    isDark
+                      ? 'border-white/[0.05] bg-gradient-to-b from-white/[0.03] to-transparent'
+                      : 'border-black/[0.06] bg-gradient-to-b from-black/[0.02] to-transparent'
+                  }`}>
                     <Image
                       src={
                         product.images?.[0] ||
@@ -225,14 +259,18 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-contain p-6 sm:p-8 drop-shadow-2xl"
-                      priority
+                      loading="lazy"
                     />
 
                     {/* Decorative elements */}
                     <div className="absolute top-6 left-6 w-10 h-10 rounded-full border border-kartel-gold/[0.08] flex items-center justify-center">
                       <div className="w-2.5 h-2.5 rounded-full bg-kartel-gold/25" />
                     </div>
-                    <div className="absolute top-6 right-6 px-4 py-2 rounded-full bg-kartel-black/40 backdrop-blur-md border border-white/[0.04]">
+                    <div className={`absolute top-6 right-6 px-4 py-2 rounded-full backdrop-blur-md border ${
+                      isDark
+                        ? 'bg-kartel-black/40 border-white/[0.04]'
+                        : 'bg-white/60 border-black/[0.06]'
+                    }`}>
                       <span className="text-[10px] font-semibold tracking-wider uppercase text-kartel-gold/60">Bestseller</span>
                     </div>
                   </div>
@@ -244,7 +282,11 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
             <div className="flex lg:hidden items-center justify-center gap-4 mt-10">
               <button
                 onClick={handlePrev}
-                className="p-3.5 rounded-full bg-white/[0.03] border border-white/[0.05] text-white/30 hover:text-kartel-gold hover:border-kartel-gold/25 transition-all duration-300"
+                className={`p-3.5 rounded-full border transition-all duration-300 ${
+                  isDark
+                    ? 'bg-white/[0.03] border-white/[0.05] text-white/30 hover:text-kartel-gold hover:border-kartel-gold/25'
+                    : 'bg-black/[0.03] border-black/[0.06] text-kartel-black-400 hover:text-kartel-gold hover:border-kartel-gold/25'
+                }`}
               >
                 <ChevronLeft className="w-5 h-5" strokeWidth={1.5} />
               </button>
@@ -257,14 +299,18 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                       setCurrent(idx)
                     }}
                     className={`h-1.5 rounded-full transition-all duration-500 ${
-                      idx === current ? 'w-8 bg-kartel-gold' : 'w-2 bg-white/10'
+                      idx === current ? 'w-8 bg-kartel-gold' : `w-2 ${isDark ? 'bg-white/10' : 'bg-black/10'}`
                     }`}
                   />
                 ))}
               </div>
               <button
                 onClick={handleNext}
-                className="p-3.5 rounded-full bg-white/[0.03] border border-white/[0.05] text-white/30 hover:text-kartel-gold hover:border-kartel-gold/25 transition-all duration-300"
+                className={`p-3.5 rounded-full border transition-all duration-300 ${
+                  isDark
+                    ? 'bg-white/[0.03] border-white/[0.05] text-white/30 hover:text-kartel-gold hover:border-kartel-gold/25'
+                    : 'bg-black/[0.03] border-black/[0.06] text-kartel-black-400 hover:text-kartel-gold hover:border-kartel-gold/25'
+                }`}
               >
                 <ChevronRight className="w-5 h-5" strokeWidth={1.5} />
               </button>
