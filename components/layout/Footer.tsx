@@ -251,6 +251,23 @@ export function Footer() {
           }`}>
             &copy; {new Date().getFullYear()} KARTEL. All rights reserved.
           </p>
+          <p className={`text-xs tracking-wide transition-colors ${
+            isDark ? 'text-white/20' : 'text-kartel-black-400'
+          }`}>
+            Built by{' '}
+            <a
+              href="https://samtechlabs.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition-colors ${
+                isDark
+                  ? 'text-white/40 hover:text-kartel-gold'
+                  : 'text-kartel-black-500 hover:text-kartel-gold'
+              }`}
+            >
+              Samtech Labs
+            </a>
+          </p>
         </div>
       </div>
     </footer>

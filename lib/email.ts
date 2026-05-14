@@ -1,7 +1,7 @@
 import { Client } from 'node-mailjet'
 
 const FROM_EMAIL = 'romeovilleproperties20@gmail.com'
-const FROM_NAME = 'Kartel Perfumes'
+const FROM_NAME = 'Carl Jones Perfumes'
 
 function getMailjet() {
   return new Client({
@@ -51,7 +51,7 @@ function getHtmlTemplate(content: string) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kartel Perfumes</title>
+  <title>Carl Jones Perfumes</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #1a1a1a; padding: 40px 20px;">
@@ -75,10 +75,10 @@ function getHtmlTemplate(content: string) {
             <tr>
               <td style="background-color: #1e1e1e; padding: 25px 30px; text-align: center;">
                 <p style="margin: 0; color: #888888; font-size: 12px;">
-                 Kartel Perfumes — Premium Fragrance Experience
+                 Carl Jones Perfumes — Premium Fragrance Experience
                 </p>
                 <p style="margin: 10px 0 0 0; color: #666666; font-size: 11px;">
-                  This email was sent to you as a registered member of Kartel Perfumes.
+                  This email was sent to you as a registered member of Carl Jones Perfumes.
                 </p>
               </td>
             </tr>
@@ -97,7 +97,7 @@ export async function sendWelcomeEmail(email: string, name: string) {
       <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #D4AF37 0%, #C9A227 100%); border-radius: 50%; margin: 0 auto 25px; display: flex; align-items: center; justify-content: center;">
         <span style="color: #1a1a1a; font-size: 36px;">✨</span>
       </div>
-      <h2 style="color: #ffffff; font-size: 24px; margin: 0 0 15px 0; font-weight: 600;">Welcome to Kartel, ${name}!</h2>
+      <h2 style="color: #ffffff; font-size: 24px; margin: 0 0 15px 0; font-weight: 600;">Welcome to Carl Jones, ${name}!</h2>
       <p style="color: #bbbbbb; font-size: 15px; line-height: 1.6; margin: 0 0 25px 0;">
         Thank you for joining our exclusive fragrance community. Prepare to discover your signature scent from our curated collection of luxury perfumes.
       </p>
@@ -110,7 +110,7 @@ export async function sendWelcomeEmail(email: string, name: string) {
 
   return sendEmail({
     to: email,
-    subject: 'Welcome to Kartel Perfumes ✨',
+    subject: 'Welcome to Carl Jones Perfumes ✨',
     html,
   })
 }
@@ -169,7 +169,7 @@ export async function sendOrderConfirmationEmail(
 
   return sendEmail({
     to: email,
-    subject: `Order ${orderNumber} Confirmed - Kartel Perfumes`,
+    subject: `Order ${orderNumber} Confirmed - Carl Jones Perfumes`,
     html,
   })
 }
@@ -223,7 +223,7 @@ export async function sendOrderStatusUpdateEmail(
 
   return sendEmail({
     to: email,
-    subject: `Order ${orderNumber} Status: ${status.charAt(0).toUpperCase() + status.slice(1)} - Kartel`,
+    subject: `Order ${orderNumber} Status: ${status.charAt(0).toUpperCase() + status.slice(1)} - Carl Jones`,
     html,
   })
 }
@@ -252,7 +252,7 @@ export async function sendPasswordResetEmail(email: string, name: string, resetT
 
   return sendEmail({
     to: email,
-    subject: 'Reset Your Password - Kartel Perfumes',
+    subject: 'Reset Your Password - Carl Jones Perfumes',
     html,
   })
 }
@@ -276,7 +276,7 @@ export async function sendTestEmail(to: string) {
 
   return sendEmail({
     to: to,
-    subject: 'Test Email - Kartel Perfumes',
+    subject: 'Test Email - Carl Jones Perfumes',
     html,
   })
 }
