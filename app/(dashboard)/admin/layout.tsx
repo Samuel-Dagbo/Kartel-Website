@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Sidebar } from '@/components/admin/Sidebar'
 import { motion } from 'framer-motion'
 import { useTheme } from '@/components/providers/ThemeProvider'
-import { Menu, Bell, Search, Sun, Moon, User } from 'lucide-react'
+import { Menu, Bell, Search, Sun, Moon, User, ExternalLink } from 'lucide-react'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession()
@@ -82,6 +82,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           <div className="flex items-center gap-2">
+            <a
+              href="/"
+              target="_blank"
+              className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                isDark
+                  ? 'text-white/40 hover:text-white hover:bg-white/[0.05]'
+                  : 'text-kartel-black-500 hover:text-kartel-black-900 hover:bg-black/[0.05]'
+              }`}
+            >
+              <ExternalLink className="w-3.5 h-3.5" strokeWidth={1.5} />
+              View Store
+            </a>
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-lg transition-colors ${
