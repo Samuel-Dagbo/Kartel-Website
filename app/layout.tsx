@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { AuthProvider } from "@/components/providers/AuthProvider"
 import { CartProvider } from "@/components/providers/CartProvider"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
-import { Navbar } from "@/components/layout/Navbar"
+import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar"
 import { Footer } from "@/components/layout/Footer"
 import { Toaster } from "@/components/ui/toaster"
 import { CartDrawer } from "@/components/common/CartDrawer"
@@ -46,7 +46,7 @@ export default function RootLayout({
           <AuthProvider>
             <CartProvider>
               <div className="flex flex-col min-h-screen">
-                <Navbar />
+                <ConditionalNavbar />
                 <main className="flex-1">{children}</main>
                 <Footer />
               </div>
