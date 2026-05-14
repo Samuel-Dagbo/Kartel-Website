@@ -31,7 +31,7 @@ const timeline = [
   {
     year: '2009',
     title: 'The Beginning',
-    description: 'KARTEL was founded with a vision to create extraordinary fragrances.',
+    description: 'CARL JONES was founded with a vision to create extraordinary fragrances.',
   },
   {
     year: '2014',
@@ -67,7 +67,7 @@ export default function AboutPage() {
               <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-black/[0.08] dark:border-white/[0.08]">
                 <Image
                   src="https://images.unsplash.com/photo-1700522360590-a913ff2a3d9f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fHBlcmZ1bWV8ZW58MHx8MHx8fDA%3D"
-                  alt="KARTEL Craftsmanship"
+                  alt="CARL JONES Craftsmanship"
                   fill
                   className="object-cover"
                 />
@@ -85,7 +85,7 @@ export default function AboutPage() {
                 Our Journey
               </span>
               <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-heading leading-[1.1] tracking-[-0.02em]">
-                The <span className="text-gradient">Story</span> of KARTEL
+                The <span className="text-gradient">Story</span> of CARL JONES
               </h1>
               <p className="text-lg text-muted leading-relaxed">
                 Crafting extraordinary fragrances since 2009, blending artistry with science to create scents that define you.
@@ -109,7 +109,7 @@ export default function AboutPage() {
               Our <span className="text-gradient">Mission</span>
             </h2>
             <p className="text-base sm:text-lg text-body leading-[1.8] mb-6">
-              At KARTEL, we believe that fragrance is more than a scent&mdash;it&apos;s an expression of identity, a memory in a bottle, an invisible accessory that leaves a lasting impression.
+              At CARL JONES, we believe that fragrance is more than a scent&mdash;it&apos;s an expression of identity, a memory in a bottle, an invisible accessory that leaves a lasting impression.
             </p>
             <p className="text-base sm:text-lg text-body leading-[1.8] mb-10">
               Our mission is to create fragrances that transcend time, blending rare botanicals with avant-garde chemistry to produce scents that are both timeless and innovative.

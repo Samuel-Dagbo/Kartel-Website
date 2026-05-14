@@ -84,7 +84,7 @@ export function Navbar() {
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
               >
-                KARTEL
+                CARL JONES
               </motion.span>
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-kartel-gold to-transparent group-hover:w-full transition-all duration-500 ease-luxury" />
             </Link>

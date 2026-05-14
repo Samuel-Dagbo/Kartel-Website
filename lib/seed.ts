@@ -25,7 +25,7 @@ const PERFUME_IMAGES = [
   'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80',
 ]
 
-const BRANDS = ['KARTEL', 'Velvet Scents', 'Desert Gold', 'Starlight Fragrances', 'Bloom House', 'Royal Scents', 'Aqua Essence', 'Dark Art', 'Pure Essence', 'Luxe Parfums']
+const BRANDS = ['CARL JONES', 'Velvet Scents', 'Desert Gold', 'Starlight Fragrances', 'Bloom House', 'Royal Scents', 'Aqua Essence', 'Dark Art', 'Pure Essence', 'Luxe Parfums']
 
 const CATEGORIES = ['womens', 'mens', 'unisex']
 
@@ -107,7 +107,7 @@ function generateProduct(index: number) {
 const SEED_USERS = [
   {
     name: 'Admin User',
-    email: 'admin@kartel.com',
+    email: 'admin@carljones.com',
     password: 'admin123',
     role: 'admin',
   },
@@ -154,7 +154,7 @@ async function seed() {
     console.log(`Successfully seeded ${productsToCreate.length} products!`)
 
     console.log('\n=== LOGIN CREDENTIALS ===')
-    console.log('Admin: admin@kartel.com / admin123')
+    console.log('Admin: admin@carljones.com / admin123')
     console.log('Customer: john@customer.com / customer123')
     console.log('Customer 2: sarah@example.com / password123')
     console.log('=========================\n')

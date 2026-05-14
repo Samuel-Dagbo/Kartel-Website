@@ -115,7 +115,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
               >
                 <div>
                   <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-kartel-gold/60">
-                    {product.brand || 'KARTEL'}
+                    {product.brand || 'CARL JONES'}
                   </span>
                   <h3 className="font-serif text-2xl sm:text-3xl lg:text-[2.75rem] font-bold text-heading mt-2 sm:mt-3 leading-[1.15] text-balance">
                     {product.name}

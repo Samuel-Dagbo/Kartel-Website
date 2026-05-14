@@ -9,20 +9,20 @@ import { CartDrawer } from "@/components/common/CartDrawer"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "KARTEL | Luxury Perfumes",
-  description: "Discover an exquisite collection of luxury perfumes at KARTEL. From niche to iconic fragrances, find your signature scent.",
+  title: "CARL JONES | Luxury Perfumes",
+  description: "Discover an exquisite collection of luxury perfumes at Carl Jones. From niche to iconic fragrances, find your signature scent.",
   keywords: "luxury perfume, niche perfume, designer fragrance, haut parfumerie, cologne, eau de parfum",
-  authors: [{ name: "KARTEL" }],
+  authors: [{ name: "Carl Jones" }],
   openGraph: {
-    title: "KARTEL | Luxury Perfumes",
-    description: "Discover an exquisite collection of luxury perfumes at KARTEL.",
+    title: "CARL JONES | Luxury Perfumes",
+    description: "Discover an exquisite collection of luxury perfumes at Carl Jones.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KARTEL | Luxury Perfumes",
-    description: "Discover an exquisite collection of luxury perfumes at KARTEL.",
+    title: "CARL JONES | Luxury Perfumes",
+    description: "Discover an exquisite collection of luxury perfumes at Carl Jones.",
   },
   icons: {
     icon: "/favicon.ico",

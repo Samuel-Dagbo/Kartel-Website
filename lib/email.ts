@@ -61,7 +61,7 @@ function getHtmlTemplate(content: string) {
             <!-- Header -->
             <tr>
               <td style="background: linear-gradient(135deg, #D4AF37 0%, #C9A227 100%); padding: 30px; text-align: center;">
-                <h1 style="margin: 0; color: #1a1a1a; font-size: 28px; font-weight: 700; letter-spacing: 4px;">KARTEL</h1>
+                <h1 style="margin: 0; color: #1a1a1a; font-size: 28px; font-weight: 700; letter-spacing: 4px;">CARL JONES</h1>
                 <p style="margin: 8px 0 0 0; color: #1a1a1a; font-size: 12px; letter-spacing: 2px; opacity: 0.8;">LUXURY FRAGRANCES</p>
               </td>
             </tr>
@@ -104,7 +104,7 @@ export async function sendWelcomeEmail(email: string, name: string) {
       <p style="color: #999999; font-size: 13px; line-height: 1.6; margin: 0;">
         💡 <strong>Tip:</strong> Check your spam or junk folder if you don't see our emails in your inbox.
       </p>
-      <a href="https://kartelperfumes.com/shop" style="display: inline-block; margin-top: 30px; padding: 14px 35px; background: linear-gradient(135deg, #D4AF37 0%, #C9A227 100%); color: #1a1a1a; text-decoration: none; font-weight: 600; border-radius: 8px; font-size: 14px;">Explore Collection</a>
+      <a href="https://carljonesperfumes.com/shop" style="display: inline-block; margin-top: 30px; padding: 14px 35px; background: linear-gradient(135deg, #D4AF37 0%, #C9A227 100%); color: #1a1a1a; text-decoration: none; font-weight: 600; border-radius: 8px; font-size: 14px;">Explore Collection</a>
     </div>
   `)
 
@@ -217,7 +217,7 @@ export async function sendOrderStatusUpdateEmail(
       <p style="color: #999999; font-size: 13px; line-height: 1.6; margin: 0;">
         💡 <strong>Tip:</strong> Check your spam or junk folder if you don't see our email in your inbox.
       </p>
-      <a href="https://kartelperfumes.com/customer/orders" style="display: inline-block; margin-top: 30px; padding: 14px 35px; background: linear-gradient(135deg, #D4AF37 0%, #C9A227 100%); color: #1a1a1a; text-decoration: none; font-weight: 600; border-radius: 8px; font-size: 14px;">View Order Details</a>
+      <a href="https://carljonesperfumes.com/customer/orders" style="display: inline-block; margin-top: 30px; padding: 14px 35px; background: linear-gradient(135deg, #D4AF37 0%, #C9A227 100%); color: #1a1a1a; text-decoration: none; font-weight: 600; border-radius: 8px; font-size: 14px;">View Order Details</a>
     </div>
   `)
 
@@ -229,7 +229,7 @@ export async function sendOrderStatusUpdateEmail(
 }
 
 export async function sendPasswordResetEmail(email: string, name: string, resetToken: string) {
-  const resetUrl = `https://kartelperfumes.com/forgot-password?token=${resetToken}`
+  const resetUrl = `https://carljonesperfumes.com/forgot-password?token=${resetToken}`
 
   const html = getHtmlTemplate(`
     <div style="text-align: center;">

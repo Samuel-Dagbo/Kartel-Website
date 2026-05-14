@@ -19,7 +19,7 @@ export default async function HomePage() {
     comparePrice: (p.comparePrice as number) || 0,
     images: (p.images as string[]) || [],
     category: (p.category as 'mens' | 'womens' | 'unisex' | 'niche') || 'unisex',
-    brand: (p.brand as string) || 'KARTEL',
+    brand: (p.brand as string) || 'CARL JONES',
     notes: (p.notes as { top: string[]; middle: string[]; base: string[] }) || { top: [], middle: [], base: [] },
     size: (p.size as string) || '50ml',
     concentration: (p.concentration as 'EDT' | 'EDP' | 'Parfum') || 'EDP',

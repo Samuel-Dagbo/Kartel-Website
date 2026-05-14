@@ -172,13 +172,13 @@ export default function RegisterPage() {
               <Link href="/" className="inline-block mb-3">
                 <span className={`text-xl font-serif font-bold tracking-[0.3em] ${
                   isDark ? 'text-gradient-shine' : 'text-kartel-black'
-                }`}>KARTEL</span>
+                }`}>CARL JONES</span>
               </Link>
               <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
                 isDark ? 'text-white' : 'text-kartel-black-900'
               }`}>Create Account</h1>
               <p className={`mt-1 text-xs ${isDark ? 'text-white/35' : 'text-kartel-black-400'}`}>
-                Join the KARTEL family today.
+                Join the CARL JONES family today.
               </p>
             </div>
             <button

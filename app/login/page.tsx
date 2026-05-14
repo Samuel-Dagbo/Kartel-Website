@@ -132,7 +132,7 @@ export default function LoginPage() {
               <Link href="/" className="inline-block mb-3">
                 <span className={`text-xl font-serif font-bold tracking-[0.3em] ${
                   isDark ? 'text-gradient-shine' : 'text-kartel-black'
-                }`}>KARTEL</span>
+                }`}>CARL JONES</span>
               </Link>
               <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
                 isDark ? 'text-white' : 'text-kartel-black-900'

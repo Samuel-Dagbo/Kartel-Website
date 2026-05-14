@@ -16,7 +16,7 @@ const highlights = [
     icon: '02',
     title: 'Master Perfumers',
     description:
-      'Each KARTEL scent is crafted by world-renowned perfumers with decades of experience in haute parfumerie.',
+      'Each CARL JONES scent is crafted by world-renowned perfumers with decades of experience in haute parfumerie.',
   },
   {
     icon: '03',
@@ -57,7 +57,7 @@ export function BrandStory() {
             <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] overflow-hidden border border-black/[0.04] dark:border-white/[0.04] shadow-luxury-xl">
               <Image
                 src="https://images.unsplash.com/photo-1705338670422-01133208eab9?w=600&auto=format&fit=crop&q=60"
-                alt="KARTEL Brand Story"
+                alt="CARL JONES Brand Story"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -100,7 +100,7 @@ export function BrandStory() {
                 Our Story
               </span>
               <h2 className="font-serif text-display-md font-bold text-heading leading-[1.05] tracking-[-0.02em]">
-                The <span className="text-gradient">Essence</span> of KARTEL
+                The <span className="text-gradient">Essence</span> of CARL JONES
               </h2>
             </motion.div>
 
@@ -111,7 +111,7 @@ export function BrandStory() {
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg text-body leading-[1.8]"
             >
-              At KARTEL, we believe that fragrance is an art form—an invisible
+              At CARL JONES, we believe that fragrance is an art form—an invisible
               accessory that speaks volumes before you utter a word. Born from a
               passion for exquisite scents and meticulous craftsmanship, our
               journey began with a singular vision.
@@ -124,7 +124,7 @@ export function BrandStory() {
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg text-body leading-[1.8]"
             >
-              Each KARTEL perfume is a symphony of rare ingredients, carefully
+              Each CARL JONES perfume is a symphony of rare ingredients, carefully
               sourced from the far corners of the world and blended by master
               perfumers with decades of experience.
             </motion.p>

@@ -22,7 +22,7 @@ export function NewsletterSignup() {
     if (email.includes('@') && email.includes('.')) {
       setMessage({
         type: 'success',
-        text: 'Welcome to KARTEL. Expect extraordinary.',
+        text: 'Welcome to CARL JONES. Expect extraordinary.',
       })
       setEmail('')
     } else {
@@ -94,7 +94,7 @@ export function NewsletterSignup() {
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="font-serif text-display-sm font-bold text-heading leading-[1.1] tracking-[-0.02em] mt-4"
               >
-                Stay Connected with <br /><span className="text-gradient">KARTEL</span>
+                Stay Connected with <br /><span className="text-gradient">CARL JONES</span>
               </motion.h2>
 
               <motion.p

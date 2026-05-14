@@ -66,7 +66,7 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-7">
             <Link href="/" className="inline-block group relative">
               <span className="text-2xl font-serif font-bold tracking-[0.3em] text-gradient transition-all duration-300">
-                KARTEL
+                CARL JONES
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-kartel-gold to-transparent group-hover:w-full transition-all duration-500 ease-luxury" />
             </Link>
@@ -201,7 +201,7 @@ export function Footer() {
               </h3>
               <div className="flex flex-wrap gap-8">
                 <a
-                  href="mailto:contact@kartel.com"
+                  href="mailto:contact@carljones.com"
                   className={`flex items-center gap-2.5 text-sm transition-colors ${
                     isDark
                       ? 'text-white/50 hover:text-kartel-gold'
@@ -212,7 +212,7 @@ export function Footer() {
                     className="w-4 h-4 text-kartel-gold/50"
                     strokeWidth={1.5}
                   />
-                  contact@kartel.com
+                  contact@carljones.com
                 </a>
                 <a
                   href="tel:+15551234567"
@@ -249,7 +249,7 @@ export function Footer() {
           <p className={`text-xs tracking-wide transition-colors ${
             isDark ? 'text-white/20' : 'text-kartel-black-400'
           }`}>
-            &copy; {new Date().getFullYear()} KARTEL. All rights reserved.
+            &copy; {new Date().getFullYear()} CARL JONES. All rights reserved.
           </p>
           <p className={`text-xs tracking-wide transition-colors ${
             isDark ? 'text-white/20' : 'text-kartel-black-400'

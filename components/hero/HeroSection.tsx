@@ -73,7 +73,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(0.875rem,2vw,1.125rem)] text-muted max-w-xl leading-[1.75]"
             >
-              KARTEL blends rare botanicals with avant-garde chemistry. Each scent
+              CARL JONES blends rare botanicals with avant-garde chemistry. Each scent
               transcends time—a symphony of luxury for the discerning few.
             </motion.p>
 
@@ -145,7 +145,7 @@ export function HeroSection() {
                 <div className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl">
                   <Image
                     src="https://images.unsplash.com/photo-1622618991746-fe6004db3a47?w=600&auto=format&fit=crop&q=60"
-                    alt="KARTEL Signature Perfume"
+                    alt="CARL JONES Signature Perfume"
                     fill
                     className="object-cover object-center"
                     priority

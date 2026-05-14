@@ -292,7 +292,7 @@ export default function CheckoutPage() {
               Your order has been placed successfully. We&apos;re preparing your signature scent with the utmost care. You will receive a confirmation email shortly.
             </p>
             <div className="p-6 glass-card text-left space-y-3 mb-8">
-              <p className="text-sm text-muted">Order Number: <span className="text-heading font-medium">#KARTEL-{Math.floor(Math.random() * 1000000)}</span></p>
+              <p className="text-sm text-muted">Order Number: <span className="text-heading font-medium">#CJ-{Math.floor(Math.random() * 1000000)}</span></p>
               <p className="text-sm text-muted">Estimated Delivery: <span className="text-heading font-medium">3-5 Business Days</span></p>
             </div>
             <Link href="/" className="btn-primary px-8 py-4">Return to Home</Link>

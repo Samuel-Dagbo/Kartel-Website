@@ -10,7 +10,7 @@ const testimonials = [
     name: 'Elara Vance',
     title: 'Fragrance Enthusiast',
     quote:
-      "KARTEL perfumes are simply unparalleled. The depth and complexity of 'Midnight Bloom' captivate every time I wear it. It's truly a luxurious experience from the moment you open the exquisite packaging.",
+      "Carl Jones perfumes are simply unparalleled. The depth and complexity of 'Midnight Bloom' captivate every time I wear it. It's truly a luxurious experience from the moment you open the exquisite packaging.",
     avatar:
       'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop',
     rating: 5,
@@ -20,7 +20,7 @@ const testimonials = [
     name: 'Julian Thorne',
     title: 'Creative Director',
     quote:
-      "'Golden Oasis' is a masterpiece. Its unique blend of notes transports me to another world. KARTEL doesn't just sell perfumes; they sell emotions and stories.",
+      "'Golden Oasis' is a masterpiece. Its unique blend of notes transports me to another world. Carl Jones doesn't just sell perfumes; they sell emotions and stories.",
     avatar:
       'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop',
     rating: 5,
@@ -30,7 +30,7 @@ const testimonials = [
     name: 'Seraphina Lee',
     title: 'Fashion Stylist',
     quote:
-      "As a stylist, I appreciate attention to detail, and KARTEL delivers. 'Celestial Mist' has become my signature scent—subtle yet powerful. The sleek design of the bottle itself is a work of art.",
+      "As a stylist, I appreciate attention to detail, and Carl Jones delivers. 'Celestial Mist' has become my signature scent—subtle yet powerful. The sleek design of the bottle itself is a work of art.",
     avatar:
       'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976&auto=format&fit=crop',
     rating: 4,
