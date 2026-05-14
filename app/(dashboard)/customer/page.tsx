@@ -156,7 +156,7 @@ export default function CustomerOverview() {
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-heading">
-                      {order.orderNumber || `KRT-${order._id.slice(-6).toUpperCase()}`}
+                      {order.orderNumber || `CJ-${order._id.slice(-6).toUpperCase()}`}
                     </span>
                     <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase ${
                       order.status === 'delivered' ? 'bg-green-500/15 text-green-400 border border-green-500/20' :

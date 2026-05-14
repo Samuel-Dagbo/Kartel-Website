@@ -2,10 +2,17 @@
 
 import { motion } from 'framer-motion'
 import { useTheme } from '@/components/providers/ThemeProvider'
+import { usePathname } from 'next/navigation'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme()
+  const pathname = usePathname()
   const isDark = theme === 'dark'
+  const isAdmin = pathname?.startsWith('/admin')
+
+  if (isAdmin) {
+    return <>{children}</>
+  }
 
   return (
     <motion.div

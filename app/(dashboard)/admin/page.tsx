@@ -14,6 +14,11 @@ import {
   Sun,
   Moon,
   UserCog,
+  BarChart3,
+  Percent,
+  Star,
+  FileText,
+  CreditCard,
 } from 'lucide-react'
 import { 
   XAxis, 
@@ -313,10 +318,14 @@ export default function AdminDashboard() {
           <h3 className={`font-serif text-lg font-semibold mb-5 ${isDark ? 'text-heading' : 'text-kartel-black-900'}`}>Quick Actions</h3>
           <div className="space-y-3">
             {[
-              { label: 'View Products', icon: Package, href: '/admin/products', color: 'from-blue-500/20' },
-              { label: 'Manage Orders', icon: ShoppingBag, href: '/admin/orders', color: 'from-purple-500/20' },
-              { label: 'Manage Users', icon: UserCog, href: '/admin/users', color: 'from-green-500/20' },
-              { label: 'Add New Product', icon: Plus, href: '/admin/products?action=add', color: 'from-kartel-gold/20' },
+              { label: 'Point of Sale', icon: CreditCard, href: '/admin/pos', color: 'from-green-500/20' },
+              { label: 'Analytics', icon: BarChart3, href: '/admin/analytics', color: 'from-purple-500/20' },
+              { label: 'Manage Orders', icon: ShoppingBag, href: '/admin/orders', color: 'from-blue-500/20' },
+              { label: 'View Products', icon: Package, href: '/admin/products', color: 'from-kartel-gold/20' },
+              { label: 'Discounts', icon: Percent, href: '/admin/discounts', color: 'from-pink-500/20' },
+              { label: 'Reviews', icon: Star, href: '/admin/reviews', color: 'from-yellow-500/20' },
+              { label: 'Reports', icon: FileText, href: '/admin/reports', color: 'from-red-500/20' },
+              { label: 'Users', icon: UserCog, href: '/admin/users', color: 'from-teal-500/20' },
             ].map((action, i) => (
               <Link 
                 key={i} 
@@ -384,7 +393,7 @@ export default function AdminDashboard() {
                   >
                     <td className="px-6 py-4">
                       <span className={`text-sm font-medium ${isDark ? 'text-heading' : 'text-kartel-black-900'}`}>
-                        {order.orderNumber || `KRT-${order._id.slice(-6).toUpperCase()}`}
+                        {order.orderNumber || `CJ-${order._id.slice(-6).toUpperCase()}`}
                       </span>
                     </td>
                     <td className="px-6 py-4">

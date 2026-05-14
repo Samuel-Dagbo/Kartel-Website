@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       name,
       email,
       password: hashedPassword,
-      role: 'customer',
+      role: 'user',
     })
 
     sendWelcomeEmail(email, name).catch(err => console.error('Welcome email failed:', err))
