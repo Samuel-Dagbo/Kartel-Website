@@ -159,7 +159,7 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse }: Side
     <>
       {/* Desktop sidebar */}
       <aside
-        className={`hidden lg:block fixed top-0 left-0 h-full z-40 transition-all duration-300 ${
+        className={`hidden lg:block fixed top-[4.5rem] lg:top-24 left-0 h-[calc(100%-4.5rem)] lg:h-[calc(100%-6rem)] z-40 transition-all duration-300 ${
           isCollapsed ? 'w-20' : 'w-64'
         }`}
       >
@@ -187,7 +187,7 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse }: Side
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 250 }}
-              className="absolute top-0 left-0 h-full w-72 max-w-[80vw] shadow-2xl"
+              className="absolute top-[4.5rem] left-0 h-[calc(100%-4.5rem)] w-72 max-w-[80vw] shadow-2xl"
             >
               {sidebarContent}
             </motion.div>
