@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db'
 import User from '@/models/User'
-import bcrypt from 'bcryptjs'
 import { sendWelcomeEmail } from '@/lib/email'
 
 export async function POST(req: Request) {
@@ -11,6 +10,13 @@ export async function POST(req: Request) {
     if (!name || !email || !password) {
       return NextResponse.json(
         { error: 'Please provide all fields' },
+        { status: 400 }
+      )
+    }
+
+    if (password.length < 6) {
+      return NextResponse.json(
+        { error: 'Password must be at least 6 characters' },
         { status: 400 }
       )
     }
@@ -25,12 +31,10 @@ export async function POST(req: Request) {
       )
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12)
-
     const user = await User.create({
       name,
       email,
-      password: hashedPassword,
+      password,
       role: 'user',
     })
 
@@ -41,6 +45,7 @@ export async function POST(req: Request) {
       { status: 201 }
     )
   } catch (error) {
+    console.error('Registration error:', error)
     return NextResponse.json(
       { error: 'Something went wrong' },
       { status: 500 }

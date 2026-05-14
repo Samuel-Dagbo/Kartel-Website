@@ -78,10 +78,13 @@ export default function RegisterPage() {
       })
 
       if (signInResult?.error) {
-        setError('Registration successful but login failed')
+        setError('Registration successful but login failed. Please try logging in.')
+      } else {
+        router.push('/customer')
+        router.refresh()
       }
     } catch {
-      setError('Something went wrong')
+      setError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
     }

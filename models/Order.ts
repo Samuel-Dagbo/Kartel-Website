@@ -1,14 +1,14 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
 export interface IOrder extends Document {
-  user: mongoose.Schema.Types.ObjectId
+  user?: mongoose.Schema.Types.ObjectId
   items: {
     product: mongoose.Schema.Types.ObjectId
     quantity: number
     price: number
   }[]
   shippingAddress: {
-    email?: string
+    email: string
     name?: string
     street: string
     city: string
@@ -20,6 +20,7 @@ export interface IOrder extends Document {
   totalAmount: number
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
   paymentStatus: 'pending' | 'completed' | 'failed'
+  paymentMethod?: string
   stripePaymentId?: string
   trackingNumber?: string
   createdAt: Date
@@ -31,7 +32,7 @@ const OrderSchema = new Schema<IOrder>(
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
       index: true,
     },
     items: [
@@ -53,6 +54,8 @@ const OrderSchema = new Schema<IOrder>(
       },
     ],
     shippingAddress: {
+      email: { type: String, required: true },
+      name: { type: String },
       street: { type: String, required: true },
       city: { type: String, required: true },
       state: { type: String, required: true },
@@ -74,6 +77,11 @@ const OrderSchema = new Schema<IOrder>(
       enum: ['pending', 'completed', 'failed'],
       default: 'pending',
     },
+    paymentMethod: {
+      type: String,
+      enum: ['cod', 'card', 'transfer'],
+      default: 'cod',
+    },
     stripePaymentId: String,
     trackingNumber: String,
   },
@@ -84,5 +92,6 @@ const OrderSchema = new Schema<IOrder>(
 
 OrderSchema.index({ createdAt: -1 })
 OrderSchema.index({ status: 1 })
+OrderSchema.index({ 'shippingAddress.email': 1 })
 
 export default mongoose.models.Order || mongoose.model<IOrder>('Order', OrderSchema)

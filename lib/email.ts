@@ -229,7 +229,7 @@ export async function sendOrderStatusUpdateEmail(
 }
 
 export async function sendPasswordResetEmail(email: string, name: string, resetToken: string) {
-  const resetUrl = `https://carljonesperfumes.com/forgot-password?token=${resetToken}`
+  const resetUrl = `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`
 
   const html = getHtmlTemplate(`
     <div style="text-align: center;">

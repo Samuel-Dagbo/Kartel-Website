@@ -33,17 +33,17 @@ export default function CustomerOverview() {
     try {
       const [ordersRes, productsRes] = await Promise.all([
         fetch('/api/orders'),
-        fetch('/api/products?limit=4')
+        fetch('/api/products?featured=true&limit=4')
       ])
 
       if (ordersRes.ok) {
         const ordersData = await ordersRes.json()
-        setOrders(ordersData)
+        setOrders(Array.isArray(ordersData) ? ordersData : [])
       }
 
       if (productsRes.ok) {
         const productsData = await productsRes.json()
-        setRecommendations(productsData.products || productsData)
+        setRecommendations(Array.isArray(productsData) ? productsData : [])
       }
     } catch (error) {
       console.error('Failed to fetch data:', error)

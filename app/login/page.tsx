@@ -43,9 +43,13 @@ export default function LoginPage() {
 
       if (result?.error) {
         setError('Invalid email or password')
+      } else if (result?.ok) {
+        const callbackUrl = '/customer'
+        router.push(callbackUrl)
+        router.refresh()
       }
     } catch {
-      setError('Something went wrong')
+      setError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
     }

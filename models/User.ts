@@ -7,6 +7,8 @@ export interface IUser extends Document {
   name: string
   role: 'user' | 'admin'
   image?: string
+  resetToken?: string
+  resetTokenExpiry?: Date
   shippingAddress?: {
     street: string
     city: string
@@ -50,6 +52,14 @@ const UserSchema = new Schema<IUser>(
       type: String,
       default: null,
     },
+    resetToken: {
+      type: String,
+      default: null,
+    },
+    resetTokenExpiry: {
+      type: Date,
+      default: null,
+    },
     shippingAddress: {
       street: String,
       city: String,
@@ -72,7 +82,9 @@ const UserSchema = new Schema<IUser>(
 
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next()
-  this.password = await bcrypt.hash(this.password, 12)
+  if (this.password.length > 0 && !this.password.startsWith('$2')) {
+    this.password = await bcrypt.hash(this.password, 12)
+  }
   next()
 })
 

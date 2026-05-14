@@ -57,10 +57,10 @@ function ProductsContent() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch('/api/products')
+      const res = await fetch('/api/admin/products')
       if (res.ok) {
         const data = await res.json()
-        setProducts(data.products || data)
+        setProducts(Array.isArray(data) ? data : data.products || [])
       }
     } catch (error) {
       console.error('Failed to fetch products:', error)
