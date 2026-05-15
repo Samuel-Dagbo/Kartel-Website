@@ -1,6 +1,10 @@
 import { Client } from 'node-mailjet'
 
-const FROM_EMAIL = 'romeovilleproperties20@gmail.com'
+// CAUTION: Gmail's DMARC policy (p=reject) flags emails from third-party
+// services like Mailjet claiming to be from @gmail.com, hurting deliverability.
+// For reliable inbox delivery, set up a custom domain sender
+// (e.g., noreply@carljonesperfumes.com) with SPF/DKIM/DMARC in Mailjet.
+const FROM_EMAIL = 'carljonesperfumes@gmail.com'
 const FROM_NAME = 'Carl Jones Perfumes'
 
 function getMailjet() {
@@ -19,6 +23,7 @@ interface EmailOptions {
 async function sendEmail({ to, subject, html }: EmailOptions) {
   try {
     const mailjet = getMailjet()
+    const stripHtml = html.replace(/<[^>]*>/g, '')
     const result = await mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [
         {
@@ -33,7 +38,10 @@ async function sendEmail({ to, subject, html }: EmailOptions) {
             },
           ],
           Subject: subject,
+          TextPart: stripHtml.slice(0, 500),
           HTMLPart: html,
+          TrackOpens: 'enabled',
+          TrackClicks: 'enabled',
         },
       ],
     })
