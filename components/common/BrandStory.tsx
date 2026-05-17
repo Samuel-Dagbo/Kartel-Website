@@ -54,7 +54,7 @@ export function BrandStory() {
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] overflow-hidden border border-black/[0.04] dark:border-white/[0.04] shadow-luxury-xl">
+            <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] overflow-hidden border border-black/[0.08] dark:border-white/[0.08] shadow-luxury-xl">
               <Image
                 src="https://images.unsplash.com/photo-1705338670422-01133208eab9?w=600&auto=format&fit=crop&q=60"
                 alt="CARL JONES Brand Story"
@@ -63,8 +63,8 @@ export function BrandStory() {
                 className="object-cover"
               />
               {/* Gradient overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/20 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-kartel-black/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
 
               {/* Floating stats */}
               <motion.div

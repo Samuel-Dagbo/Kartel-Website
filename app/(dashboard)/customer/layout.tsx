@@ -21,7 +21,7 @@ export default function CustomerLayout({ children }: { children: React.ReactNode
 
   if (status === 'loading' || !session) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-kartel-cream'}`}>
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-white'}`}>
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
           <span className={`text-sm ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Loading...</span>
@@ -45,7 +45,7 @@ export default function CustomerLayout({ children }: { children: React.ReactNode
     >
       <div
         className={`min-h-screen pt-28 lg:pt-32 pb-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
-          isDark ? 'bg-kartel-black' : 'bg-kartel-cream'
+          isDark ? 'bg-kartel-black' : 'bg-white'
         }`}
       >
         <div className="max-w-7xl mx-auto">

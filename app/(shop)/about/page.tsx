@@ -52,9 +52,9 @@ const timeline = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+    <div className="min-h-screen transition-colors duration-300 bg-white dark:bg-kartel-black">
       {/* Hero Section */}
-      <section className="section-padding transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+      <section className="section-padding transition-colors duration-300 bg-white dark:bg-kartel-black">
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div
@@ -96,7 +96,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="section-padding transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+      <section className="section-padding transition-colors duration-300 bg-white dark:bg-kartel-black">
         <div className="container-luxury">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -131,7 +131,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="section-padding transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+      <section className="section-padding transition-colors duration-300 bg-kartel-white-50 dark:bg-kartel-black-950">
         <div className="container-luxury">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -170,7 +170,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section className="section-padding transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+      <section className="section-padding transition-colors duration-300 bg-kartel-white-50 dark:bg-kartel-black-950">
         <div className="container-luxury">
           <motion.div
             initial={{ opacity: 0, y: 40 }}

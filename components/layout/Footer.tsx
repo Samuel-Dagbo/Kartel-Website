@@ -45,8 +45,8 @@ export function Footer() {
     <footer
       className={`relative border-t overflow-hidden transition-colors duration-300 ${
         isDark
-          ? 'bg-[#161616] border-white/[0.03]'
-          : 'bg-[#faf7f2] border-black/[0.06]'
+          ? 'bg-kartel-black-900 border-white/[0.06]'
+          : 'bg-white border-black/[0.06]'
       }`}
     >
       {/* Main glow line */}
@@ -60,7 +60,7 @@ export function Footer() {
       <div className="container-luxury pt-20 lg:pt-28 pb-10 relative">
         {/* Top Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-10 pb-16 border-b transition-colors duration-300"
-          style={{ borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)' }}
+          style={{ borderColor: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)' }}
         >
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-7">
@@ -71,7 +71,7 @@ export function Footer() {
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-kartel-gold to-transparent group-hover:w-full transition-all duration-500 ease-luxury" />
             </Link>
             <p className={`text-sm leading-[1.85] max-w-sm transition-colors duration-300 ${
-              isDark ? 'text-white/70' : 'text-kartel-black-700'
+              isDark ? 'text-white/70' : 'text-black/70'
             }`}>
               Curating the world&apos;s finest collection of luxury perfumes. Each
               fragrance tells a story of artistry, passion, and timeless elegance.
@@ -83,8 +83,8 @@ export function Footer() {
                   href={href}
                   className={`group p-3 rounded-full border transition-all duration-300 ${
                     isDark
-                      ? 'border-white/[0.05] text-white/50 hover:text-kartel-gold hover:border-kartel-gold/25'
-                      : 'border-black/[0.06] text-kartel-black-500 hover:text-kartel-gold hover:border-kartel-gold/25'
+                      ? 'border-white/[0.08] text-white/60 hover:text-kartel-gold hover:border-kartel-gold/30'
+                      : 'border-black/[0.08] text-black/60 hover:text-kartel-gold hover:border-kartel-gold/30'
                   }`}
                   aria-label={label}
                 >
@@ -114,8 +114,8 @@ export function Footer() {
                         href={item.href}
                         className={`group inline-flex items-center gap-1.5 text-sm transition-colors duration-300 ${
                           isDark
-                            ? 'text-white/50 hover:text-kartel-gold'
-                            : 'text-kartel-black-500 hover:text-kartel-gold'
+                            ? 'text-white/60 hover:text-kartel-gold'
+                            : 'text-black/60 hover:text-kartel-gold'
                         }`}
                       >
                         {item.label}
@@ -142,8 +142,8 @@ export function Footer() {
                         href={item.href}
                         className={`group inline-flex items-center gap-1.5 text-sm transition-colors duration-300 ${
                           isDark
-                            ? 'text-white/50 hover:text-kartel-gold'
-                            : 'text-kartel-black-500 hover:text-kartel-gold'
+                            ? 'text-white/60 hover:text-kartel-gold'
+                            : 'text-black/60 hover:text-kartel-gold'
                         }`}
                       >
                         {item.label}
@@ -170,8 +170,8 @@ export function Footer() {
                         href={item.href}
                         className={`group inline-flex items-center gap-1.5 text-sm transition-colors duration-300 ${
                           isDark
-                            ? 'text-white/50 hover:text-kartel-gold'
-                            : 'text-kartel-black-500 hover:text-kartel-gold'
+                            ? 'text-white/60 hover:text-kartel-gold'
+                            : 'text-black/60 hover:text-kartel-gold'
                         }`}
                       >
                         {item.label}
@@ -190,7 +190,7 @@ export function Footer() {
         {/* Contact & Newsletter */}
         <div
           className="py-12 border-b transition-colors duration-300"
-          style={{ borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)' }}
+          style={{ borderColor: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)' }}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-5">
@@ -204,8 +204,8 @@ export function Footer() {
                   href="mailto:contact@carljones.com"
                   className={`flex items-center gap-2.5 text-sm transition-colors ${
                     isDark
-                      ? 'text-white/50 hover:text-kartel-gold'
-                      : 'text-kartel-black-500 hover:text-kartel-gold'
+                      ? 'text-white/60 hover:text-kartel-gold'
+                      : 'text-black/60 hover:text-kartel-gold'
                   }`}
                 >
                   <Mail
@@ -218,8 +218,8 @@ export function Footer() {
                   href="tel:+15551234567"
                   className={`flex items-center gap-2.5 text-sm transition-colors ${
                     isDark
-                      ? 'text-white/50 hover:text-kartel-gold'
-                      : 'text-kartel-black-500 hover:text-kartel-gold'
+                      ? 'text-white/60 hover:text-kartel-gold'
+                      : 'text-black/60 hover:text-kartel-gold'
                   }`}
                 >
                   <Phone
@@ -247,12 +247,12 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className={`text-xs tracking-wide transition-colors ${
-            isDark ? 'text-white/20' : 'text-kartel-black-400'
+            isDark ? 'text-white/30' : 'text-black/40'
           }`}>
             &copy; {new Date().getFullYear()} CARL JONES. All rights reserved.
           </p>
           <p className={`text-xs tracking-wide transition-colors ${
-            isDark ? 'text-white/20' : 'text-kartel-black-400'
+            isDark ? 'text-white/30' : 'text-black/40'
           }`}>
             Built by{' '}
             <a
@@ -261,8 +261,8 @@ export function Footer() {
               rel="noopener noreferrer"
               className={`transition-colors ${
                 isDark
-                  ? 'text-white/40 hover:text-kartel-gold'
-                  : 'text-kartel-black-500 hover:text-kartel-gold'
+                  ? 'text-white/50 hover:text-kartel-gold'
+                  : 'text-black/60 hover:text-kartel-gold'
               }`}
             >
               Samtech Labs

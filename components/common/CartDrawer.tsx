@@ -35,20 +35,20 @@ export function CartDrawer() {
             transition={{ type: 'spring', damping: 28, stiffness: 280 }}
             className="fixed right-0 top-0 bottom-0 z-[70] w-full max-w-md border-l shadow-2xl flex flex-col backdrop-blur-2xl"
             style={{
-              borderColor: isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.04)',
-              backgroundColor: isDark ? 'rgba(14, 14, 14, 0.95)' : 'rgba(250, 247, 242, 0.95)',
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+              backgroundColor: isDark ? 'rgba(10, 10, 10, 0.98)' : 'rgba(255, 255, 255, 0.98)',
             }}
           >
             {/* Header */}
             <div
               className="px-6 py-5 border-b flex items-center justify-between flex-shrink-0"
-              style={{ borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)' }}
+                style={{ borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' }}
             >
               <div className="flex items-center gap-3">
                 <ShoppingBag className="w-5 h-5 text-kartel-gold" strokeWidth={1.5} />
                 <h2 className={`font-serif text-xl font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Your Bag</h2>
                 {items.length > 0 && (
-                  <span className={`text-xs ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>
+                  <span className={`text-xs ${isDark ? 'text-white/50' : 'text-black/50'}`}>
                     {items.length} {items.length === 1 ? 'item' : 'items'}
                   </span>
                 )}
@@ -57,8 +57,8 @@ export function CartDrawer() {
                 onClick={() => setCartOpen(false)}
                 className={`p-2 rounded-full transition-all duration-300 ${
                   isDark
-                    ? 'text-white/40 hover:text-white hover:bg-white/[0.04]'
-                    : 'text-kartel-black-400 hover:text-kartel-black-900 hover:bg-black/[0.04]'
+                    ? 'text-white/50 hover:text-white hover:bg-white/[0.06]'
+                    : 'text-black/50 hover:text-black-900 hover:bg-black/[0.04]'
                 }`}
                 aria-label="Close cart"
               >
@@ -71,13 +71,13 @@ export function CartDrawer() {
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
                   <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                    isDark ? 'bg-white/[0.04] border border-white/[0.06]' : 'bg-black/[0.04] border border-black/[0.06]'
+                    isDark ? 'bg-white/[0.05] border border-white/[0.08]' : 'bg-black/[0.03] border border-black/[0.08]'
                   }`}>
-                    <ShoppingBag className={`w-7 h-7 ${isDark ? 'text-white/30' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+                    <ShoppingBag className={`w-7 h-7 ${isDark ? 'text-white/40' : 'text-black/40'}`} strokeWidth={1.5} />
                   </div>
                   <div className="space-y-2">
-                    <p className={`text-base font-medium ${isDark ? 'text-white/80' : 'text-kartel-black-700'}`}>Your bag is empty</p>
-                    <p className={`text-sm ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>
+                    <p className={`text-base font-medium ${isDark ? 'text-white/80' : 'text-black/70'}`}>Your bag is empty</p>
+                    <p className={`text-sm ${isDark ? 'text-white/50' : 'text-black/50'}`}>
                       Discover your next signature scent.
                     </p>
                   </div>
@@ -106,12 +106,12 @@ export function CartDrawer() {
                         }}
                         className={`flex gap-4 p-3 rounded-xl border transition-colors ${
                           isDark
-                            ? 'bg-white/[0.03] border-white/[0.06] hover:border-kartel-gold/[0.08]'
-                            : 'bg-black/[0.03] border-black/[0.06] hover:border-kartel-gold/20'
+                            ? 'bg-white/[0.04] border-white/[0.08] hover:border-kartel-gold/[0.15]'
+                            : 'bg-black/[0.02] border-black/[0.08] hover:border-kartel-gold/20'
                         }`}
                       >
                         <div className={`relative w-20 h-20 rounded-lg overflow-hidden shrink-0 border ${
-                          isDark ? 'border-white/[0.05]' : 'border-black/[0.05]'
+                          isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
                         }`}>
                           <Image
                             src={item.product.images[0]}
@@ -126,7 +126,7 @@ export function CartDrawer() {
                               <h3 className={`font-serif text-sm font-semibold truncate ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>
                                 {item.product.name}
                               </h3>
-                              <p className={`text-xs mt-0.5 ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>
+                              <p className={`text-xs mt-0.5 ${isDark ? 'text-white/50' : 'text-black/50'}`}>
                                 {item.product.brand}
                               </p>
                             </div>
@@ -134,8 +134,8 @@ export function CartDrawer() {
                               onClick={() => removeItem(item.product._id)}
                               className={`p-1.5 rounded-full transition-all shrink-0 ${
                                 isDark
-                                  ? 'text-white/30 hover:text-red-500 hover:bg-red-500/10'
-                                  : 'text-kartel-black-400 hover:text-red-500 hover:bg-red-50'
+                                  ? 'text-white/40 hover:text-red-500 hover:bg-red-500/10'
+                                  : 'text-black/40 hover:text-red-500 hover:bg-red-50'
                               }`}
                               aria-label="Remove item"
                             >
@@ -145,15 +145,15 @@ export function CartDrawer() {
                           <div className="flex items-center justify-between mt-2">
                             <div className={`flex items-center gap-2 rounded-full px-2.5 py-1 border ${
                               isDark
-                                ? 'bg-white/[0.03] border-white/[0.06]'
-                                : 'bg-black/[0.03] border-black/[0.06]'
+                                ? 'bg-white/[0.04] border-white/[0.08]'
+                                : 'bg-black/[0.02] border-black/[0.08]'
                             }`}>
                               <button
                                 onClick={() =>
                                   updateQuantity(item.product._id, item.quantity - 1)
                                 }
                                 className={`p-1 transition-colors ${
-                                  isDark ? 'text-white/40 hover:text-kartel-gold' : 'text-kartel-black-400 hover:text-kartel-gold'
+                                  isDark ? 'text-white/50 hover:text-kartel-gold' : 'text-black/50 hover:text-kartel-gold'
                                 }`}
                                 aria-label="Decrease quantity"
                               >
@@ -167,7 +167,7 @@ export function CartDrawer() {
                                   updateQuantity(item.product._id, item.quantity + 1)
                                 }
                                 className={`p-1 transition-colors ${
-                                  isDark ? 'text-white/40 hover:text-kartel-gold' : 'text-kartel-black-400 hover:text-kartel-gold'
+                                  isDark ? 'text-white/50 hover:text-kartel-gold' : 'text-black/50 hover:text-kartel-gold'
                                 }`}
                                 aria-label="Increase quantity"
                               >
@@ -190,11 +190,11 @@ export function CartDrawer() {
             {items.length > 0 && (
               <div
                 className="px-6 py-6 border-t space-y-4 flex-shrink-0"
-                style={{ borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)' }}
+              style={{ borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' }}
               >
                 <div className="space-y-3">
                   <div className="flex justify-between items-center text-sm">
-                    <span className={isDark ? 'text-white/40' : 'text-kartel-black-400'}>Subtotal</span>
+                    <span className={isDark ? 'text-white/50' : 'text-black/50'}>Subtotal</span>
                     <span className={`font-medium ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>
                       {formatPrice(totalPrice)}
                     </span>
@@ -206,7 +206,7 @@ export function CartDrawer() {
                     </span>
                   </div>
                 </div>
-                <p className={`text-xs text-center ${isDark ? 'text-white/25' : 'text-kartel-black-400'}`}>
+                <p className={`text-xs text-center ${isDark ? 'text-white/35' : 'text-black/40'}`}>
                   Shipping and taxes calculated at checkout.
                 </p>
                 <Link
@@ -220,7 +220,7 @@ export function CartDrawer() {
                 <button
                   onClick={() => setCartOpen(false)}
                   className={`w-full py-3 text-sm text-center transition-colors ${
-                    isDark ? 'text-white/40 hover:text-white' : 'text-kartel-black-400 hover:text-kartel-black-700'
+                    isDark ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black-900'
                   }`}
                 >
                   Continue Shopping

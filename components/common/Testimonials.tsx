@@ -94,7 +94,7 @@ export function Testimonials() {
                       className={`w-3.5 h-3.5 ${
                         i < testimonial.rating
                           ? 'text-kartel-gold fill-kartel-gold'
-                          : 'dark:text-white/8 text-black/10'
+                          : 'text-black/10'
                       }`}
                     />
                   ))}
@@ -106,7 +106,7 @@ export function Testimonials() {
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-4 pt-6 border-t border-black/[0.03] dark:border-white/[0.03]">
+                <div className="flex items-center gap-4 pt-6 border-t border-black/[0.06] dark:border-white/[0.06]">
                   <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-kartel-gold/[0.1] group-hover:ring-kartel-gold/[0.25] transition-all duration-500">
                     <Image
                       src={testimonial.avatar}

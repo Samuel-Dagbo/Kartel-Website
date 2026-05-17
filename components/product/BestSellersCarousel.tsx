@@ -67,7 +67,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
 
   return (
     <section className={`section-padding relative overflow-hidden transition-colors duration-300 ${
-        isDark ? 'bg-secondary' : 'bg-kartel-cream'
+        isDark ? 'bg-secondary' : 'bg-kartel-white-50'
       }`}>
       {/* Ambient glow effects */}
       <div className="absolute top-1/2 left-[-10%] w-[500px] h-[500px] bg-kartel-gold/[0.02] rounded-full blur-[150px] pointer-events-none" />
@@ -165,17 +165,17 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 <div className="flex flex-wrap gap-3 sm:gap-4 pt-1 sm:pt-2">
                   <Link
                     href={`/product/${product.slug || product._id}`}
-                    className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black text-xs sm:text-sm font-semibold px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full overflow-hidden shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-500"
+                    className="group relative inline-flex items-center gap-2 bg-kartel-black text-white text-xs sm:text-sm font-semibold px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500"
                   >
                     <span className="relative z-10">View Details</span>
-                    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-kartel-black-900 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
                   </Link>
                   <button
                     onClick={handleAddToCart}
                     className={`group inline-flex items-center gap-2 border text-xs sm:text-sm font-medium px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full transition-all duration-300 ${
                       isDark
-                        ? 'bg-white/[0.04] hover:bg-kartel-gold/[0.08] border-white/[0.06] hover:border-kartel-gold/25 text-white/80 hover:text-kartel-gold'
-                        : 'bg-black/[0.03] hover:bg-kartel-gold/[0.08] border-black/[0.08] hover:border-kartel-gold/25 text-kartel-black-500 hover:text-kartel-gold'
+                        ? 'bg-white/[0.05] hover:bg-kartel-gold/[0.08] border-white/[0.08] hover:border-kartel-gold/25 text-white/80 hover:text-kartel-gold'
+                        : 'bg-black/[0.02] hover:bg-kartel-gold/[0.08] border-black/[0.08] hover:border-kartel-gold/25 text-black/70 hover:text-kartel-gold'
                     }`}
                   >
                     <ShoppingBag className="w-4 h-4 transition-transform group-hover:scale-110" strokeWidth={2} />
@@ -191,8 +191,8 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 onClick={handlePrev}
                 className={`group p-3.5 rounded-full border transition-all duration-300 ${
                   isDark
-                    ? 'bg-white/[0.03] border-white/[0.05] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/30 hover:text-kartel-gold'
-                    : 'bg-black/[0.03] border-black/[0.06] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-kartel-black-400 hover:text-kartel-gold'
+                    ? 'bg-white/[0.04] border-white/[0.08] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/40 hover:text-kartel-gold'
+                    : 'bg-black/[0.02] border-black/[0.08] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-black/40 hover:text-kartel-gold'
                 }`}
                 aria-label="Previous"
               >
@@ -202,8 +202,8 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 onClick={handleNext}
                 className={`group p-3.5 rounded-full border transition-all duration-300 ${
                   isDark
-                    ? 'bg-white/[0.03] border-white/[0.05] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/30 hover:text-kartel-gold'
-                    : 'bg-black/[0.03] border-black/[0.06] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-kartel-black-400 hover:text-kartel-gold'
+                    ? 'bg-white/[0.04] border-white/[0.08] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-white/40 hover:text-kartel-gold'
+                    : 'bg-black/[0.02] border-black/[0.08] hover:bg-kartel-gold/[0.08] hover:border-kartel-gold/25 text-black/40 hover:text-kartel-gold'
                 }`}
                 aria-label="Next"
               >
@@ -247,8 +247,8 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 <div className="relative z-10 w-full h-full p-5 sm:p-8">
                   <div className={`relative w-full h-full rounded-[2.5rem] overflow-hidden border shadow-luxury-xl ${
                     isDark
-                      ? 'border-white/[0.05] bg-gradient-to-b from-white/[0.03] to-transparent'
-                      : 'border-black/[0.06] bg-gradient-to-b from-black/[0.02] to-transparent'
+                      ? 'border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-transparent'
+                      : 'border-black/[0.08] bg-gradient-to-b from-black/[0.02] to-transparent'
                   }`}>
                     <Image
                       src={
@@ -268,8 +268,8 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                     </div>
                     <div className={`absolute top-6 right-6 px-4 py-2 rounded-full backdrop-blur-md border ${
                       isDark
-                        ? 'bg-kartel-black/40 border-white/[0.04]'
-                        : 'bg-white/60 border-black/[0.06]'
+                        ? 'bg-kartel-black/60 border-white/[0.08]'
+                        : 'bg-white/80 border-black/[0.08]'
                     }`}>
                       <span className="text-[10px] font-semibold tracking-wider uppercase text-kartel-gold/60">Bestseller</span>
                     </div>

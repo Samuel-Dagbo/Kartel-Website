@@ -4,12 +4,16 @@ import { Product as ProductType } from '@/types'
 import { ProductCard } from '@/components/product/ProductCard'
 import { motion } from 'framer-motion'
 import { PackageX } from 'lucide-react'
+import { useTheme } from '@/components/providers/ThemeProvider'
 
 interface ProductGridProps {
   products: ProductType[]
 }
 
 export function ProductGrid({ products }: ProductGridProps) {
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+
   if (!products || products.length === 0) {
     return (
       <motion.div
@@ -21,13 +25,15 @@ export function ProductGrid({ products }: ProductGridProps) {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-kartel-gold/[0.02] blur-[150px] rounded-full pointer-events-none" />
 
         <div className="relative z-10">
-          <div className="w-20 h-20 rounded-full bg-white/[0.03] border border-white/[0.05] flex items-center justify-center mb-8">
-            <PackageX className="w-8 h-8 text-white/20" strokeWidth={1.5} />
+          <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-8 ${
+            isDark ? 'bg-white/[0.04] border border-white/[0.08]' : 'bg-black/[0.03] border border-black/[0.08]'
+          }`}>
+            <PackageX className={`w-8 h-8 ${isDark ? 'text-white/30' : 'text-black/30'}`} strokeWidth={1.5} />
           </div>
-          <h3 className="font-serif text-2xl font-semibold text-white/70 mb-3">
+          <h3 className={`font-serif text-2xl font-semibold mb-3 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
             No products found
           </h3>
-          <p className="text-base text-white/35 max-w-sm leading-relaxed">
+          <p className={`text-base max-w-sm leading-relaxed ${isDark ? 'text-white/40' : 'text-black/40'}`}>
             Try adjusting your filters or search terms to find what you&apos;re
             looking for.
           </p>

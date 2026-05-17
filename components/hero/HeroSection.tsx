@@ -22,9 +22,9 @@ export function HeroSection() {
       ref={sectionRef}
       className="relative min-h-[85dvh] lg:min-h-[90dvh] flex items-center overflow-hidden hero-gradient"
     >
-      {/* Ambient glow - reduced to one instead of three */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/8 via-yellow-500/3 to-transparent rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-amber-600/5 via-amber-500/2 to-transparent rounded-full blur-[100px] pointer-events-none" />
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-kartel-gold/6 via-kartel-gold/2 to-transparent rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-kartel-gold/4 via-kartel-gold/1 to-transparent rounded-full blur-[100px] pointer-events-none" />
 
       {/* Main container */}
       <div className="container-luxury w-full relative z-10 pt-16 lg:pt-0">
@@ -40,10 +40,10 @@ export function HeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-600/5 border border-amber-500/20 backdrop-blur-sm w-fit"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-kartel-gold/8 border border-kartel-gold/20 backdrop-blur-sm w-fit"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" strokeWidth={1.5} />
-              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-amber-400">
+              <Sparkles className="w-3.5 h-3.5 text-kartel-gold" strokeWidth={1.5} />
+              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-kartel-gold">
                 Haute Parfumerie
               </span>
             </motion.div>
@@ -57,7 +57,7 @@ export function HeroSection() {
             >
               <h1 className="font-serif text-[clamp(1.75rem,5vw,3.5rem)] font-bold text-heading leading-[1.1] tracking-[-0.02em]">
                 Define Your{' '}
-                <span className="italic font-light bg-gradient-to-r from-kartel-gold via-kartel-gold-light to-kartel-champagne bg-clip-text text-transparent">
+                <span className="italic font-light bg-gradient-to-r from-kartel-gold via-kartel-gold-light to-kartel-gold-dark bg-clip-text text-transparent">
                   Invisible
                 </span>
               </h1>
@@ -86,18 +86,18 @@ export function HeroSection() {
             >
               <Link
                 href="/shop"
-                className="group relative inline-flex items-center gap-2.5 text-sm px-6 py-3.5 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-300 text-black font-semibold rounded-full shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-all duration-500 overflow-hidden"
+                className="group relative inline-flex items-center gap-2.5 text-sm px-6 py-3.5 bg-kartel-black text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden"
               >
                 <span className="relative z-10">Shop Collection</span>
                 <ArrowRight
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5 relative z-10"
                   strokeWidth={2.5}
                 />
-                <div className="absolute inset-0 bg-white/30 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-kartel-black-900 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700" />
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center text-sm px-6 py-3.5 border border-amber-500/20 text-amber-300/80 rounded-full hover:bg-amber-500/10 hover:border-amber-500/40 transition-all duration-300"
+                className="inline-flex items-center text-sm px-6 py-3.5 border border-kartel-gold/30 text-kartel-gold rounded-full hover:bg-kartel-gold/10 hover:border-kartel-gold/50 transition-all duration-300"
               >
                 Our Heritage
               </Link>
@@ -110,7 +110,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
               className="hidden md:flex items-center gap-6 pt-3"
             >
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-black/[0.08] to-transparent" />
               <div className="flex gap-10 lg:gap-12">
                 {[
                   { value: '200+', label: 'Scents' },
@@ -123,7 +123,7 @@ export function HeroSection() {
                   </div>
                 ))}
               </div>
-              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.08] to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-black/[0.08] to-transparent" />
             </motion.div>
           </motion.div>
 
@@ -136,7 +136,7 @@ export function HeroSection() {
             className="relative flex justify-center lg:justify-end items-center order-2 mt-8 lg:mt-0"
           >
             {/* Ambient glow behind image */}
-            <div className="absolute inset-0 -m-20 lg:-m-32 bg-gradient-to-br from-amber-500/15 via-yellow-400/10 to-amber-600/15 blur-[100px] rounded-full" />
+            <div className="absolute inset-0 -m-20 lg:-m-32 bg-gradient-to-br from-kartel-gold/10 via-kartel-gold/6 to-kartel-gold/10 blur-[100px] rounded-full" />
 
             {/* Main perfume bottle container */}
             <div className="relative z-10">
@@ -156,13 +156,13 @@ export function HeroSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
                   {/* Badge */}
-                  <div className="absolute top-5 left-5 px-3.5 py-2 rounded-xl bg-black/50 backdrop-blur-md border border-white/[0.15]">
-                    <p className="text-[10px] uppercase tracking-[0.15em] text-amber-300 font-semibold">Signature</p>
+                  <div className="absolute top-5 left-5 px-3.5 py-2 rounded-xl bg-black/60 backdrop-blur-md border border-kartel-gold/20">
+                    <p className="text-[10px] uppercase tracking-[0.15em] text-kartel-gold font-semibold">Signature</p>
                     <p className="font-serif text-white text-xs mt-0.5">Collection</p>
                   </div>
 
                   {/* Rating */}
-                  <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30">
+                  <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-kartel-gold/30">
                     <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" strokeWidth={0} />
                     <span className="text-sm font-bold text-white">4.9</span>
                   </div>

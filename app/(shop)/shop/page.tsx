@@ -92,7 +92,7 @@ export default function ShopPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-8 pb-6 border-b border-black/[0.08] dark:border-white/[0.04]"
+          className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-8 pb-6 border-b border-black/[0.08] dark:border-white/[0.08]"
         >
           <div className="flex items-center gap-4 w-full sm:w-auto">
             {/* Mobile Filter Toggle */}
@@ -122,7 +122,7 @@ export default function ShopPage() {
 
           <div className="flex items-center gap-4">
             {/* View mode toggle */}
-            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-black/[0.03] border border-black/[0.06] dark:bg-white/[0.03] dark:border-white/[0.04]">
+            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-black/[0.03] border border-black/[0.08] dark:bg-white/[0.04] dark:border-white/[0.08]">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 rounded-full transition-all duration-300 ${
@@ -153,7 +153,7 @@ export default function ShopPage() {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="input-luxury rounded-full px-4 py-2.5 text-sm cursor-pointer appearance-none pr-8"
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 0.75rem center',
                 }}
@@ -206,7 +206,7 @@ export default function ShopPage() {
               )}
               <button
                 onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs text-black/40 hover:text-kartel-gold dark:text-white/40 transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs text-black/50 hover:text-kartel-gold dark:text-white/50 transition-colors"
               >
                 Clear all
               </button>
@@ -225,7 +225,7 @@ export default function ShopPage() {
             }`}
           >
             <div className="lg:sticky lg:top-32">
-              <div className="bg-gradient-to-b from-black/[0.03] to-transparent dark:from-kartel-black-900/50 rounded-2xl p-6 lg:p-7 border border-black/[0.06] dark:border-white/[0.04]">
+              <div className="bg-gradient-to-b from-black/[0.02] to-transparent dark:from-kartel-black-900/50 rounded-2xl p-6 lg:p-7 border border-black/[0.08] dark:border-white/[0.08]">
                 <ProductFilters
                   categories={categories}
                   brands={brands}

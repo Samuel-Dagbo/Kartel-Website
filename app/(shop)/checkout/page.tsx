@@ -171,11 +171,11 @@ export default function CheckoutPage() {
             <div key={s} className="flex items-center gap-2">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
                 step === s ? 'bg-kartel-gold text-kartel-black' : 
-                step > s ? 'bg-green-500 text-white' : 'bg-white/[0.1] text-muted'
+                step > s ? 'bg-green-500 text-white' : 'bg-black/[0.06] dark:bg-white/[0.06] text-muted'
               }`}>
                 {step > s ? <CheckCircle2 className="w-5 h-5" /> : s}
               </div>
-              {s < 3 && <div className={`h-px w-12 ${step > s ? 'bg-green-500' : 'bg-white/[0.1]'}`} />}
+              {s < 3 && <div className={`h-px w-12 ${step > s ? 'bg-green-500' : 'bg-black/[0.08] dark:bg-white/[0.08]'}`} />}
             </div>
           ))}
         </div>
@@ -310,7 +310,7 @@ function OrderSummary({ totalPrice, items }: { totalPrice: number; items: any[] 
       <div className="space-y-4 mb-6 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
         {items.map((item) => (
           <div key={item.product._id} className="flex gap-4 items-center">
-            <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-black/[0.05] dark:border-white/[0.05]">
+            <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-black/[0.08] dark:border-white/[0.08]">
               <Image src={item.product.images[0]} alt={item.product.name} fill className="object-cover" />
             </div>
             <div className="flex-1">
@@ -321,7 +321,7 @@ function OrderSummary({ totalPrice, items }: { totalPrice: number; items: any[] 
           </div>
         ))}
       </div>
-      <div className="space-y-3 pt-6 border-t border-black/[0.04] dark:border-white/[0.04]">
+      <div className="space-y-3 pt-6 border-t border-black/[0.08] dark:border-white/[0.08]">
         <div className="flex justify-between text-sm text-muted">
           <span>Subtotal</span>
           <span>{formatPrice(totalPrice)}</span>

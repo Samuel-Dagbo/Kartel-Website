@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     >
       <div
         className={`min-h-screen pt-28 lg:pt-32 pb-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
-          isDark ? 'bg-kartel-black' : 'bg-kartel-cream'
+          isDark ? 'bg-kartel-black' : 'bg-white'
         }`}
       >
         <div className="max-w-7xl mx-auto">

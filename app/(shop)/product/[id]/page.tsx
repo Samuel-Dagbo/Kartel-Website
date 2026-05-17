@@ -55,7 +55,7 @@ function ProductContent({ id }: { id: string }) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen pt-32 flex items-center justify-center bg-kartel-cream dark:bg-kartel-black transition-colors duration-300">
+      <div className="min-h-screen pt-32 flex items-center justify-center bg-white dark:bg-kartel-black transition-colors duration-300">
         <div className="flex flex-col items-center gap-4">
           <div className="w-8 h-8 border-2 border-kartel-gold/20 border-t-kartel-gold rounded-full animate-spin" />
           <span className="text-muted text-sm">Loading Essence</span>
@@ -66,11 +66,11 @@ function ProductContent({ id }: { id: string }) {
 
   if (!product) {
     return (
-      <div className="min-h-screen pt-32 flex flex-col items-center justify-center text-center px-4 bg-kartel-cream dark:bg-kartel-black transition-colors duration-300">
+      <div className="min-h-screen pt-32 flex flex-col items-center justify-center text-center px-4 bg-white dark:bg-kartel-black transition-colors duration-300">
         <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 ${
-          isDark ? 'bg-white/[0.03] border border-white/[0.05]' : 'bg-black/[0.03] border border-black/[0.06]'
+          isDark ? 'bg-white/[0.05] border border-white/[0.08]' : 'bg-black/[0.03] border border-black/[0.08]'
         }`}>
-          <Sparkles className={`w-7 h-7 ${isDark ? 'text-white/15' : 'text-black/15'}`} strokeWidth={1.5} />
+          <Sparkles className={`w-7 h-7 ${isDark ? 'text-white/25' : 'text-black/25'}`} strokeWidth={1.5} />
         </div>
         <h1 className="font-serif text-2xl font-bold text-heading mb-4">Fragrance Not Found</h1>
         <p className="text-muted mb-8 max-w-sm">
@@ -84,7 +84,7 @@ function ProductContent({ id }: { id: string }) {
   }
 
   return (
-    <div className="min-h-screen pt-28 lg:pt-32 pb-20 lg:pb-28 bg-kartel-cream dark:bg-kartel-black transition-colors duration-300">
+    <div className="min-h-screen pt-28 lg:pt-32 pb-20 lg:pb-28 bg-white dark:bg-kartel-black transition-colors duration-300">
       <div className="container-luxury">
         <nav className="flex items-center gap-2 text-sm text-muted mb-10 lg:mb-14">
           <Link href="/" className="hover:text-kartel-gold transition-colors">Home</Link>
@@ -103,7 +103,7 @@ function ProductContent({ id }: { id: string }) {
           >
             <div className="relative aspect-square rounded-3xl overflow-hidden glass-card shadow-luxury p-3">
               <div className={`relative w-full h-full rounded-2xl overflow-hidden ${
-                isDark ? 'bg-kartel-black-900' : 'bg-kartel-cream-dark'
+                isDark ? 'bg-kartel-black-900' : 'bg-kartel-white-50'
               }`}>
                 <Image
                   src={product.images[activeImage] || '/placeholder.jpg'}
@@ -191,7 +191,7 @@ function ProductContent({ id }: { id: string }) {
                 {product.description}
               </p>
 
-              <div className="grid grid-cols-3 gap-4 py-6 border-y border-black/[0.06] dark:border-white/[0.04]">
+              <div className="grid grid-cols-3 gap-4 py-6 border-y border-black/[0.08] dark:border-white/[0.08]">
                 {[
                   { label: 'Top Notes', notes: product.notes?.top || [] },
                   { label: 'Heart Notes', notes: product.notes?.middle || [] },
@@ -250,7 +250,7 @@ function ProductContent({ id }: { id: string }) {
 export default function ProductDetailsPage({ params }: { params: { id: string } }) {
   return (
     <Suspense fallback={
-      <div className="min-h-screen pt-32 flex items-center justify-center bg-kartel-cream dark:bg-kartel-black transition-colors duration-300">
+      <div className="min-h-screen pt-32 flex items-center justify-center bg-white dark:bg-kartel-black transition-colors duration-300">
         <div className="flex flex-col items-center gap-4">
           <div className="w-8 h-8 border-2 border-kartel-gold/20 border-t-kartel-gold rounded-full animate-spin" />
           <span className="text-muted text-sm">Loading...</span>

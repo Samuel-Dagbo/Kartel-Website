@@ -35,7 +35,7 @@ export function NewsletterSignup() {
   }
 
   return (
-    <section className="section-padding transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black relative overflow-hidden">
+    <section className="section-padding transition-colors duration-300 bg-white dark:bg-kartel-black relative overflow-hidden">
       {/* Dramatic ambient glow */}
       <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[900px] h-[350px] bg-kartel-gold/[0.015] blur-[200px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-10%] w-[400px] h-[300px] bg-kartel-gold/[0.01] blur-[180px] rounded-full pointer-events-none" />
@@ -129,7 +129,7 @@ export function NewsletterSignup() {
                 </div>
                 <motion.button
                   type="submit"
-                  className="group relative inline-flex items-center justify-center gap-2 shadow-gold-glow hover:shadow-gold-glow-lg"
+                  className="group relative inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -163,8 +163,8 @@ export function NewsletterSignup() {
                     transition={{ duration: 0.4 }}
                     className={`mt-6 inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-full ${
                       message.type === 'success'
-                        ? 'bg-green-500/8 text-green-400 border border-green-500/15'
-                        : 'bg-red-500/8 text-red-400 border border-red-500/15'
+                        ? 'bg-green-500/10 text-green-600 border border-green-500/20'
+                        : 'bg-red-500/10 text-red-600 border border-red-500/20'
                     }`}
                   >
                     {message.type === 'success' ? (

@@ -98,10 +98,10 @@ export function FeaturedCollections({ products = [] }: FeaturedCollectionsProps)
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[1.2s] ease-out brightness-90 group-hover:brightness-100"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/20 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-kartel-black/70" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50" />
 
-                    <div className="absolute top-6 left-6 px-4 py-2 rounded-full bg-kartel-black/50 backdrop-blur-xl border border-white/[0.06]">
+                    <div className="absolute top-6 left-6 px-4 py-2 rounded-full bg-black/60 backdrop-blur-xl border border-white/[0.08]">
                       <span className="text-xs font-medium text-white/80">
                         {collection.productCount} scent{collection.productCount !== 1 ? 's' : ''}
                       </span>

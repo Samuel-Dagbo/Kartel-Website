@@ -94,7 +94,7 @@ export default function RegisterPage() {
 
   if (status === 'loading') {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-kartel-cream'}`}>
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-white'}`}>
         <div className="w-8 h-8 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
       </div>
     )
@@ -108,7 +108,7 @@ export default function RegisterPage() {
     <div className={`min-h-[100dvh] relative overflow-hidden flex ${
       isDark 
         ? 'bg-kartel-black' 
-        : 'bg-gradient-to-br from-kartel-cream via-white to-kartel-cream'
+        : 'bg-gradient-to-br from-white via-kartel-white-50 to-white'
     }`}>
       <div className="absolute top-[-10%] right-[-5%] w-[50%] h-[50%] bg-kartel-gold/[0.03] blur-[250px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-kartel-gold/[0.015] blur-[200px] rounded-full pointer-events-none" />
@@ -129,8 +129,8 @@ export default function RegisterPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/30 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-kartel-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
 
           <div className="absolute bottom-8 left-8 right-8 z-10">
             <motion.div
@@ -163,7 +163,7 @@ export default function RegisterPage() {
           <Link
             href="/"
             className={`inline-flex items-center gap-1.5 transition-colors text-xs mb-4 group ${
-              isDark ? 'text-white/25 hover:text-kartel-gold' : 'text-kartel-black-500 hover:text-kartel-gold'
+              isDark ? 'text-white/35 hover:text-kartel-gold' : 'text-black/50 hover:text-kartel-gold'
             }`}
           >
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" strokeWidth={1.5} />
@@ -180,7 +180,7 @@ export default function RegisterPage() {
               <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
                 isDark ? 'text-white' : 'text-kartel-black-900'
               }`}>Create Account</h1>
-              <p className={`mt-1 text-xs ${isDark ? 'text-white/35' : 'text-kartel-black-400'}`}>
+              <p className={`mt-1 text-xs ${isDark ? 'text-white/45' : 'text-black/45'}`}>
                 Join the CARL JONES family today.
               </p>
             </div>
@@ -188,8 +188,8 @@ export default function RegisterPage() {
               onClick={toggleTheme}
               className={`p-2.5 rounded-full transition-all duration-300 ${
                 isDark 
-                  ? 'text-white/25 hover:text-kartel-gold hover:bg-white/[0.05]' 
-                  : 'text-kartel-black-400 hover:text-kartel-gold hover:bg-kartel-gold/10'
+                  ? 'text-white/35 hover:text-kartel-gold hover:bg-white/[0.06]' 
+                  : 'text-black/40 hover:text-kartel-gold hover:bg-kartel-gold/10'
               }`}
               aria-label="Toggle theme"
             >
@@ -203,8 +203,8 @@ export default function RegisterPage() {
 
           <div className={`relative rounded-2xl p-5 ${
             isDark 
-              ? 'bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-xl border border-white/[0.05] shadow-luxury'
-              : 'bg-white/90 backdrop-blur-xl border border-black/[0.08] shadow-luxury-lg'
+              ? 'bg-gradient-to-b from-white/[0.05] to-white/[0.02] backdrop-blur-xl border border-white/[0.08] shadow-luxury'
+              : 'bg-white border border-black/[0.08] shadow-lg'
           }`}>
             <form onSubmit={handleSubmit} className="space-y-3">
               {error && (
@@ -214,23 +214,23 @@ export default function RegisterPage() {
               )}
 
               <div className="space-y-1">
-                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
-                  isDark ? 'text-white/45' : 'text-kartel-black-400'
-                }`}>Full Name</label>
-                <div className="relative group">
-                  <User className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
-                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
-                  }`} strokeWidth={1.5} />
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
-                      isDark 
-                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
-                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
-                    }`}
+              <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                isDark ? 'text-white/55' : 'text-black/50'
+              }`}>Full Name</label>
+              <div className="relative group">
+                <User className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                  isDark ? 'text-white/25 group-focus-within:text-kartel-gold/60' : 'text-black/25 group-focus-within:text-kartel-gold/70'
+                }`} strokeWidth={1.5} />
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 ${
+                    isDark 
+                      ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30 focus:bg-white/[0.06]'
+                      : 'bg-black/[0.02] border-black/[0.08] text-black placeholder:text-black/30 focus:bg-black/[0.04]'
+                  }`}
                     placeholder="Your name"
                     required
                   />
@@ -238,23 +238,23 @@ export default function RegisterPage() {
               </div>
 
               <div className="space-y-1">
-                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
-                  isDark ? 'text-white/45' : 'text-kartel-black-400'
-                }`}>Email</label>
-                <div className="relative group">
-                  <Mail className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
-                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
-                  }`} strokeWidth={1.5} />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
-                      isDark 
-                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
-                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
-                    }`}
+              <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                isDark ? 'text-white/55' : 'text-black/50'
+              }`}>Email</label>
+              <div className="relative group">
+                <Mail className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                  isDark ? 'text-white/25 group-focus-within:text-kartel-gold/60' : 'text-black/25 group-focus-within:text-kartel-gold/70'
+                }`} strokeWidth={1.5} />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 ${
+                    isDark 
+                      ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30 focus:bg-white/[0.06]'
+                      : 'bg-black/[0.02] border-black/[0.08] text-black placeholder:text-black/30 focus:bg-black/[0.04]'
+                  }`}
                     placeholder="your@email.com"
                     required
                   />
@@ -262,23 +262,23 @@ export default function RegisterPage() {
               </div>
 
               <div className="space-y-1">
-                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
-                  isDark ? 'text-white/45' : 'text-kartel-black-400'
-                }`}>Password</label>
-                <div className="relative group">
-                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
-                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
-                  }`} strokeWidth={1.5} />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className={`w-full rounded-lg pl-9 pr-9 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
-                      isDark 
-                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
-                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
-                    }`}
+              <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                isDark ? 'text-white/55' : 'text-black/50'
+              }`}>Password</label>
+              <div className="relative group">
+                <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                  isDark ? 'text-white/25 group-focus-within:text-kartel-gold/60' : 'text-black/25 group-focus-within:text-kartel-gold/70'
+                }`} strokeWidth={1.5} />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={`w-full rounded-lg pl-9 pr-9 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 ${
+                    isDark 
+                      ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30 focus:bg-white/[0.06]'
+                      : 'bg-black/[0.02] border-black/[0.08] text-black placeholder:text-black/30 focus:bg-black/[0.04]'
+                  }`}
                     placeholder="Min. 6 characters"
                     required
                   />
@@ -295,23 +295,23 @@ export default function RegisterPage() {
               </div>
 
               <div className="space-y-1">
-                <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
-                  isDark ? 'text-white/45' : 'text-kartel-black-400'
-                }`}>Confirm Password</label>
-                <div className="relative group">
-                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
-                    isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
-                  }`} strokeWidth={1.5} />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
-                      isDark 
-                        ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.03]'
-                        : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
-                    }`}
+              <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
+                isDark ? 'text-white/55' : 'text-black/50'
+              }`}>Confirm Password</label>
+              <div className="relative group">
+                <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                  isDark ? 'text-white/25 group-focus-within:text-kartel-gold/60' : 'text-black/25 group-focus-within:text-kartel-gold/70'
+                }`} strokeWidth={1.5} />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 ${
+                    isDark 
+                      ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30 focus:bg-white/[0.06]'
+                      : 'bg-black/[0.02] border-black/[0.08] text-black placeholder:text-black/30 focus:bg-black/[0.04]'
+                  }`}
                     placeholder="Repeat password"
                     required
                   />
@@ -321,7 +321,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-1 py-2.5 bg-gradient-to-r from-kartel-gold to-kartel-gold-light text-kartel-black font-semibold text-sm rounded-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-500 disabled:opacity-50 flex items-center justify-center gap-2 relative group overflow-hidden"
+                className="w-full mt-1 py-2.5 bg-kartel-black text-white font-semibold text-sm rounded-lg shadow-lg hover:bg-kartel-black-900 transition-all duration-500 disabled:opacity-50 flex items-center justify-center gap-2 relative group overflow-hidden"
               >
                 <span>{loading ? 'Creating...' : 'Create Account'}</span>
                 {!loading && <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />}
@@ -330,17 +330,17 @@ export default function RegisterPage() {
             </form>
 
             <div className="flex items-center gap-3 my-4">
-              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.05] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.05] to-transparent'}`} />
-              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/15' : 'text-kartel-black-300'}`}>or</span>
-              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.05] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.05] to-transparent'}`} />
+              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.08] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.08] to-transparent'}`} />
+              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/25' : 'text-black/30'}`}>or</span>
+              <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.08] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.08] to-transparent'}`} />
             </div>
 
             <button
               onClick={() => signIn('google', { callbackUrl: '/customer' })}
               className={`w-full py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-xs font-medium ${
                 isDark 
-                  ? 'bg-white/[0.02] border border-white/[0.05] text-white/50 hover:text-white/80 hover:border-white/[0.08] hover:bg-white/[0.04]'
-                  : 'bg-black/[0.03] border border-black/[0.08] text-kartel-black-500 hover:text-kartel-black-700 hover:border-kartel-gold/30 hover:bg-kartel-gold/5'
+                  ? 'bg-white/[0.04] border border-white/[0.08] text-white/60 hover:text-white/80 hover:border-white/[0.12] hover:bg-white/[0.06]'
+                  : 'bg-black/[0.02] border border-black/[0.08] text-black/60 hover:text-black/80 hover:border-kartel-gold/30 hover:bg-kartel-gold/5'
               }`}
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -353,9 +353,9 @@ export default function RegisterPage() {
             </button>
           </div>
 
-          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/25' : 'text-kartel-black-400'}`}>
+          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/35' : 'text-black/40'}`}>
             Already have an account?{' '}
-            <Link href="/login" className={`font-medium transition-colors ${isDark ? 'text-kartel-gold/60 hover:text-kartel-gold' : 'text-kartel-gold hover:text-kartel-gold/80'}`}>
+            <Link href="/login" className={`font-medium transition-colors ${isDark ? 'text-kartel-gold/70 hover:text-kartel-gold' : 'text-kartel-gold hover:text-kartel-gold/80'}`}>
               Sign in
             </Link>
           </p>

@@ -46,14 +46,14 @@ export function ProductFilters({
             className="w-4 h-4 text-kartel-gold"
             strokeWidth={1.5}
           />
-          <h3 className={`text-sm font-semibold ${isDark ? 'text-white/80' : 'text-kartel-black-700'}`}>
+          <h3 className={`text-sm font-semibold ${isDark ? 'text-white/80' : 'text-black/70'}`}>
             Filters
           </h3>
         </div>
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className={`text-caption ${isDark ? 'text-white/35' : 'text-kartel-black-400'} hover:text-kartel-gold transition-colors flex items-center gap-1`}
+            className={`text-caption ${isDark ? 'text-white/45' : 'text-black/45'} hover:text-kartel-gold transition-colors flex items-center gap-1`}
           >
             <X className="w-3 h-3" strokeWidth={2} />
             Clear
@@ -65,7 +65,7 @@ export function ProductFilters({
       <div className="relative lg:hidden">
         <Search
           className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 ${
-            isDark ? 'text-white/25' : 'text-kartel-black-400'
+            isDark ? 'text-white/35' : 'text-black/35'
           }`}
           strokeWidth={1.5}
         />
@@ -74,17 +74,17 @@ export function ProductFilters({
           placeholder="Search fragrances..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className={`w-full pl-10 pr-4 py-3 border rounded-xl text-sm focus:outline-none focus:border-kartel-gold/30 focus:ring-1 focus:ring-kartel-gold/10 transition-all ${
+          className={`w-full pl-10 pr-4 py-3 border rounded-xl text-sm focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 transition-all ${
             isDark
-              ? 'bg-white/[0.03] border-white/[0.06] text-white placeholder:text-white/25'
-              : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-700 placeholder:text-black/25'
+              ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/35'
+              : 'bg-black/[0.02] border-black/[0.08] text-black placeholder:text-black/35'
           }`}
         />
       </div>
 
       {/* Categories */}
       <div className="space-y-3">
-        <h4 className={`text-overline ${isDark ? 'text-white/50' : 'text-kartel-black-400'}`}>Category</h4>
+        <h4 className={`text-overline ${isDark ? 'text-white/60' : 'text-black/50'}`}>Category</h4>
         <div className="flex flex-wrap gap-2">
           {['all', ...categories].map((cat) => (
             <button
@@ -95,8 +95,8 @@ export function ProductFilters({
                 selectedCategory === cat
                   ? 'bg-kartel-gold text-kartel-black shadow-gold-glow'
                   : isDark
-                    ? 'bg-white/[0.03] text-white/50 hover:bg-white/[0.06] hover:text-white/80 border border-white/[0.05]'
-                    : 'bg-black/[0.03] text-kartel-black-500 hover:bg-black/[0.06] hover:text-kartel-black-800 border border-black/[0.08]'
+                    ? 'bg-white/[0.04] text-white/60 hover:bg-white/[0.08] hover:text-white/80 border border-white/[0.08]'
+                    : 'bg-black/[0.02] text-black/60 hover:bg-black/[0.04] hover:text-black/80 border border-black/[0.08]'
               )}
             >
               {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -108,7 +108,7 @@ export function ProductFilters({
       {/* Brands */}
       {brands.length > 0 && (
         <div className="space-y-3">
-          <h4 className={`text-overline ${isDark ? 'text-white/50' : 'text-kartel-black-400'}`}>Brands</h4>
+          <h4 className={`text-overline ${isDark ? 'text-white/60' : 'text-black/50'}`}>Brands</h4>
           <div className="space-y-1 max-h-48 overflow-y-auto pr-2 scrollbar-hide">
             {brands.map((brand) => (
               <button
@@ -121,8 +121,8 @@ export function ProductFilters({
                   selectedBrand === brand
                     ? 'bg-kartel-gold/10 text-kartel-gold'
                     : isDark
-                      ? 'text-white/45 hover:bg-white/[0.03] hover:text-white/70'
-                      : 'text-kartel-black-500 hover:bg-black/[0.03] hover:text-kartel-black-800'
+                      ? 'text-white/55 hover:bg-white/[0.04] hover:text-white/80'
+                      : 'text-black/55 hover:bg-black/[0.03] hover:text-black/80'
                 )}
               >
                 <span>{brand}</span>
@@ -138,7 +138,7 @@ export function ProductFilters({
       {/* Price Range */}
       <div className="space-y-5">
         <div className="flex justify-between items-center">
-          <h4 className={`text-overline ${isDark ? 'text-white/50' : 'text-kartel-black-400'}`}>Price Range</h4>
+          <h4 className={`text-overline ${isDark ? 'text-white/60' : 'text-black/50'}`}>Price Range</h4>
           <span className="text-caption text-kartel-gold/80">
             GHS {priceRange[0]} — GHS {priceRange[1]}
           </span>
@@ -161,7 +161,7 @@ export function ProductFilters({
         <div className="flex gap-3">
           <div className="flex-1 relative">
             <span className={`absolute left-3 top-1/2 -translate-y-1/2 text-xs ${
-              isDark ? 'text-white/25' : 'text-kartel-black-400'
+              isDark ? 'text-white/40' : 'text-black/40'
             }`}>
               GHS
             </span>
@@ -176,16 +176,16 @@ export function ProductFilters({
                   priceRange[1],
                 ])
               }
-              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-sm focus:outline-none focus:border-kartel-gold/30 transition-all ${
+              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-sm focus:outline-none focus:border-kartel-gold/40 transition-all ${
                 isDark
-                  ? 'bg-white/[0.03] border-white/[0.06] text-white/70'
-                  : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-700'
+                  ? 'bg-white/[0.04] border-white/[0.08] text-white/80'
+                  : 'bg-black/[0.02] border-black/[0.08] text-black/80'
               }`}
             />
           </div>
           <div className="flex-1 relative">
             <span className={`absolute left-3 top-1/2 -translate-y-1/2 text-xs ${
-              isDark ? 'text-white/25' : 'text-kartel-black-400'
+              isDark ? 'text-white/40' : 'text-black/40'
             }`}>
               GHS
             </span>
@@ -200,10 +200,10 @@ export function ProductFilters({
                   parseInt(e.target.value) || 1000,
                 ])
               }
-              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-sm focus:outline-none focus:border-kartel-gold/30 transition-all ${
+              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-sm focus:outline-none focus:border-kartel-gold/40 transition-all ${
                 isDark
-                  ? 'bg-white/[0.03] border-white/[0.06] text-white/70'
-                  : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-700'
+                  ? 'bg-white/[0.04] border-white/[0.08] text-white/80'
+                  : 'bg-black/[0.02] border-black/[0.08] text-black/80'
               }`}
             />
           </div>

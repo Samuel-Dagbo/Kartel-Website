@@ -67,12 +67,12 @@ export function Navbar() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 border-b backdrop-blur-md ${
           isScrolled
-            ? 'shadow-2xl shadow-black/40'
+            ? 'shadow-lg shadow-black/10'
             : ''
         } ${
           theme === 'dark'
-            ? 'bg-kartel-black-950/95 border-white/[0.06]'
-            : 'bg-kartel-cream/95 border-black/[0.06]'
+            ? 'bg-kartel-black-950/95 border-white/[0.08]'
+            : 'bg-white/95 border-black/[0.08]'
         }`}
       >
         <div className="container-luxury">
@@ -94,8 +94,8 @@ export function Navbar() {
               <div
                 className={`flex items-center rounded-full px-1.5 py-1.5 border backdrop-blur-xl ${
                   theme === 'dark'
-                    ? 'bg-white/[0.03] border-white/[0.06]'
-                    : 'bg-black/[0.03] border-black/[0.06]'
+                    ? 'bg-white/[0.04] border-white/[0.08]'
+                    : 'bg-black/[0.02] border-black/[0.08]'
                 }`}
               >
                 {navLinks.map((link) => (
@@ -104,8 +104,8 @@ export function Navbar() {
                     href={link.href}
                     className={`relative px-5 py-2.5 text-[13px] font-medium tracking-wide transition-colors duration-300 group ${
                       theme === 'dark'
-                        ? 'text-white/50 hover:text-kartel-gold'
-                        : 'text-kartel-black-500 hover:text-kartel-gold'
+                        ? 'text-white/60 hover:text-kartel-gold'
+                        : 'text-black/60 hover:text-kartel-gold'
                     }`}
                   >
                     {link.label}
@@ -139,8 +139,8 @@ export function Navbar() {
                 onClick={toggleTheme}
                 className={`p-2.5 rounded-full transition-all duration-300 ${
                   theme === 'dark'
-                    ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.05]'
-                    : 'text-kartel-black-500 hover:text-kartel-gold hover:bg-black/[0.05]'
+                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
+                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Toggle theme"
               >
@@ -156,8 +156,8 @@ export function Navbar() {
                 href="/wishlist"
                 className={`hidden sm:flex p-2.5 rounded-full transition-all duration-300 ${
                   theme === 'dark'
-                    ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.05]'
-                    : 'text-kartel-black-500 hover:text-kartel-gold hover:bg-black/[0.05]'
+                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
+                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Wishlist"
               >
@@ -173,8 +173,8 @@ export function Navbar() {
                 onClick={toggleCart}
                 className={`relative p-2.5 rounded-full transition-all duration-300 ${
                   theme === 'dark'
-                    ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.05]'
-                    : 'text-kartel-black-500 hover:text-kartel-gold hover:bg-black/[0.05]'
+                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
+                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Cart"
               >
@@ -201,8 +201,8 @@ export function Navbar() {
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                     className={`p-2.5 rounded-full transition-all duration-300 ${
                       theme === 'dark'
-                        ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.05]'
-                        : 'text-kartel-black-500 hover:text-kartel-gold hover:bg-black/[0.05]'
+                        ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
+                        : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
                     }`}
                     aria-label="Account"
                   >
@@ -226,7 +226,7 @@ export function Navbar() {
                         }`}
                       >
                         <div className={`px-4 py-3 border-b ${
-                          theme === 'dark' ? 'border-white/[0.06]' : 'border-black/[0.06]'
+                          theme === 'dark' ? 'border-white/[0.08]' : 'border-black/[0.08]'
                         }`}>
                           <p className={`text-sm font-medium ${
                             theme === 'dark' ? 'text-white' : 'text-kartel-black-900'
@@ -234,7 +234,7 @@ export function Navbar() {
                             {session.user?.name || 'User'}
                           </p>
                           <p className={`text-xs ${
-                            theme === 'dark' ? 'text-white/40' : 'text-kartel-black-400'
+                            theme === 'dark' ? 'text-white/50' : 'text-black/50'
                           }`}>
                             {session.user?.email}
                           </p>
@@ -245,8 +245,8 @@ export function Navbar() {
                             onClick={() => setIsUserMenuOpen(false)}
                             className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
                               theme === 'dark'
-                                ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.04]'
-                                : 'text-kartel-black-700 hover:text-kartel-gold hover:bg-black/[0.04]'
+                                ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.05]'
+                                : 'text-black/70 hover:text-kartel-gold hover:bg-black/[0.03]'
                             }`}
                           >
                             <User className="w-4 h-4" />
@@ -258,8 +258,8 @@ export function Navbar() {
                               onClick={() => setIsUserMenuOpen(false)}
                               className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
                                 theme === 'dark'
-                                  ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.04]'
-                                  : 'text-kartel-black-700 hover:text-kartel-gold hover:bg-black/[0.04]'
+                                  ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.05]'
+                                  : 'text-black/70 hover:text-kartel-gold hover:bg-black/[0.03]'
                               }`}
                             >
                               <ShoppingCart className="w-4 h-4" />
@@ -273,8 +273,8 @@ export function Navbar() {
                             }}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
                               theme === 'dark'
-                                ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.04]'
-                                : 'text-kartel-black-700 hover:text-kartel-gold hover:bg-black/[0.04]'
+                                ? 'text-white/70 hover:text-kartel-gold hover:bg-white/[0.05]'
+                                : 'text-black/70 hover:text-kartel-gold hover:bg-black/[0.03]'
                             }`}
                           >
                             <LogOut className="w-4 h-4" />
@@ -299,8 +299,8 @@ export function Navbar() {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={`md:hidden p-2.5 rounded-full transition-all duration-300 ml-1 ${
                   theme === 'dark'
-                    ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.04]'
-                    : 'text-kartel-black-500 hover:text-kartel-gold hover:bg-black/[0.04]'
+                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.05]'
+                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Menu"
               >
@@ -327,24 +327,24 @@ export function Navbar() {
               <div
                 className={`container-luxury py-6 border-b ${
                   theme === 'dark'
-                    ? 'bg-kartel-black-950/95 border-white/[0.04]'
-                    : 'bg-kartel-cream/95 border-black/[0.04]'
+                    ? 'bg-kartel-black-950/95 border-white/[0.06]'
+                    : 'bg-white/95 border-black/[0.06]'
                 }`}
               >
                 <div className="max-w-2xl mx-auto relative">
                   <Search
                     className={`absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 ${
-                      theme === 'dark' ? 'text-white/25' : 'text-black/25'
+                      theme === 'dark' ? 'text-white/35' : 'text-black/35'
                     }`}
                     strokeWidth={1.5}
                   />
                   <input
                     type="text"
                     placeholder="Search for perfumes, brands, note..."
-                    className={`w-full rounded-full pl-12 pr-6 py-3.5 text-sm focus:outline-none focus:border-kartel-gold/40 focus:ring-1 focus:ring-kartel-gold/15 transition-all duration-300 ${
+                    className={`w-full rounded-full pl-12 pr-6 py-3.5 text-sm focus:outline-none focus:border-kartel-gold/50 focus:ring-1 focus:ring-kartel-gold/20 transition-all duration-300 ${
                       theme === 'dark'
-                        ? 'bg-white/[0.03] border border-white/[0.06] text-white placeholder:text-white/25'
-                        : 'bg-black/[0.03] border border-black/[0.06] text-kartel-black-900 placeholder:text-black/25'
+                        ? 'bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-white/35'
+                        : 'bg-black/[0.02] border border-black/[0.08] text-kartel-black-900 placeholder:text-black/35'
                     }`}
                     autoFocus
                   />
@@ -367,8 +367,8 @@ export function Navbar() {
               <div
                 className={`container-luxury py-8 space-y-1 border-b ${
                   theme === 'dark'
-                    ? 'bg-kartel-black-950/98 border-white/[0.03]'
-                    : 'bg-kartel-cream/98 border-black/[0.03]'
+                    ? 'bg-kartel-black-950/98 border-white/[0.05]'
+                    : 'bg-white/98 border-black/[0.05]'
                 }`}
               >
                 {navLinks.map((link, i) => (
@@ -388,7 +388,7 @@ export function Navbar() {
                       className={`flex items-center justify-between py-3.5 text-lg transition-colors group ${
                         theme === 'dark'
                           ? 'text-white/70 hover:text-kartel-gold'
-                          : 'text-kartel-black-700 hover:text-kartel-gold'
+                          : 'text-black/70 hover:text-kartel-gold'
                       }`}
                     >
                       {link.label}
@@ -398,7 +398,7 @@ export function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
-                <div className="pt-6 mt-4 border-t border-white/[0.04] dark:border-white/[0.04]">
+                <div className="pt-6 mt-4 border-t border-white/[0.06] dark:border-white/[0.06]">
                   {session ? (
                     <button
                       onClick={() => {
@@ -408,7 +408,7 @@ export function Navbar() {
                       className={`w-full py-3 text-left transition-colors flex items-center gap-2 ${
                         theme === 'dark'
                           ? 'text-white/70 hover:text-kartel-gold'
-                          : 'text-kartel-black-700 hover:text-kartel-gold'
+                          : 'text-black/70 hover:text-kartel-gold'
                       }`}
                     >
                       <LogOut className="w-4 h-4" strokeWidth={1.5} />

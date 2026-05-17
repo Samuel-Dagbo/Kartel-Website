@@ -59,11 +59,11 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
             />
 
             {/* Multi-layer gradient overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-kartel-black via-kartel-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-kartel-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
 
             {/* Hover overlay with CTAs */}
-            <div className="absolute inset-0 bg-kartel-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4 backdrop-blur-[4px]">
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4 backdrop-blur-[4px]">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}

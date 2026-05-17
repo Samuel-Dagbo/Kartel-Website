@@ -54,11 +54,11 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+    <div className="min-h-screen transition-colors duration-300 bg-white dark:bg-kartel-black">
       {/* Hero Section */}
       <section className="relative h-[50vh] lg:h-[60vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
-          <div className="absolute inset-0 bg-gradient-to-br from-kartel-cream via-kartel-cream to-kartel-cream dark:from-kartel-black dark:via-kartel-black dark:to-kartel-black" />
+        <div className="absolute inset-0 transition-colors duration-300 bg-white dark:bg-kartel-black">
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-kartel-white-50 to-white dark:from-kartel-black dark:via-kartel-black dark:to-kartel-black" />
           <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-kartel-gold/[0.03] blur-[150px] rounded-full" />
           <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-kartel-gold/[0.02] blur-[120px] rounded-full" />
         </div>
@@ -84,7 +84,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info */}
-      <section className="section-padding transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+      <section className="section-padding transition-colors duration-300 bg-white dark:bg-kartel-black">
         <div className="container-luxury">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
@@ -115,7 +115,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form */}
-      <section className="section-padding-sm transition-colors duration-300 bg-kartel-cream dark:bg-kartel-black">
+      <section className="section-padding-sm transition-colors duration-300 bg-kartel-white-50 dark:bg-kartel-black-950">
         <div className="container-luxury">
           <div className="max-w-2xl mx-auto">
             <motion.div
