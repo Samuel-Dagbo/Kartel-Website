@@ -38,10 +38,9 @@ export function HeroSection() {
             priority
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
-        <div className="absolute inset-0 bg-kartel-gold/5 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/80 to-black/75" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
         <div className="absolute inset-0 noise-overlay" />
       </div>
 
@@ -97,7 +96,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(0.9375rem,2.5vw,1.125rem)] text-white/85 lg:text-muted max-w-xl leading-[1.8]"
+              className="text-[clamp(0.9375rem,2.5vw,1.125rem)] text-white lg:text-muted max-w-xl leading-[1.8]"
             >
               CARL JONES blends rare botanicals with avant-garde chemistry. Each scent
               transcends time—a symphony of luxury for the discerning few.
@@ -123,7 +122,7 @@ export function HeroSection() {
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center text-sm px-8 py-4 border border-white/20 lg:border-black/[0.12] text-white/90 lg:text-black/70 rounded-full backdrop-blur-sm hover:bg-white/10 lg:hover:bg-black/[0.05] hover:border-white/40 lg:hover:border-black/20 transition-all duration-300"
+                className="inline-flex items-center justify-center text-sm px-8 py-4 border border-white/40 lg:border-black/[0.12] text-white lg:text-black/70 rounded-full bg-black/20 lg:bg-transparent backdrop-blur-md hover:bg-white/15 lg:hover:bg-black/[0.05] hover:border-white/60 lg:hover:border-black/20 transition-all duration-300"
               >
                 Our Heritage
               </Link>
