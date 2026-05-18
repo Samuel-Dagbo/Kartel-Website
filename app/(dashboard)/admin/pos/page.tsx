@@ -153,7 +153,7 @@ export default function POSPage() {
         }`}>
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+              <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-black/40'}`} strokeWidth={1.5} />
               <input
                 type="text"
                 placeholder="Search products..."
@@ -175,7 +175,7 @@ export default function POSPage() {
                       ? 'bg-kartel-gold text-kartel-black'
                       : isDark
                         ? 'bg-white/[0.03] text-white/50 hover:text-white hover:bg-white/[0.06]'
-                        : 'bg-black/[0.03] text-kartel-black-500 hover:text-kartel-black-900 hover:bg-black/[0.06]'
+                        : 'bg-black/[0.03] text-black/50 hover:text-kartel-black-900 hover:bg-black/[0.06]'
                   }`}
                 >
                   {cat}
@@ -208,11 +208,11 @@ export default function POSPage() {
                 </div>
                 <p className={`text-xs font-medium truncate ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>{product.name}</p>
                 <p className="text-kartel-gold text-xs font-bold mt-1">{formatPrice(product.price)}</p>
-                <p className={`text-[10px] ${isDark ? 'text-white/30' : 'text-kartel-black-400'}`}>Stock: {product.quantity}</p>
+                <p className={`text-[10px] ${isDark ? 'text-white/30' : 'text-black/40'}`}>Stock: {product.quantity}</p>
               </motion.button>
             ))}
             {filtered.length === 0 && (
-              <p className={`col-span-full text-center py-20 text-sm ${isDark ? 'text-white/30' : 'text-kartel-black-300'}`}>
+              <p className={`col-span-full text-center py-20 text-sm ${isDark ? 'text-white/30' : 'text-black/30'}`}>
                 No products found
               </p>
             )}
@@ -230,7 +230,7 @@ export default function POSPage() {
             <ShoppingCart className="w-5 h-5 text-kartel-gold" strokeWidth={1.5} />
             <span className={`font-semibold text-sm ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Current Sale</span>
           </div>
-          <span className={`text-xs ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>{totalItems} item{totalItems !== 1 ? 's' : ''}</span>
+          <span className={`text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>{totalItems} item{totalItems !== 1 ? 's' : ''}</span>
         </div>
 
         {/* Cart Items */}
@@ -238,8 +238,8 @@ export default function POSPage() {
           {cart.length === 0 && (
             <div className="text-center py-16">
               <ShoppingCart className="w-12 h-12 mx-auto mb-3" strokeWidth={1} />
-              <p className={`text-sm ${isDark ? 'text-white/30' : 'text-kartel-black-300'}`}>Cart is empty</p>
-              <p className={`text-xs mt-1 ${isDark ? 'text-white/20' : 'text-kartel-black-200'}`}>Tap a product to add</p>
+              <p className={`text-sm ${isDark ? 'text-white/30' : 'text-black/30'}`}>Cart is empty</p>
+              <p className={`text-xs mt-1 ${isDark ? 'text-white/20' : 'text-black/20'}`}>Tap a product to add</p>
             </div>
           )}
           <AnimatePresence>
@@ -267,7 +267,7 @@ export default function POSPage() {
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => updateQty(item.product._id, -1)}
-                    className={`p-1 rounded-lg transition-colors ${isDark ? 'hover:bg-white/[0.06] text-white/50' : 'hover:bg-black/[0.06] text-kartel-black-400'}`}
+                    className={`p-1 rounded-lg transition-colors ${isDark ? 'hover:bg-white/[0.06] text-white/50' : 'hover:bg-black/[0.06] text-black/40'}`}
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
@@ -275,7 +275,7 @@ export default function POSPage() {
                   <button
                     onClick={() => updateQty(item.product._id, 1)}
                     disabled={item.quantity >= item.product.quantity}
-                    className={`p-1 rounded-lg transition-colors ${isDark ? 'hover:bg-white/[0.06] text-white/50' : 'hover:bg-black/[0.06] text-kartel-black-400'}`}
+                    className={`p-1 rounded-lg transition-colors ${isDark ? 'hover:bg-white/[0.06] text-white/50' : 'hover:bg-black/[0.06] text-black/40'}`}
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -294,7 +294,7 @@ export default function POSPage() {
         {/* Cart Footer */}
         <div className={`p-4 border-t space-y-3 ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}>
           <div className="flex justify-between items-center">
-            <span className={`text-sm ${isDark ? 'text-white/60' : 'text-kartel-black-500'}`}>Total</span>
+            <span className={`text-sm ${isDark ? 'text-white/60' : 'text-black/50'}`}>Total</span>
             <span className={`text-2xl font-bold text-kartel-gold`}>{formatPrice(total)}</span>
           </div>
           <button
@@ -331,13 +331,13 @@ export default function POSPage() {
                     <CheckCircle className="w-8 h-8 text-green-500" />
                   </div>
                   <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Sale Complete!</h3>
-                  <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Receipt printed</p>
+                  <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-black/40'}`}>Receipt printed</p>
                 </div>
               ) : (
                 <>
                   <div className="flex items-center justify-between mb-6">
                     <h3 className={`font-serif text-lg font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Complete Sale</h3>
-                    <button onClick={() => setCheckoutModal(false)} className={`p-1.5 rounded-lg ${isDark ? 'hover:bg-white/[0.06] text-white/40' : 'hover:bg-black/[0.06] text-kartel-black-400'}`}>
+                    <button onClick={() => setCheckoutModal(false)} className={`p-1.5 rounded-lg ${isDark ? 'hover:bg-white/[0.06] text-white/40' : 'hover:bg-black/[0.06] text-black/40'}`}>
                       <X className="w-5 h-5" />
                     </button>
                   </div>
@@ -360,7 +360,7 @@ export default function POSPage() {
                   {/* Customer Info */}
                   <div className="space-y-3 mb-6">
                     <div className="relative">
-                      <User className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+                      <User className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-black/40'}`} strokeWidth={1.5} />
                       <input
                         type="text"
                         placeholder="Customer name (optional)"
@@ -372,7 +372,7 @@ export default function POSPage() {
                       />
                     </div>
                     <div className="relative">
-                      <Package className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+                      <Package className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-black/40'}`} strokeWidth={1.5} />
                       <input
                         type="email"
                         placeholder="Customer email (optional)"
@@ -389,7 +389,7 @@ export default function POSPage() {
                     <button
                       onClick={() => setCheckoutModal(false)}
                       className={`flex-1 py-3 rounded-xl text-sm font-medium border transition-colors ${
-                        isDark ? 'border-white/[0.06] text-white/50 hover:text-white' : 'border-black/[0.06] text-kartel-black-500 hover:text-kartel-black-900'
+                        isDark ? 'border-white/[0.06] text-white/50 hover:text-white' : 'border-black/[0.06] text-black/50 hover:text-kartel-black-900'
                       }`}
                     >
                       Cancel

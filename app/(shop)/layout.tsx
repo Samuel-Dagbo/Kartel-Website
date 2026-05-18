@@ -20,7 +20,7 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
     >
       <div
         className={`min-h-screen transition-colors duration-300 ${
-          isDark ? 'bg-kartel-black' : 'bg-kartel-cream'
+          isDark ? 'bg-kartel-black' : 'bg-kartel-white-50'
         }`}
       >
         {children}

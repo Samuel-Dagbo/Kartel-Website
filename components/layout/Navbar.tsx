@@ -123,7 +123,7 @@ export function Navbar() {
                 className={`p-2.5 rounded-full transition-all duration-300 ${
                   theme === 'dark'
                     ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.05]'
-                    : 'text-kartel-black-500 hover:text-kartel-gold hover:bg-black/[0.05]'
+                    : 'text-black/50 hover:text-kartel-gold hover:bg-black/[0.05]'
                 }`}
                 aria-label="Search"
               >

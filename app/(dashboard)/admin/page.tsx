@@ -166,7 +166,7 @@ export default function AdminDashboard() {
       >
         <div>
           <h1 className={`font-serif text-2xl sm:text-3xl font-bold ${isDark ? 'text-heading' : 'text-kartel-black-900'}`}>Dashboard Overview</h1>
-          <p className={`text-sm mt-1 ${isDark ? 'text-muted' : 'text-kartel-black-500'}`}>Welcome back! Here&apos;s what&apos;s happening with your store.</p>
+          <p className={`text-sm mt-1 ${isDark ? 'text-muted' : 'text-black/50'}`}>Welcome back! Here&apos;s what&apos;s happening with your store.</p>
         </div>
         <div className="flex items-center gap-3">
           <button
@@ -174,7 +174,7 @@ export default function AdminDashboard() {
             className={`p-2.5 rounded-xl transition-all duration-300 ${
               isDark 
                 ? 'glass-card text-muted hover:text-kartel-gold' 
-                : 'bg-kartel-gold/10 text-kartel-black-500 hover:text-kartel-gold border border-kartel-gold/20'
+                : 'bg-kartel-gold/10 text-black/50 hover:text-kartel-gold border border-kartel-gold/20'
             }`}
             aria-label="Toggle theme"
           >
@@ -189,7 +189,7 @@ export default function AdminDashboard() {
             className={`px-4 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all ${
               isDark 
                 ? 'glass-card text-body hover:bg-white/[0.06]' 
-                : 'bg-white border border-black/[0.06] text-kartel-black-700 hover:border-kartel-gold/30 hover:bg-kartel-gold/5'
+                : 'bg-white border border-black/[0.06] text-black/70 hover:border-kartel-gold/30 hover:bg-kartel-gold/5'
             }`}
           >
             <Package className="w-4 h-4" />
@@ -232,7 +232,7 @@ export default function AdminDashboard() {
                   {stat.change}
                 </div>
               </div>
-              <p className={`text-xs uppercase tracking-wider mb-1 ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>{stat.label}</p>
+              <p className={`text-xs uppercase tracking-wider mb-1 ${isDark ? 'text-muted' : 'text-black/40'}`}>{stat.label}</p>
               <p className={`text-2xl font-bold ${isDark ? 'text-heading' : 'text-kartel-black-900'}`}>{stat.value}</p>
             </div>
           </motion.div>
@@ -254,7 +254,7 @@ export default function AdminDashboard() {
         >
           <div className="flex items-center justify-between mb-6">
             <h3 className={`font-serif text-lg font-semibold ${isDark ? 'text-heading' : 'text-kartel-black-900'}`}>Revenue Trend</h3>
-            <span className={`text-xs ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>Last 30 days</span>
+            <span className={`text-xs ${isDark ? 'text-muted' : 'text-black/40'}`}>Last 30 days</span>
           </div>
           <div className="h-[280px] w-full">
             {orders.length > 0 ? (
@@ -292,12 +292,12 @@ export default function AdminDashboard() {
               <div className="h-full flex items-center justify-center">
                 <div className="text-center">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 ${
-                    isDark ? 'glass-card' : 'bg-kartel-cream'
+                    isDark ? 'glass-card' : 'bg-kartel-white-50'
                   }`}>
-                    <TrendingUp className={`w-5 h-5 ${isDark ? 'text-muted' : 'text-kartel-black-400'}`} />
+                    <TrendingUp className={`w-5 h-5 ${isDark ? 'text-muted' : 'text-black/40'}`} />
                   </div>
-                  <p className={`text-sm ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>No data available yet</p>
-                  <p className={`text-xs mt-1 ${isDark ? 'text-muted/50' : 'text-kartel-black-300'}`}>Orders will appear here</p>
+                  <p className={`text-sm ${isDark ? 'text-muted' : 'text-black/40'}`}>No data available yet</p>
+                  <p className={`text-xs mt-1 ${isDark ? 'text-muted/50' : 'text-black/30'}`}>Orders will appear here</p>
                 </div>
               </div>
             )}
@@ -331,18 +331,18 @@ export default function AdminDashboard() {
                 key={i} 
                 href={action.href}
                 className={`flex items-center justify-between p-3.5 rounded-xl transition-all group ${
-                  isDark 
-                    ? 'glass-card hover:border-kartel-gold/20' 
-                    : 'bg-kartel-cream hover:border-kartel-gold/20 border border-transparent'
+                   isDark 
+                     ? 'glass-card hover:border-kartel-gold/20' 
+                     : 'bg-kartel-white-50 hover:border-kartel-gold/20 border border-transparent'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <div className={`p-2 rounded-lg bg-gradient-to-br ${action.color}`}>
-                    <action.icon className={`w-4 h-4 ${isDark ? 'text-muted group-hover:text-kartel-gold' : 'text-kartel-black-400 group-hover:text-kartel-gold'} transition-colors`} />
+                    <action.icon className={`w-4 h-4 ${isDark ? 'text-muted group-hover:text-kartel-gold' : 'text-black/40 group-hover:text-kartel-gold'} transition-colors`} />
                   </div>
-                  <span className={`text-sm ${isDark ? 'text-body' : 'text-kartel-black-700'}`}>{action.label}</span>
+                  <span className={`text-sm ${isDark ? 'text-body' : 'text-black/70'}`}>{action.label}</span>
                 </div>
-                <Eye className={`w-4 h-4 ${isDark ? 'text-muted/50 group-hover:text-muted' : 'text-kartel-black-300 group-hover:text-kartel-black-500'} transition-colors`} />
+                <Eye className={`w-4 h-4 ${isDark ? 'text-muted/50 group-hover:text-muted' : 'text-black/30 group-hover:text-black/50'} transition-colors`} />
               </Link>
             ))}
           </div>
@@ -373,13 +373,13 @@ export default function AdminDashboard() {
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className={isDark ? 'bg-white/[0.02]' : 'bg-kartel-cream'}>
-                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>Order ID</th>
-                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>Customer</th>
-                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>Amount</th>
-                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>Status</th>
-                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>Date</th>
-                  <th className={`px-6 py-4 text-right text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>Action</th>
+                    <tr className={isDark ? 'bg-white/[0.02]' : 'bg-kartel-white-50'}>
+                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-black/40'}`}>Order ID</th>
+                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-black/40'}`}>Customer</th>
+                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-black/40'}`}>Amount</th>
+                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-black/40'}`}>Status</th>
+                  <th className={`px-6 py-4 text-left text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-black/40'}`}>Date</th>
+                  <th className={`px-6 py-4 text-right text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-muted' : 'text-black/40'}`}>Action</th>
                 </tr>
               </thead>
               <tbody className={`divide-y ${isDark ? 'divide-white/[0.04]' : 'divide-black/[0.04]'}`}>
@@ -389,7 +389,7 @@ export default function AdminDashboard() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.7 + i * 0.05 }}
-                    className={`transition-colors ${isDark ? 'hover:bg-white/[0.02]' : 'hover:bg-kartel-cream'}`}
+                     className={`transition-colors ${isDark ? 'hover:bg-white/[0.02]' : 'hover:bg-kartel-white-50'}`}
                   >
                     <td className="px-6 py-4">
                       <span className={`text-sm font-medium ${isDark ? 'text-heading' : 'text-kartel-black-900'}`}>
@@ -398,8 +398,8 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-6 py-4">
                       <div>
-                        <p className={`text-sm ${isDark ? 'text-body' : 'text-kartel-black-700'}`}>{order.user?.name || 'Guest'}</p>
-                        <p className={`text-xs ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>{order.user?.email || 'No email'}</p>
+                        <p className={`text-sm ${isDark ? 'text-body' : 'text-black/70'}`}>{order.user?.name || 'Guest'}</p>
+                        <p className={`text-xs ${isDark ? 'text-muted' : 'text-black/40'}`}>{order.user?.email || 'No email'}</p>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -410,13 +410,13 @@ export default function AdminDashboard() {
                         order.status === 'delivered' ? 'bg-green-500/15 text-green-400 border border-green-500/20' :
                         order.status === 'shipped' ? 'bg-blue-500/15 text-blue-400 border border-blue-500/20' :
                         order.status === 'processing' ? 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20' :
-                        isDark ? 'bg-white/10 text-muted border border-white/[0.1]' : 'bg-black/[0.05] text-kartel-black-500 border border-black/[0.1]'
+                        isDark ? 'bg-white/10 text-muted border border-white/[0.1]' : 'bg-black/[0.05] text-black/50 border border-black/[0.1]'
                       }`}>
                         {order.status || 'pending'}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`text-sm ${isDark ? 'text-muted' : 'text-kartel-black-400'}`}>
+                      <span className={`text-sm ${isDark ? 'text-muted' : 'text-black/40'}`}>
                         {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'N/A'}
                       </span>
                     </td>
@@ -435,11 +435,11 @@ export default function AdminDashboard() {
           </div>
         ) : (
           <div className="p-12 text-center">
-            <div className={`w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 ${isDark ? 'glass-card' : 'bg-kartel-cream'}`}>
-              <ShoppingBag className={`w-6 h-6 ${isDark ? 'text-muted' : 'text-kartel-black-400'}`} />
+             <div className={`w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 ${isDark ? 'glass-card' : 'bg-kartel-white-50'}`}>
+               <ShoppingBag className={`w-6 h-6 ${isDark ? 'text-muted' : 'text-black/40'}`} />
             </div>
-            <p className={isDark ? 'text-muted' : 'text-kartel-black-500'}>No orders yet</p>
-            <p className={`text-sm mt-1 ${isDark ? 'text-muted/50' : 'text-kartel-black-300'}`}>Orders will appear here when customers purchase</p>
+            <p className={isDark ? 'text-muted' : 'text-black/50'}>No orders yet</p>
+            <p className={`text-sm mt-1 ${isDark ? 'text-muted/50' : 'text-black/30'}`}>Orders will appear here when customers purchase</p>
           </div>
         )}
       </motion.div>

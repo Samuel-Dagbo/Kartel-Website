@@ -76,7 +76,7 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse }: Side
         <button
           onClick={onClose}
           className={`lg:hidden ml-auto p-1.5 rounded-lg transition-colors ${
-            isDark ? 'text-white/40 hover:text-white hover:bg-white/[0.05]' : 'text-kartel-black-400 hover:text-kartel-black-900 hover:bg-black/[0.05]'
+            isDark ? 'text-white/40 hover:text-white hover:bg-white/[0.05]' : 'text-black/40 hover:text-kartel-black-900 hover:bg-black/[0.05]'
           }`}
         >
           <X className="w-5 h-5" />
@@ -98,7 +98,7 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse }: Side
                   ? 'bg-kartel-gold/10 text-kartel-gold'
                   : isDark
                     ? 'text-white/50 hover:text-white hover:bg-white/[0.04]'
-                    : 'text-kartel-black-500 hover:text-kartel-black-900 hover:bg-black/[0.04]'
+                    : 'text-black/50 hover:text-kartel-black-900 hover:bg-black/[0.04]'
               }`}
             >
               <Icon className={`w-5 h-5 flex-shrink-0 transition-colors ${
@@ -134,7 +134,7 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse }: Side
           className={`hidden lg:flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
             isDark
               ? 'text-white/50 hover:text-white hover:bg-white/[0.04]'
-              : 'text-kartel-black-500 hover:text-kartel-black-900 hover:bg-black/[0.04]'
+              : 'text-black/50 hover:text-kartel-black-900 hover:bg-black/[0.04]'
           }`}
         >
           {isCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
@@ -145,7 +145,7 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse }: Side
           className={`flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
             isDark
               ? 'text-white/50 hover:text-red-400 hover:bg-red-500/[0.06]'
-              : 'text-kartel-black-500 hover:text-red-600 hover:bg-red-500/[0.06]'
+              : 'text-black/50 hover:text-red-600 hover:bg-red-500/[0.06]'
           }`}
         >
           <LogOut className="w-5 h-5" strokeWidth={1.5} />

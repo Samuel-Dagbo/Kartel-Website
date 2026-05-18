@@ -111,7 +111,7 @@ export default function DiscountsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className={`font-serif text-2xl font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Discounts</h1>
-          <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Manage promo codes and coupons</p>
+          <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-black/40'}`}>Manage promo codes and coupons</p>
         </div>
         <button
           onClick={openAdd}
@@ -124,7 +124,7 @@ export default function DiscountsPage() {
 
       {/* Search */}
       <div className="relative max-w-xs">
-        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-black/40'}`} strokeWidth={1.5} />
         <input
           type="text"
           placeholder="Search by code..."
@@ -154,7 +154,7 @@ export default function DiscountsPage() {
                 </div>
                 <div>
                   <p className={`font-bold text-sm uppercase tracking-wider ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>{discount.code}</p>
-                  <p className={`text-xs ${isDark ? 'text-white/30' : 'text-kartel-black-400'}`}>
+                  <p className={`text-xs ${isDark ? 'text-white/30' : 'text-black/40'}`}>
                     {discount.type === 'percentage' ? `${discount.value}% Off` : `GHS ${discount.value} Off`}
                   </p>
                 </div>
@@ -165,15 +165,15 @@ export default function DiscountsPage() {
             </div>
 
             <div className="space-y-1.5 mb-4">
-              <p className={`text-xs ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>
+              <p className={`text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
                 Min purchase: GHS {discount.minPurchase.toLocaleString()}
               </p>
-              <p className={`text-xs ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>
+              <p className={`text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
                 Used: {discount.usedCount}/{discount.maxUses || '∞'}
               </p>
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-3 h-3" />
-                <span className={`text-xs ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>
+                <span className={`text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
                   Expires: {new Date(discount.expiresAt).toLocaleDateString()}
                 </span>
               </div>
@@ -183,7 +183,7 @@ export default function DiscountsPage() {
               <button
                 onClick={() => openEdit(discount)}
                 className={`flex-1 py-2 rounded-xl text-xs font-medium border transition-colors ${
-                  isDark ? 'border-white/[0.06] text-white/50 hover:text-white' : 'border-black/[0.06] text-kartel-black-500 hover:text-kartel-black-900'
+                  isDark ? 'border-white/[0.06] text-white/50 hover:text-white' : 'border-black/[0.06] text-black/50 hover:text-kartel-black-900'
                 }`}
               >
                 Edit
@@ -198,7 +198,7 @@ export default function DiscountsPage() {
           </motion.div>
         ))}
         {filtered.length === 0 && (
-          <p className={`col-span-full text-center py-16 text-sm ${isDark ? 'text-white/30' : 'text-kartel-black-300'}`}>
+          <p className={`col-span-full text-center py-16 text-sm ${isDark ? 'text-white/30' : 'text-black/30'}`}>
             No discounts found
           </p>
         )}
@@ -223,14 +223,14 @@ export default function DiscountsPage() {
             >
               <div className="flex items-center justify-between mb-6">
                 <h3 className={`font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>{editing ? 'Edit Discount' : 'Add Discount'}</h3>
-                <button onClick={() => setModal(false)} className={`p-1.5 rounded-lg ${isDark ? 'hover:bg-white/[0.06] text-white/40' : 'hover:bg-black/[0.06] text-kartel-black-400'}`}>
+                <button onClick={() => setModal(false)} className={`p-1.5 rounded-lg ${isDark ? 'hover:bg-white/[0.06] text-white/40' : 'hover:bg-black/[0.06] text-black/40'}`}>
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Discount Code</label>
+                  <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>Discount Code</label>
                   <input
                     value={form.code}
                     onChange={(e) => setForm({ ...form, code: e.target.value.toUpperCase() })}
@@ -243,7 +243,7 @@ export default function DiscountsPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Type</label>
+                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>Type</label>
                     <select
                       value={form.type}
                       onChange={(e) => setForm({ ...form, type: e.target.value as 'percentage' | 'fixed' })}
@@ -256,7 +256,7 @@ export default function DiscountsPage() {
                     </select>
                   </div>
                   <div>
-                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Value</label>
+                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>Value</label>
                     <input
                       type="number"
                       value={form.value}
@@ -269,7 +269,7 @@ export default function DiscountsPage() {
                 </div>
 
                 <div>
-                  <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Min Purchase Amount</label>
+                  <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>Min Purchase Amount</label>
                   <input
                     type="number"
                     value={form.minPurchase}
@@ -282,7 +282,7 @@ export default function DiscountsPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Max Uses (0 = unlimited)</label>
+                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>Max Uses (0 = unlimited)</label>
                     <input
                       type="number"
                       value={form.maxUses}
@@ -293,7 +293,7 @@ export default function DiscountsPage() {
                     />
                   </div>
                   <div>
-                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Expiry Date</label>
+                    <label className={`block text-xs font-medium mb-1 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>Expiry Date</label>
                     <input
                       type="date"
                       value={form.expiresAt}
@@ -309,7 +309,7 @@ export default function DiscountsPage() {
                   <button
                     onClick={() => setModal(false)}
                     className={`flex-1 py-3 rounded-xl text-sm font-medium border transition-colors ${
-                      isDark ? 'border-white/[0.06] text-white/50 hover:text-white' : 'border-black/[0.06] text-kartel-black-500 hover:text-kartel-black-900'
+                  isDark ? 'border-white/[0.06] text-white/50 hover:text-white' : 'border-black/[0.06] text-black/50 hover:text-kartel-black-900'
                     }`}
                   >
                     Cancel

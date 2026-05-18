@@ -134,7 +134,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                       ))}
                     </div>
                     <span className={`text-xs sm:text-sm ${
-                      isDark ? 'text-white/40' : 'text-kartel-black-400'
+                      isDark ? 'text-white/40' : 'text-black/40'
                     }`}>
                       {product.rating} ({product.reviewCount || 0})
                     </span>
@@ -142,7 +142,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 </div>
 
                 <p className={`text-sm sm:text-base leading-[1.7] sm:leading-[1.8] line-clamp-2 sm:line-clamp-none max-w-md ${
-                  isDark ? 'text-white/40' : 'text-kartel-black-500'
+                  isDark ? 'text-white/40' : 'text-black/50'
                 }`}>
                   {product.description}
                 </p>
@@ -155,7 +155,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                   </span>
                   {product.comparePrice && (
                     <span className={`text-base sm:text-lg line-through ${
-                      isDark ? 'text-white/25' : 'text-kartel-black-400'
+                      isDark ? 'text-white/25' : 'text-black/40'
                     }`}>
                       {formatPrice(product.comparePrice)}
                     </span>
@@ -285,7 +285,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 className={`p-3.5 rounded-full border transition-all duration-300 ${
                   isDark
                     ? 'bg-white/[0.03] border-white/[0.05] text-white/30 hover:text-kartel-gold hover:border-kartel-gold/25'
-                    : 'bg-black/[0.03] border-black/[0.06] text-kartel-black-400 hover:text-kartel-gold hover:border-kartel-gold/25'
+                    : 'bg-black/[0.03] border-black/[0.06] text-black/40 hover:text-kartel-gold hover:border-kartel-gold/25'
                 }`}
               >
                 <ChevronLeft className="w-5 h-5" strokeWidth={1.5} />
@@ -309,7 +309,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 className={`p-3.5 rounded-full border transition-all duration-300 ${
                   isDark
                     ? 'bg-white/[0.03] border-white/[0.05] text-white/30 hover:text-kartel-gold hover:border-kartel-gold/25'
-                    : 'bg-black/[0.03] border-black/[0.06] text-kartel-black-400 hover:text-kartel-gold hover:border-kartel-gold/25'
+                    : 'bg-black/[0.03] border-black/[0.06] text-black/40 hover:text-kartel-gold hover:border-kartel-gold/25'
                 }`}
               >
                 <ChevronRight className="w-5 h-5" strokeWidth={1.5} />

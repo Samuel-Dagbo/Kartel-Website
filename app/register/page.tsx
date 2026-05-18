@@ -286,7 +286,7 @@ export default function RegisterPage() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors ${
-                      isDark ? 'text-white/15 hover:text-white/40' : 'text-kartel-black-300 hover:text-kartel-black-600'
+                      isDark ? 'text-white/15 hover:text-white/40' : 'text-black/30 hover:text-black/60'
                     }`}
                   >
                     {showPassword ? <EyeOff className="w-3.5 h-3.5" strokeWidth={1.5} /> : <Eye className="w-3.5 h-3.5" strokeWidth={1.5} />}

@@ -232,7 +232,7 @@ export function Footer() {
             </div>
             <div className="lg:text-right">
               <p className={`text-sm transition-colors ${
-                isDark ? 'text-white/35' : 'text-kartel-black-400'
+                isDark ? 'text-white/35' : 'text-black/40'
               }`}>
                 <MapPin
                   className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5 text-kartel-gold/40"

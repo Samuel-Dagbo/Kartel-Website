@@ -59,7 +59,7 @@ export default function AnalyticsPage() {
     <div className="space-y-6">
       <div>
         <h1 className={`font-serif text-2xl font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Analytics</h1>
-        <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Track your store&apos;s performance</p>
+        <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-black/40'}`}>Track your store&apos;s performance</p>
       </div>
 
       {/* Stats Grid */}
@@ -75,7 +75,7 @@ export default function AnalyticsPage() {
             }`}
           >
             <div className="flex items-center justify-between mb-3">
-              <span className={`text-xs font-medium uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>{stat.label}</span>
+              <span className={`text-xs font-medium uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>{stat.label}</span>
               <div className="w-9 h-9 rounded-lg bg-kartel-gold/10 flex items-center justify-center">
                 <stat.icon className="w-4 h-4 text-kartel-gold" strokeWidth={1.5} />
               </div>

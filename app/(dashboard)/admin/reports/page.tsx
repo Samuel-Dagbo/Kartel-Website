@@ -67,7 +67,7 @@ export default function ReportsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className={`font-serif text-2xl font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Reports</h1>
-          <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Business performance overview</p>
+          <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-black/40'}`}>Business performance overview</p>
         </div>
         <button
           onClick={() => window.print()}
@@ -85,7 +85,7 @@ export default function ReportsPage() {
             isDark ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-white border-black/[0.06]'
           }`}>
             <div className="flex items-center justify-between mb-2">
-              <span className={`text-[10px] font-medium uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>{card.label}</span>
+              <span className={`text-[10px] font-medium uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>{card.label}</span>
               <card.icon className={`w-4 h-4 ${card.color}`} strokeWidth={1.5} />
             </div>
             <p className={`text-lg font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>{card.value}</p>
@@ -170,7 +170,7 @@ export default function ReportsPage() {
                       style={{ width: `${Math.min(100, (cat.count / Math.max(...data.topCategories.map((c) => c.count))) * 100)}%` }}
                     />
                   </div>
-                  <span className={`text-xs font-medium w-8 text-right ${isDark ? 'text-white/50' : 'text-kartel-black-500'}`}>{cat.count}</span>
+                  <span className={`text-xs font-medium w-8 text-right ${isDark ? 'text-white/50' : 'text-black/50'}`}>{cat.count}</span>
                 </div>
               </div>
             ))}

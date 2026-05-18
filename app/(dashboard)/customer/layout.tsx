@@ -24,7 +24,7 @@ export default function CustomerLayout({ children }: { children: React.ReactNode
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-white'}`}>
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
-          <span className={`text-sm ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Loading...</span>
+          <span className={`text-sm ${isDark ? 'text-white/40' : 'text-black/40'}`}>Loading...</span>
         </div>
       </div>
     )

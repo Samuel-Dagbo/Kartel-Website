@@ -182,7 +182,7 @@ export default function AdminUsersPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-kartel-cream dark:bg-kartel-black">
+              <tr className="bg-kartel-white-50 dark:bg-kartel-black">
                 <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">User</th>
                 <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Email</th>
                 <th className="px-5 py-4 text-left text-[10px] font-semibold text-muted uppercase tracking-wider">Role</th>

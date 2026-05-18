@@ -69,7 +69,7 @@ function ResetPasswordContent() {
       <div className={`min-h-[100dvh] relative overflow-hidden flex ${
         isDark 
           ? 'bg-kartel-black' 
-          : 'bg-gradient-to-br from-kartel-cream via-white to-kartel-cream'
+          : 'bg-gradient-to-br from-white via-kartel-white-50 to-white'
       }`}>
         <div className="absolute top-[-10%] right-[-5%] w-[50%] h-[50%] bg-kartel-gold/[0.03] blur-[250px] rounded-full pointer-events-none" />
         
@@ -92,7 +92,7 @@ function ResetPasswordContent() {
                 <h3 className={`font-serif text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>
                   Password Reset Complete
                 </h3>
-                <p className={`text-sm mb-6 ${isDark ? 'text-white/50' : 'text-kartel-black-400'}`}>
+                <p className={`text-sm mb-6 ${isDark ? 'text-white/50' : 'text-black/40'}`}>
                   Your password has been successfully reset. You can now sign in with your new password.
                 </p>
                 <Link
@@ -113,8 +113,8 @@ function ResetPasswordContent() {
     <div className={`min-h-[100dvh] relative overflow-hidden flex ${
       isDark 
         ? 'bg-kartel-black' 
-        : 'bg-gradient-to-br from-kartel-cream via-white to-kartel-cream'
-    }`}>
+        : 'bg-gradient-to-br from-white via-kartel-white-50 to-white'
+      }`}>
       <div className="absolute top-[-10%] right-[-5%] w-[50%] h-[50%] bg-kartel-gold/[0.03] blur-[250px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-kartel-gold/[0.015] blur-[200px] rounded-full pointer-events-none" />
 
@@ -126,7 +126,7 @@ function ResetPasswordContent() {
           className="w-full max-w-sm"
         >
           <Link href="/" className={`inline-flex items-center gap-1.5 transition-colors text-xs mb-4 group ${
-            isDark ? 'text-white/25 hover:text-kartel-gold' : 'text-kartel-black-500 hover:text-kartel-gold'
+            isDark ? 'text-white/25 hover:text-kartel-gold' : 'text-black/50 hover:text-kartel-gold'
           }`}>
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" strokeWidth={1.5} />
             Back to home
@@ -142,7 +142,7 @@ function ResetPasswordContent() {
               <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
                 isDark ? 'text-white' : 'text-kartel-black-900'
               }`}>Set New Password</h1>
-              <p className={`mt-1 text-xs ${isDark ? 'text-white/35' : 'text-kartel-black-400'}`}>
+              <p className={`mt-1 text-xs ${isDark ? 'text-white/35' : 'text-black/40'}`}>
                 Create a new secure password for your account.
               </p>
             </div>
@@ -150,8 +150,8 @@ function ResetPasswordContent() {
               onClick={toggleTheme}
               className={`p-2.5 rounded-full transition-all duration-300 ${
                 isDark 
-                  ? 'text-white/25 hover:text-kartel-gold hover:bg-white/[0.05]' 
-                  : 'text-kartel-black-400 hover:text-kartel-gold hover:bg-kartel-gold/10'
+                   ? 'text-white/25 hover:text-kartel-gold hover:bg-white/[0.05]' 
+                   : 'text-black/40 hover:text-kartel-gold hover:bg-kartel-gold/10'
               }`}
               aria-label="Toggle theme"
             >
@@ -184,11 +184,11 @@ function ResetPasswordContent() {
 
                 <div className="space-y-1">
                   <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
-                    isDark ? 'text-white/45' : 'text-kartel-black-400'
-                  }`}>New Password</label>
-                  <div className="relative group">
-                    <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
-                      isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                    isDark ? 'text-white/45' : 'text-black/50'
+                   }`}>New Password</label>
+                   <div className="relative group">
+                     <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                       isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-black/30 group-focus-within:text-kartel-gold/70'
                     }`} strokeWidth={1.5} />
                     <input
                       type={showPassword ? 'text' : 'password'}
@@ -197,16 +197,16 @@ function ResetPasswordContent() {
                       className={`w-full rounded-lg pl-9 pr-9 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
                         isDark 
                           ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.05]'
-                          : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
-                      }`}
-                      placeholder="Min. 6 characters"
+                          : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-black/30 focus:bg-black/[0.05]'
+                       }`}
+                       placeholder="Min. 6 characters"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors ${
-                        isDark ? 'text-white/15 hover:text-white/40' : 'text-kartel-black-300 hover:text-kartel-black-600'
+                        isDark ? 'text-white/15 hover:text-white/40' : 'text-black/30 hover:text-black/60'
                       }`}
                     >
                       {showPassword ? <EyeOff className="w-3.5 h-3.5" strokeWidth={1.5} /> : <Eye className="w-3.5 h-3.5" strokeWidth={1.5} />}
@@ -216,11 +216,11 @@ function ResetPasswordContent() {
 
                 <div className="space-y-1">
                   <label className={`text-[10px] font-medium tracking-[0.15em] uppercase ${
-                    isDark ? 'text-white/45' : 'text-kartel-black-400'
-                  }`}>Confirm Password</label>
-                  <div className="relative group">
-                    <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
-                      isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-kartel-black-300 group-focus-within:text-kartel-gold/70'
+                     isDark ? 'text-white/45' : 'text-black/50'
+                   }`}>Confirm Password</label>
+                   <div className="relative group">
+                     <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors ${
+                       isDark ? 'text-white/15 group-focus-within:text-kartel-gold/50' : 'text-black/30 group-focus-within:text-kartel-gold/70'
                     }`} strokeWidth={1.5} />
                     <input
                       type={showPassword ? 'text' : 'password'}
@@ -229,9 +229,9 @@ function ResetPasswordContent() {
                       className={`w-full rounded-lg pl-9 pr-3 py-2 text-sm transition-all focus:outline-none focus:border-kartel-gold/25 focus:ring-1 focus:ring-kartel-gold/8 ${
                         isDark 
                           ? 'bg-white/[0.02] border-white/[0.05] text-white placeholder:text-white/15 focus:bg-white/[0.05]'
-                          : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-kartel-black-300 focus:bg-black/[0.05]'
-                      }`}
-                      placeholder="Repeat password"
+                          : 'bg-black/[0.03] border-black/[0.08] text-kartel-black-900 placeholder:text-black/30 focus:bg-black/[0.05]'
+                       }`}
+                       placeholder="Repeat password"
                       required
                     />
                   </div>
@@ -255,7 +255,7 @@ function ResetPasswordContent() {
             )}
           </div>
 
-          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/25' : 'text-kartel-black-400'}`}>
+          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/25' : 'text-black/40'}`}>
             Remember your password?{' '}
             <Link href="/login" className={`font-medium transition-colors ${isDark ? 'text-kartel-gold/60 hover:text-kartel-gold' : 'text-kartel-gold hover:text-kartel-gold/80'}`}>
               Sign in

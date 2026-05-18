@@ -122,7 +122,7 @@ export default function SettingsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className={`font-serif text-2xl font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Settings</h1>
-          <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Manage your store configuration</p>
+          <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-black/40'}`}>Manage your store configuration</p>
         </div>
         <button
           onClick={handleSave}
@@ -153,11 +153,11 @@ export default function SettingsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {section.fields.map((field) => (
               <div key={field.key}>
-                <label className={`block text-xs font-medium mb-1.5 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>
+                <label className={`block text-xs font-medium mb-1.5 uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>
                   {field.label}
                 </label>
                 <div className="relative">
-                  <field.icon className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+                  <field.icon className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-black/40'}`} strokeWidth={1.5} />
                   <input
                     type={field.type}
                     value={String((form as unknown as Record<string, unknown>)[field.key] ?? '')}
@@ -196,7 +196,7 @@ export default function SettingsPage() {
           </div>
           <div>
             <p className={`text-sm font-medium ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Enable Email Notifications</p>
-            <p className={`text-xs mt-0.5 ${isDark ? 'text-white/30' : 'text-kartel-black-400'}`}>Receive order and low stock alerts</p>
+            <p className={`text-xs mt-0.5 ${isDark ? 'text-white/30' : 'text-black/40'}`}>Receive order and low stock alerts</p>
           </div>
         </label>
       </motion.div>

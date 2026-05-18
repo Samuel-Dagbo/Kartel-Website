@@ -59,7 +59,7 @@ export default function ReviewsPage() {
     <div className="space-y-6">
       <div>
         <h1 className={`font-serif text-2xl font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>Reviews</h1>
-        <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Customer feedback and ratings</p>
+        <p className={`text-sm mt-1 ${isDark ? 'text-white/40' : 'text-black/40'}`}>Customer feedback and ratings</p>
       </div>
 
       {/* Stats */}
@@ -73,7 +73,7 @@ export default function ReviewsPage() {
             isDark ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-white border-black/[0.06]'
           }`}>
             <div className="flex items-center justify-between mb-2">
-              <span className={`text-xs font-medium uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>{stat.label}</span>
+              <span className={`text-xs font-medium uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>{stat.label}</span>
               <stat.icon className="w-4 h-4 text-kartel-gold" strokeWidth={1.5} />
             </div>
             <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-kartel-black-900'}`}>{stat.value}</p>
@@ -83,7 +83,7 @@ export default function ReviewsPage() {
 
       {/* Search */}
       <div className="relative max-w-xs">
-        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-black/40'}`} strokeWidth={1.5} />
         <input
           type="text"
           placeholder="Search reviews..."
@@ -124,13 +124,13 @@ export default function ReviewsPage() {
                         />
                       ))}
                     </div>
-                    <span className={`text-xs ${isDark ? 'text-white/30' : 'text-kartel-black-400'}`}>
+                    <span className={`text-xs ${isDark ? 'text-white/30' : 'text-black/40'}`}>
                       {new Date(review.createdAt).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mb-2">
                     <Package className="w-3 h-3 text-kartel-gold/50" strokeWidth={1.5} />
-                    <span className={`text-xs ${isDark ? 'text-white/50' : 'text-kartel-black-500'}`}>{review.product?.name || 'Deleted Product'}</span>
+                    <span className={`text-xs ${isDark ? 'text-white/50' : 'text-black/50'}`}>{review.product?.name || 'Deleted Product'}</span>
                   </div>
                   <p className={`text-sm leading-relaxed ${isDark ? 'text-white/60' : 'text-kartel-black-600'}`}>{review.comment}</p>
                 </div>
@@ -145,7 +145,7 @@ export default function ReviewsPage() {
           </motion.div>
         ))}
         {filtered.length === 0 && (
-          <p className={`text-center py-16 text-sm ${isDark ? 'text-white/30' : 'text-kartel-black-300'}`}>
+          <p className={`text-center py-16 text-sm ${isDark ? 'text-white/30' : 'text-black/30'}`}>
             No reviews found
           </p>
         )}

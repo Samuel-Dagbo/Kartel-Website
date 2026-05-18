@@ -30,7 +30,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-kartel-black' : 'bg-white'}`}>
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-kartel-gold border-t-transparent rounded-full animate-spin" />
-          <span className={`text-sm ${isDark ? 'text-white/40' : 'text-kartel-black-400'}`}>Loading...</span>
+          <span className={`text-sm ${isDark ? 'text-white/40' : 'text-black/40'}`}>Loading...</span>
         </div>
       </div>
     )
@@ -96,7 +96,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               className={`p-2 rounded-lg transition-colors relative ${
                 isDark
                   ? 'text-white/40 hover:text-white hover:bg-white/[0.05]'
-                  : 'text-kartel-black-400 hover:text-kartel-black-900 hover:bg-black/[0.05]'
+                  : 'text-black/40 hover:text-kartel-black-900 hover:bg-black/[0.05]'
               }`}
             >
               <Bell className="w-5 h-5" strokeWidth={1.5} />

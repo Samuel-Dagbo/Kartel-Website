@@ -129,7 +129,7 @@ export function EmptyState({
           ? 'bg-white/[0.03] border-white/[0.05]'
           : 'bg-black/[0.03] border-black/[0.06]'
       }`}>
-        <Icon className={`w-7 h-7 ${isDark ? 'text-white/15' : 'text-kartel-black-400'}`} strokeWidth={1.5} />
+        <Icon className={`w-7 h-7 ${isDark ? 'text-white/15' : 'text-black/40'}`} strokeWidth={1.5} />
       </div>
       <h3 className={`font-serif text-xl font-semibold mb-2 ${
         isDark ? 'text-white/70' : 'text-kartel-black-700'
@@ -137,7 +137,7 @@ export function EmptyState({
         {title}
       </h3>
       <p className={`text-body-sm max-w-sm ${
-        isDark ? 'text-white/35' : 'text-kartel-black-400'
+        isDark ? 'text-white/35' : 'text-black/40'
       }`}>{description}</p>
     </motion.div>
   )
