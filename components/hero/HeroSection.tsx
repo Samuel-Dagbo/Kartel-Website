@@ -97,7 +97,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(0.9375rem,2.5vw,1.125rem)] text-white/70 lg:text-muted max-w-xl leading-[1.8]"
+              className="text-[clamp(0.9375rem,2.5vw,1.125rem)] text-white/85 lg:text-muted max-w-xl leading-[1.8]"
             >
               CARL JONES blends rare botanicals with avant-garde chemistry. Each scent
               transcends time—a symphony of luxury for the discerning few.
