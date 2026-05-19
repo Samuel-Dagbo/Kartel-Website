@@ -72,26 +72,31 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account?.provider === 'google' && profile) {
-        await connectDB()
-        
-        const email = profile.email
-        let existingUser = await User.findOne({ email })
-        
-        if (!existingUser) {
-          existingUser = await User.create({
-            name: profile.name || 'Google User',
-            email: email,
-            password: 'GOOGLE_OAUTH_' + Math.random().toString(36),
-            role: 'user',
-            image: profile.image || null,
-          })
-        } else if (!existingUser.image && profile.image) {
-          existingUser.image = profile.image
-          await existingUser.save()
+        try {
+          await connectDB()
+
+          const email = profile.email
+          let existingUser = await User.findOne({ email })
+
+          if (!existingUser) {
+            existingUser = await User.create({
+              name: profile.name || 'Google User',
+              email: email,
+              password: 'GOOGLE_OAUTH_' + Math.random().toString(36),
+              role: 'user',
+              image: profile.image || null,
+            })
+          } else if (!existingUser.image && profile.image) {
+            existingUser.image = profile.image
+            await existingUser.save()
+          }
+
+          user.id = existingUser._id.toString()
+          user.role = existingUser.role
+        } catch (error) {
+          console.error('Google signIn callback error:', error)
+          return false
         }
-        
-        user.id = existingUser._id.toString()
-        user.role = existingUser.role
       }
       return true
     },
