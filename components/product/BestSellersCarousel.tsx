@@ -128,13 +128,13 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                           className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
                             i < rating
                               ? 'text-kartel-gold fill-kartel-gold'
-                              : isDark ? 'text-white/10' : 'text-black/10'
+                              : isDark ? 'text-white/30' : 'text-black/30'
                           }`}
                         />
                       ))}
                     </div>
                     <span className={`text-xs sm:text-sm ${
-                      isDark ? 'text-white/40' : 'text-black/40'
+                      isDark ? 'text-white/60' : 'text-black/60'
                     }`}>
                       {product.rating} ({product.reviewCount || 0})
                     </span>
@@ -142,7 +142,7 @@ export default function BestSellersCarousel({ products = [] }: BestSellersCarous
                 </div>
 
                 <p className={`text-sm sm:text-base leading-[1.7] sm:leading-[1.8] line-clamp-2 sm:line-clamp-none max-w-md ${
-                  isDark ? 'text-white/40' : 'text-black/50'
+                  isDark ? 'text-white/70' : 'text-black/70'
                 }`}>
                   {product.description}
                 </p>

@@ -51,9 +51,23 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
   },
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60,
+  },
   pages: {
     signIn: '/login',
     error: '/login',
+  },
+  cookies: {
+    sessionToken: {
+      name: `${process.env.NODE_ENV === 'production' ? '__Secure-' : ''}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -85,6 +99,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id as string
         token.role = user.role as string
+        token.picture = (user.image as string) || undefined
       }
       if (account?.provider === 'google') {
         token.provider = 'google'

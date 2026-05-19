@@ -8,9 +8,10 @@ import { useTheme } from '@/components/providers/ThemeProvider'
 
 interface ProductGridProps {
   products: ProductType[]
+  viewMode?: 'grid' | 'list'
 }
 
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products, viewMode = 'grid' }: ProductGridProps) {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
 
@@ -47,10 +48,14 @@ export function ProductGrid({ products }: ProductGridProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8"
+      className={
+        viewMode === 'grid'
+          ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8'
+          : 'grid grid-cols-1 gap-6'
+      }
     >
       {products.map((product, index) => (
-        <ProductCard key={product._id} product={product} index={index} />
+        <ProductCard key={product._id} product={product} index={index} variant={viewMode === 'list' ? 'list' : 'default'} />
       ))}
     </motion.div>
   )

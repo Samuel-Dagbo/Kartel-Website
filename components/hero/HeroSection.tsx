@@ -96,7 +96,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(0.9375rem,2.5vw,1.125rem)] text-white lg:text-muted max-w-xl leading-[1.8]"
+              className="text-[clamp(0.9375rem,2.5vw,1.125rem)] text-white/90 lg:text-body max-w-xl leading-[1.8]"
             >
               CARL JONES blends rare botanicals with avant-garde chemistry. Each scent
               transcends time—a symphony of luxury for the discerning few.
@@ -122,7 +122,7 @@ export function HeroSection() {
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center text-sm px-8 py-4 border border-white/40 lg:border-black/[0.12] text-white lg:text-black/70 rounded-full bg-black/20 lg:bg-transparent backdrop-blur-md hover:bg-white/15 lg:hover:bg-black/[0.05] hover:border-white/60 lg:hover:border-black/20 transition-all duration-300"
+                className="inline-flex items-center justify-center text-sm px-8 py-4 border border-white/50 lg:border-black/[0.2] text-white lg:text-black/70 rounded-full bg-black/20 lg:bg-transparent backdrop-blur-md hover:bg-white/15 lg:hover:bg-black/[0.05] hover:border-white/60 lg:hover:border-black/20 transition-all duration-300"
               >
                 Our Heritage
               </Link>
@@ -144,7 +144,7 @@ export function HeroSection() {
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
                     <p className="text-lg lg:text-xl font-serif font-bold text-white lg:text-heading">{stat.value}</p>
-                    <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 lg:text-muted mt-1">{stat.label}</p>
+                    <p className="text-[9px] uppercase tracking-[0.2em] text-white/70 lg:text-muted mt-1">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -203,7 +203,7 @@ export function HeroSection() {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
-        <span className="text-[9px] uppercase tracking-[0.3em] text-white/40 lg:text-muted/60">Scroll</span>
+        <span className="text-[9px] uppercase tracking-[0.3em] text-white/50 lg:text-muted">Scroll</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}

@@ -93,6 +93,7 @@ const config: Config = {
       boxShadow: {
         "luxury": "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03)",
         "luxury-lg": "0 35px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04)",
+        "luxury-xl": "0 45px 80px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05)",
         "gold-glow": "0 0 40px rgba(201, 168, 76, 0.15), 0 0 80px rgba(201, 168, 76, 0.05)",
         "gold-glow-lg": "0 0 60px rgba(201, 168, 76, 0.2), 0 0 120px rgba(201, 168, 76, 0.08)",
         "inner-light": "inset 0 1px 0 0 rgba(255, 255, 255, 0.06)",

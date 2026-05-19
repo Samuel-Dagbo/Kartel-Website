@@ -232,10 +232,10 @@ export function Footer() {
             </div>
             <div className="lg:text-right">
               <p className={`text-sm transition-colors ${
-                isDark ? 'text-white/35' : 'text-black/40'
+                isDark ? 'text-white/55' : 'text-black/60'
               }`}>
                 <MapPin
-                  className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5 text-kartel-gold/40"
+                  className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5 text-kartel-gold/50"
                   strokeWidth={1.5}
                 />
                 123 Luxury Lane, New York, NY 10001
@@ -246,13 +246,13 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className={`text-xs tracking-wide transition-colors ${
-            isDark ? 'text-white/30' : 'text-black/40'
+            <p className={`text-xs tracking-wide transition-colors ${
+            isDark ? 'text-white/50' : 'text-black/55'
           }`}>
             &copy; {new Date().getFullYear()} CARL JONES. All rights reserved.
           </p>
           <p className={`text-xs tracking-wide transition-colors ${
-            isDark ? 'text-white/30' : 'text-black/40'
+            isDark ? 'text-white/50' : 'text-black/55'
           }`}>
             Built by{' '}
             <a

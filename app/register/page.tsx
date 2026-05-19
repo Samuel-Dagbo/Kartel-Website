@@ -24,14 +24,14 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (session?.user) {
+    if (session?.user && status === 'authenticated') {
       if (session.user.role === 'admin') {
         router.replace('/admin')
       } else {
         router.replace('/customer')
       }
     }
-  }, [session, router])
+  }, [session, status, router])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -100,7 +100,7 @@ export default function RegisterPage() {
     )
   }
 
-  if (session?.user) {
+  if (session?.user && status === 'authenticated') {
     return null
   }
 
@@ -180,7 +180,7 @@ export default function RegisterPage() {
               <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
                 isDark ? 'text-white' : 'text-kartel-black-900'
               }`}>Create Account</h1>
-              <p className={`mt-1 text-xs ${isDark ? 'text-white/45' : 'text-black/45'}`}>
+              <p className={`mt-1 text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
                 Join the CARL JONES family today.
               </p>
             </div>
@@ -331,7 +331,7 @@ export default function RegisterPage() {
 
             <div className="flex items-center gap-3 my-4">
               <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.08] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.08] to-transparent'}`} />
-              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/25' : 'text-black/30'}`}>or</span>
+              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/50' : 'text-black/55'}`}>or</span>
               <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.08] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.08] to-transparent'}`} />
             </div>
 
@@ -353,7 +353,7 @@ export default function RegisterPage() {
             </button>
           </div>
 
-          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/35' : 'text-black/40'}`}>
+          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
             Already have an account?{' '}
             <Link href="/login" className={`font-medium transition-colors ${isDark ? 'text-kartel-gold/70 hover:text-kartel-gold' : 'text-kartel-gold hover:text-kartel-gold/80'}`}>
               Sign in

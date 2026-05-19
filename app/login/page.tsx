@@ -20,14 +20,14 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (session?.user) {
+    if (session?.user && status === 'authenticated') {
       if (session.user.role === 'admin') {
         router.replace('/admin')
       } else {
         router.replace('/customer')
       }
     }
-  }, [session, router])
+  }, [session, status, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,7 +65,7 @@ export default function LoginPage() {
     )
   }
 
-  if (session?.user) {
+  if (session?.user && status === 'authenticated') {
     return null
   }
 
@@ -141,7 +141,7 @@ export default function LoginPage() {
               <h1 className={`font-serif text-xl sm:text-2xl font-bold tracking-[-0.01em] ${
                 isDark ? 'text-white' : 'text-kartel-black-900'
               }`}>Welcome Back</h1>
-              <p className={`mt-1 text-xs ${isDark ? 'text-white/45' : 'text-black/45'}`}>Sign in to access your account.</p>
+              <p className={`mt-1 text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>Sign in to access your account.</p>
             </div>
             <button
               onClick={toggleTheme}
@@ -234,7 +234,7 @@ export default function LoginPage() {
 
             <div className="flex items-center gap-3 my-4">
               <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.08] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.08] to-transparent'}`} />
-              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/25' : 'text-black/30'}`}>or</span>
+              <span className={`text-[9px] uppercase tracking-[0.15em] ${isDark ? 'text-white/50' : 'text-black/55'}`}>or</span>
               <div className={`h-px flex-1 ${isDark ? 'bg-gradient-to-r from-transparent via-white/[0.08] to-transparent' : 'bg-gradient-to-r from-transparent via-black/[0.08] to-transparent'}`} />
             </div>
 
@@ -253,7 +253,7 @@ export default function LoginPage() {
             </button>
           </div>
 
-          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/35' : 'text-black/40'}`}>
+          <p className={`mt-5 text-center text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
             Don&apos;t have an account?{' '}
             <Link href="/register" className={`font-medium transition-colors ${isDark ? 'text-kartel-gold/70 hover:text-kartel-gold' : 'text-kartel-gold hover:text-kartel-gold/80'}`}>Create account</Link>
           </p>

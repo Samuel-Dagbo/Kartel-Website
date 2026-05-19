@@ -34,11 +34,13 @@ export async function GET(req: NextRequest) {
       query.$text = { $search: search }
     }
 
-    let products = await Product.find(query).sort({ createdAt: -1 })
+    let sortQuery: Record<string, 1 | -1> = { createdAt: -1 }
+    if (sort === 'price-asc') sortQuery = { price: 1 }
+    else if (sort === 'price-desc') sortQuery = { price: -1 }
+    else if (sort === 'rating') sortQuery = { rating: -1, createdAt: -1 }
+    else if (sort === 'newest') sortQuery = { createdAt: -1 }
 
-    if (sort === 'price-asc') products = await Product.find(query).sort({ price: 1 })
-    if (sort === 'price-desc') products = await Product.find(query).sort({ price: -1 })
-    if (sort === 'rating') products = await Product.find(query).sort({ rating: -1 })
+    const products = await Product.find(query).sort(sortQuery)
 
     return NextResponse.json(products, { status: 200 })
   } catch (error: any) {

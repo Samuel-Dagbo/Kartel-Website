@@ -23,7 +23,7 @@ import { useCart } from '@/components/providers/CartProvider'
 import { useTheme } from '@/components/providers/ThemeProvider'
 
 export function Navbar() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const { totalItems, toggleCart } = useCart()
   const { theme, toggleTheme } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -31,7 +31,13 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const isAuthenticated = session?.user && status === 'authenticated'
   const isAdmin = session?.user?.role === 'admin'
 
   useEffect(() => {
@@ -102,10 +108,10 @@ export function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative px-5 py-2.5 text-[13px] font-medium tracking-wide transition-colors duration-300 group ${
+                    className={`relative px-5 py-2.5 text-[13px] font-medium tracking-wide transition-colors duration-300 group navbar-text ${
                       theme === 'dark'
-                        ? 'text-white/60 hover:text-kartel-gold'
-                        : 'text-black/60 hover:text-kartel-gold'
+                        ? 'hover:text-kartel-gold'
+                        : 'hover:text-kartel-gold'
                     }`}
                   >
                     {link.label}
@@ -120,10 +126,10 @@ export function Navbar() {
               {/* Search */}
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className={`p-2.5 rounded-full transition-all duration-300 ${
+                className={`p-2.5 rounded-full transition-all duration-300 navbar-text ${
                   theme === 'dark'
-                    ? 'text-white/50 hover:text-kartel-gold hover:bg-white/[0.05]'
-                    : 'text-black/50 hover:text-kartel-gold hover:bg-black/[0.05]'
+                    ? 'hover:text-kartel-gold hover:bg-white/[0.05]'
+                    : 'hover:text-kartel-gold hover:bg-black/[0.05]'
                 }`}
                 aria-label="Search"
               >
@@ -137,10 +143,10 @@ export function Navbar() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className={`p-2.5 rounded-full transition-all duration-300 ${
+                className={`p-2.5 rounded-full transition-all duration-300 navbar-text ${
                   theme === 'dark'
-                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
-                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
+                    ? 'hover:text-kartel-gold hover:bg-white/[0.06]'
+                    : 'hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Toggle theme"
               >
@@ -154,10 +160,10 @@ export function Navbar() {
               {/* Wishlist */}
               <Link
                 href="/wishlist"
-                className={`hidden sm:flex p-2.5 rounded-full transition-all duration-300 ${
+                className={`hidden sm:flex p-2.5 rounded-full transition-all duration-300 navbar-text ${
                   theme === 'dark'
-                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
-                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
+                    ? 'hover:text-kartel-gold hover:bg-white/[0.06]'
+                    : 'hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Wishlist"
               >
@@ -171,10 +177,10 @@ export function Navbar() {
               {/* Cart */}
               <button
                 onClick={toggleCart}
-                className={`relative p-2.5 rounded-full transition-all duration-300 ${
+                className={`relative p-2.5 rounded-full transition-all duration-300 navbar-text ${
                   theme === 'dark'
-                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
-                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
+                    ? 'hover:text-kartel-gold hover:bg-white/[0.06]'
+                    : 'hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Cart"
               >
@@ -195,14 +201,14 @@ export function Navbar() {
               </button>
 
               {/* User */}
-              {session ? (
+              {mounted && isAuthenticated ? (
                 <div className="hidden sm:flex items-center gap-1 ml-1 relative" ref={userMenuRef}>
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className={`p-2.5 rounded-full transition-all duration-300 ${
+                    className={`p-2.5 rounded-full transition-all duration-300 navbar-text ${
                       theme === 'dark'
-                        ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.06]'
-                        : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
+                        ? 'hover:text-kartel-gold hover:bg-white/[0.06]'
+                        : 'hover:text-kartel-gold hover:bg-black/[0.04]'
                     }`}
                     aria-label="Account"
                   >
@@ -285,22 +291,22 @@ export function Navbar() {
                     )}
                   </AnimatePresence>
                 </div>
-              ) : (
+              ) : mounted && !isAuthenticated ? (
                 <Link
                   href="/login"
                   className="hidden sm:flex ml-2 px-5 py-2.5 text-xs font-semibold tracking-[0.15em] border border-kartel-gold/30 text-kartel-gold hover:bg-kartel-gold/10 hover:border-kartel-gold/50 transition-all duration-300 rounded-full"
                 >
                   Sign In
                 </Link>
-              )}
+              ) : null}
 
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`md:hidden p-2.5 rounded-full transition-all duration-300 ml-1 ${
+                className={`md:hidden p-2.5 rounded-full transition-all duration-300 ml-1 navbar-text ${
                   theme === 'dark'
-                    ? 'text-white/60 hover:text-kartel-gold hover:bg-white/[0.05]'
-                    : 'text-black/60 hover:text-kartel-gold hover:bg-black/[0.04]'
+                    ? 'hover:text-kartel-gold hover:bg-white/[0.05]'
+                    : 'hover:text-kartel-gold hover:bg-black/[0.04]'
                 }`}
                 aria-label="Menu"
               >
@@ -333,8 +339,8 @@ export function Navbar() {
               >
                 <div className="max-w-2xl mx-auto relative">
                   <Search
-                    className={`absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 ${
-                      theme === 'dark' ? 'text-white/35' : 'text-black/35'
+                    className={`absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 search-icon ${
+                      theme === 'dark' ? 'text-white/50' : 'text-black/50'
                     }`}
                     strokeWidth={1.5}
                   />
@@ -399,7 +405,7 @@ export function Navbar() {
                   </motion.div>
                 ))}
                 <div className="pt-6 mt-4 border-t border-white/[0.06] dark:border-white/[0.06]">
-                  {session ? (
+                  {isAuthenticated ? (
                     <button
                       onClick={() => {
                         setIsMobileMenuOpen(false)

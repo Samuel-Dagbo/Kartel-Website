@@ -13,7 +13,7 @@ import { cn, formatPrice } from '@/lib/utils'
 interface ProductCardProps {
   product: Product
   index?: number
-  variant?: 'default' | 'compact'
+  variant?: 'default' | 'compact' | 'list'
 }
 
 export function ProductCard({ product, index = 0, variant = 'default' }: ProductCardProps) {
@@ -34,6 +34,80 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
   const discountPercent = product.comparePrice
     ? Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100)
     : 0
+
+  if (variant === 'list') {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <Link href={`/product/${product.slug}`} className="group block">
+          <div className="flex gap-5 p-4 glass-card rounded-2xl hover:border-kartel-gold/[0.15] transition-all duration-500 shadow-sm hover:shadow-luxury">
+            <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-xl overflow-hidden shrink-0">
+              <Image
+                src={product.images[0] || '/placeholder.jpg'}
+                alt={product.name}
+                fill
+                sizes="144px"
+                className="object-cover transition-all duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+            <div className="flex-1 flex flex-col justify-between min-w-0 py-1">
+              <div className="space-y-1">
+                <p className="text-[11px] font-semibold tracking-[0.15em] uppercase text-kartel-gold/60">
+                  {product.brand}
+                </p>
+                <h3 className="font-serif text-base sm:text-lg font-semibold text-heading group-hover:text-kartel-gold transition-colors duration-500 truncate">
+                  {product.name}
+                </h3>
+                <p className="text-sm text-muted/70 line-clamp-2 leading-relaxed">
+                  {product.description}
+                </p>
+                <div className="flex items-center gap-1 pt-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={cn(
+                        'w-3 h-3',
+                        i < Math.floor(product.rating)
+                          ? 'text-kartel-gold fill-kartel-gold'
+                          : isDark ? 'text-white/20' : 'text-black/20'
+                      )}
+                    />
+                  ))}
+                  <span className="text-[11px] text-muted ml-1.5">
+                    ({product.reviewCount || 0})
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between mt-3">
+                <div className="flex items-baseline gap-2.5">
+                  <span className="text-lg font-bold text-heading tracking-tight">
+                    {formatPrice(product.price)}
+                  </span>
+                  {product.comparePrice && (
+                    <span className="text-sm text-muted line-through">
+                      {formatPrice(product.comparePrice)}
+                    </span>
+                  )}
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleAddToCart}
+                  className="p-2.5 rounded-full bg-kartel-gold/10 text-kartel-gold hover:bg-kartel-gold hover:text-kartel-black transition-all duration-300"
+                >
+                  <ShoppingBag className="w-4 h-4" strokeWidth={1.5} />
+                </motion.button>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div
@@ -118,8 +192,8 @@ export function ProductCard({ product, index = 0, variant = 'default' }: Product
                   className={cn(
                     'w-3.5 h-3.5',
                     i < Math.floor(product.rating)
-                      ? 'text-kartel-gold fill-kartel-gold'
-                      : isDark ? 'text-white/15' : 'text-black/15'
+                    ? 'text-kartel-gold fill-kartel-gold'
+                    : isDark ? 'text-white/30' : 'text-black/30'
                   )}
                 />
               ))}

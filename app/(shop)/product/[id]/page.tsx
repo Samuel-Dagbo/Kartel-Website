@@ -70,7 +70,7 @@ function ProductContent({ id }: { id: string }) {
         <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 ${
           isDark ? 'bg-white/[0.05] border border-white/[0.08]' : 'bg-black/[0.03] border border-black/[0.08]'
         }`}>
-          <Sparkles className={`w-7 h-7 ${isDark ? 'text-white/25' : 'text-black/25'}`} strokeWidth={1.5} />
+          <Sparkles className={`w-7 h-7 ${isDark ? 'text-white/45' : 'text-black/50'}`} strokeWidth={1.5} />
         </div>
         <h1 className="font-serif text-2xl font-bold text-heading mb-4">Fragrance Not Found</h1>
         <p className="text-muted mb-8 max-w-sm">
@@ -170,7 +170,7 @@ function ProductContent({ id }: { id: string }) {
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-4 h-4 ${i < product.rating ? 'text-kartel-gold fill-kartel-gold' : isDark ? 'text-white/15' : 'text-black/10'}`}
+                        className={`w-4 h-4 ${i < product.rating ? 'text-kartel-gold fill-kartel-gold' : isDark ? 'text-white/30' : 'text-black/30'}`}
                       />
                     ))}
                     <span className="text-sm text-muted ml-2">({product.reviewCount || 0} reviews)</span>

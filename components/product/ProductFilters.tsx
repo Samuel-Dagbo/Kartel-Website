@@ -64,8 +64,8 @@ export function ProductFilters({
       {/* Search */}
       <div className="relative lg:hidden">
         <Search
-          className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 ${
-            isDark ? 'text-white/35' : 'text-black/35'
+          className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 search-icon ${
+            isDark ? 'text-white/50' : 'text-black/50'
           }`}
           strokeWidth={1.5}
         />
@@ -94,9 +94,9 @@ export function ProductFilters({
                 'px-4 py-2 rounded-full text-xs font-medium transition-all duration-300',
                 selectedCategory === cat
                   ? 'bg-kartel-gold text-kartel-black shadow-gold-glow'
-                  : isDark
-                    ? 'bg-white/[0.04] text-white/60 hover:bg-white/[0.08] hover:text-white/80 border border-white/[0.08]'
-                    : 'bg-black/[0.02] text-black/60 hover:bg-black/[0.04] hover:text-black/80 border border-black/[0.08]'
+                    : isDark
+                      ? 'bg-white/[0.04] text-white/70 hover:bg-white/[0.08] hover:text-white/90 border border-white/[0.08]'
+                      : 'bg-black/[0.02] text-black/70 hover:bg-black/[0.04] hover:text-black/90 border border-black/[0.08]'
               )}
             >
               {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -121,8 +121,8 @@ export function ProductFilters({
                   selectedBrand === brand
                     ? 'bg-kartel-gold/10 text-kartel-gold'
                     : isDark
-                      ? 'text-white/55 hover:bg-white/[0.04] hover:text-white/80'
-                      : 'text-black/55 hover:bg-black/[0.03] hover:text-black/80'
+                      ? 'text-white/70 hover:bg-white/[0.04] hover:text-white/90'
+                      : 'text-black/70 hover:bg-black/[0.03] hover:text-black/90'
                 )}
               >
                 <span>{brand}</span>
@@ -161,7 +161,7 @@ export function ProductFilters({
         <div className="flex gap-3">
           <div className="flex-1 relative">
             <span className={`absolute left-3 top-1/2 -translate-y-1/2 text-xs ${
-              isDark ? 'text-white/40' : 'text-black/40'
+              isDark ? 'text-white/60' : 'text-black/60'
             }`}>
               GHS
             </span>
@@ -185,7 +185,7 @@ export function ProductFilters({
           </div>
           <div className="flex-1 relative">
             <span className={`absolute left-3 top-1/2 -translate-y-1/2 text-xs ${
-              isDark ? 'text-white/40' : 'text-black/40'
+              isDark ? 'text-white/60' : 'text-black/60'
             }`}>
               GHS
             </span>

@@ -206,7 +206,7 @@ export function CartDrawer() {
                     </span>
                   </div>
                 </div>
-                <p className={`text-xs text-center ${isDark ? 'text-white/35' : 'text-black/40'}`}>
+                <p className={`text-xs text-center ${isDark ? 'text-white/55' : 'text-black/60'}`}>
                   Shipping and taxes calculated at checkout.
                 </p>
                 <Link

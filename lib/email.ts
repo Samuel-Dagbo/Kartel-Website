@@ -4,7 +4,7 @@ import { Client } from 'node-mailjet'
 // services like Mailjet claiming to be from @gmail.com, hurting deliverability.
 // For reliable inbox delivery, set up a custom domain sender
 // (e.g., noreply@carljonesperfumes.com) with SPF/DKIM/DMARC in Mailjet.
-const FROM_EMAIL = 'carljonesperfumes@gmail.com'
+const FROM_EMAIL = 'perfumescarljones@gmail.com'
 const FROM_NAME = 'Carl Jones Perfumes'
 
 function getMailjet() {
