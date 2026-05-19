@@ -77,14 +77,20 @@ export async function POST(req: NextRequest) {
         }, { status: 400 })
       }
       
-      await Product.findByIdAndUpdate(item.product, {
-        $inc: { quantity: -item.quantity }
-      })
+      const updated = await Product.findOneAndUpdate(
+        { _id: item.product, quantity: { $gte: item.quantity } },
+        { $inc: { quantity: -item.quantity } },
+        { new: true }
+      )
       
-      const updatedProduct = await Product.findById(item.product)
-      if (updatedProduct && updatedProduct.quantity === 0) {
-        updatedProduct.inStock = false
-        await updatedProduct.save()
+      if (!updated) {
+        return NextResponse.json({
+          error: `Insufficient stock for product ${item.product}`
+        }, { status: 409 })
+      }
+      
+      if (updated.quantity === 0) {
+        await Product.findByIdAndUpdate(item.product, { inStock: false })
       }
     }
 

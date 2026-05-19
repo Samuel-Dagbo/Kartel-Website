@@ -56,7 +56,6 @@ const DiscountSchema = new Schema<IDiscount>(
   { timestamps: true }
 )
 
-DiscountSchema.index({ code: 1 })
 DiscountSchema.index({ isActive: 1, expiresAt: 1 })
 
 export default mongoose.models.Discount || mongoose.model<IDiscount>('Discount', DiscountSchema)

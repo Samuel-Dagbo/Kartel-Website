@@ -71,13 +71,31 @@ export async function GET() {
         {
           $group: {
             _id: '$items.product',
-            name: { $first: '$items.product' },
             totalSold: { $sum: '$items.quantity' },
             revenue: { $sum: { $multiply: ['$items.price', '$items.quantity'] } },
           },
         },
         { $sort: { totalSold: -1 } },
         { $limit: 10 },
+        {
+          $lookup: {
+            from: 'products',
+            localField: '_id',
+            foreignField: '_id',
+            as: 'product',
+          },
+        },
+        { $unwind: '$product' },
+        {
+          $project: {
+            _id: 1,
+            name: '$product.name',
+            image: { $arrayElemAt: ['$product.images', 0] },
+            price: '$product.price',
+            totalSold: 1,
+            revenue: 1,
+          },
+        },
       ]),
       Order.aggregate([
         { $match: { createdAt: { $gte: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000) } } },

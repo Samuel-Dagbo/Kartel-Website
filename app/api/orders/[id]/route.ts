@@ -1,29 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/db'
 import Order from '@/models/Order'
+import Product from '@/models/Product'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { sendOrderStatusUpdateEmail } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET(req: NextRequest) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     await connectDB()
     const session = await getServerSession(authOptions)
-    
+
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { searchParams } = new URL(req.url)
-    const orderId = searchParams.get('id')
-
-    if (!orderId) {
-      return NextResponse.json({ error: 'Order ID required' }, { status: 400 })
-    }
-
-    const order = await Order.findById(orderId)
+    const order = await Order.findById(params.id)
       .populate('user', 'name email')
       .populate('items.product', 'name price images')
 
@@ -42,7 +39,10 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function PUT(req: NextRequest) {
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     await connectDB()
     const session = await getServerSession(authOptions)
@@ -51,27 +51,36 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { searchParams } = new URL(req.url)
-    const orderId = searchParams.get('id')
-
-    if (!orderId) {
-      return NextResponse.json({ error: 'Order ID required' }, { status: 400 })
-    }
-
     const body = await req.json()
     const { status, trackingNumber, paymentStatus } = body
 
-    const order = await Order.findById(orderId)
+    const order = await Order.findById(params.id)
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
     }
+
+    const previousStatus = order.status
 
     if (status) order.status = status
     if (trackingNumber !== undefined) order.trackingNumber = trackingNumber
     if (paymentStatus) order.paymentStatus = paymentStatus
 
     await order.save()
+
+    // Restore stock if order is cancelled
+    if (status === 'cancelled' && previousStatus !== 'cancelled') {
+      for (const item of order.items) {
+        await Product.findByIdAndUpdate(item.product, {
+          $inc: { quantity: item.quantity, inStock: item.quantity > 0 ? 0 : 0 }
+        })
+        const product = await Product.findById(item.product)
+        if (product && product.quantity > 0) {
+          product.inStock = true
+          await product.save()
+        }
+      }
+    }
 
     const populatedOrder = await Order.findById(order._id)
       .populate('user', 'name email')
@@ -94,7 +103,10 @@ export async function PUT(req: NextRequest) {
   }
 }
 
-export async function DELETE(req: NextRequest) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     await connectDB()
     const session = await getServerSession(authOptions)
@@ -103,14 +115,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { searchParams } = new URL(req.url)
-    const orderId = searchParams.get('id')
-
-    if (!orderId) {
-      return NextResponse.json({ error: 'Order ID required' }, { status: 400 })
-    }
-
-    const order = await Order.findByIdAndDelete(orderId)
+    const order = await Order.findByIdAndDelete(params.id)
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
