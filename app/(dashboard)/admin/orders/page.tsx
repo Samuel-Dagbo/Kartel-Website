@@ -28,6 +28,8 @@ interface Order {
   totalAmount: number
   status: string
   paymentStatus: string
+  paymentMethod?: string
+  paystackReference?: string
   createdAt: string
   items: OrderItem[]
   shippingAddress: {
@@ -244,7 +246,11 @@ export default function AdminOrdersPage() {
                     </td>
                     <td className="px-5 py-4">
                       <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide ${
-                        order.paymentStatus === 'paid' ? 'bg-green-500/15 text-green-400 border border-green-500/20' : 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20'
+                        order.paymentStatus === 'completed' || order.paymentStatus === 'paid'
+                          ? 'bg-green-500/15 text-green-400 border border-green-500/20'
+                          : order.paymentStatus === 'failed'
+                            ? 'bg-red-500/15 text-red-400 border border-red-500/20'
+                            : 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20'
                       }`}>
                         {order.paymentStatus || 'pending'}
                       </span>
@@ -354,6 +360,34 @@ export default function AdminOrdersPage() {
                   <p className="text-muted text-xs uppercase tracking-wider mb-3">Customer</p>
                   <p className="text-heading font-medium">{selectedOrder.user?.name || 'Guest'}</p>
                   <p className="text-body text-sm">{selectedOrder.user?.email || 'No email'}</p>
+                </div>
+
+                {/* Payment Info */}
+                <div className="p-4 rounded-xl glass-card">
+                  <p className="text-muted text-xs uppercase tracking-wider mb-3">Payment</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-muted">Method</span>
+                      <span className="text-sm text-heading font-medium capitalize">
+                        {selectedOrder.paymentMethod || (selectedOrder.paystackReference ? 'Card' : 'COD')}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-muted">Status</span>
+                      <span className={`text-sm font-semibold ${
+                        selectedOrder.paymentStatus === 'completed' || selectedOrder.paymentStatus === 'paid'
+                          ? 'text-green-400' : selectedOrder.paymentStatus === 'failed' ? 'text-red-400' : 'text-yellow-400'
+                      }`}>
+                        {selectedOrder.paymentStatus || 'pending'}
+                      </span>
+                    </div>
+                    {selectedOrder.paystackReference && (
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted">Paystack Ref</span>
+                        <span className="text-sm text-body font-mono text-xs">{selectedOrder.paystackReference}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Shipping Address */}

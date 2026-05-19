@@ -36,6 +36,7 @@ export default function POSPage() {
   const [processing, setProcessing] = useState(false)
   const [success, setSuccess] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [posPaymentMethod, setPosPaymentMethod] = useState<'cash' | 'card'>('cash')
 
   useEffect(() => {
     fetch('/api/products')
@@ -91,6 +92,47 @@ export default function POSPage() {
 
   const handleCheckout = async () => {
     setProcessing(true)
+
+    if (posPaymentMethod === 'card') {
+      try {
+        const initRes = await fetch('/api/paystack/initialize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            items: cart.map((item) => ({
+              product: item.product._id,
+              quantity: item.quantity,
+              price: item.product.price,
+            })),
+            shippingAddress: {
+              name: customerName || session?.user?.name || 'POS Customer',
+              email: customerEmail || session?.user?.email || 'pos@carljones.com',
+              street: 'In-Store Purchase',
+              city: 'In-Store',
+              state: 'N/A',
+              zip: '00000',
+              country: 'In-Store',
+              phone: 'N/A',
+            },
+            totalAmount: total,
+            callbackUrl: `${window.location.origin}/paystack/callback`,
+          }),
+        })
+
+        const initData = await initRes.json()
+        if (!initRes.ok) throw new Error(initData.error || 'Payment init failed')
+
+        setProcessing(false)
+        setCheckoutModal(false)
+        window.location.href = initData.authorizationUrl
+        return
+      } catch (err: any) {
+        setProcessing(false)
+        alert('Payment initiation failed: ' + err.message)
+        return
+      }
+    }
+
     try {
       const res = await fetch('/api/orders', {
         method: 'POST',
@@ -112,7 +154,7 @@ export default function POSPage() {
             phone: 'N/A',
           },
           totalAmount: total,
-          paymentStatus: 'completed',
+          paymentMethod: 'cod',
         }),
       })
 
@@ -125,6 +167,7 @@ export default function POSPage() {
         setSuccess(false)
         setCustomerName('')
         setCustomerEmail('')
+        setPosPaymentMethod('cash')
         setProcessing(false)
       }, 2000)
     } catch {
@@ -358,7 +401,7 @@ export default function POSPage() {
                   </div>
 
                   {/* Customer Info */}
-                  <div className="space-y-3 mb-6">
+                  <div className="space-y-3 mb-4">
                     <div className="relative">
                       <User className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? 'text-white/20' : 'text-black/40'}`} strokeWidth={1.5} />
                       <input
@@ -385,6 +428,34 @@ export default function POSPage() {
                     </div>
                   </div>
 
+                  {/* Payment Method Selector */}
+                  <div className="grid grid-cols-2 gap-2 mb-5">
+                    <button
+                      type="button"
+                      onClick={() => setPosPaymentMethod('cash')}
+                      className={`p-3 rounded-xl border-2 text-center transition-all ${
+                        posPaymentMethod === 'cash'
+                          ? 'border-kartel-gold bg-kartel-gold/10'
+                          : isDark ? 'border-white/[0.06] text-white/50' : 'border-black/[0.06] text-black/50'
+                      }`}
+                    >
+                      <div className="text-lg mb-1">💰</div>
+                      <div className="text-xs font-semibold">Cash</div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPosPaymentMethod('card')}
+                      className={`p-3 rounded-xl border-2 text-center transition-all ${
+                        posPaymentMethod === 'card'
+                          ? 'border-kartel-gold bg-kartel-gold/10'
+                          : isDark ? 'border-white/[0.06] text-white/50' : 'border-black/[0.06] text-black/50'
+                      }`}
+                    >
+                      <div className="text-lg mb-1">💳</div>
+                      <div className="text-xs font-semibold">Card (Paystack)</div>
+                    </button>
+                  </div>
+
                   <div className="flex gap-3">
                     <button
                       onClick={() => setCheckoutModal(false)}
@@ -403,8 +474,8 @@ export default function POSPage() {
                         <div className="w-5 h-5 border-2 border-kartel-black/30 border-t-kartel-black rounded-full animate-spin" />
                       ) : (
                         <>
-                          <Printer className="w-4 h-4" strokeWidth={2} />
-                          Complete Sale
+                          {posPaymentMethod === 'card' ? <CreditCard className="w-4 h-4" strokeWidth={2} /> : <Printer className="w-4 h-4" strokeWidth={2} />}
+                          {posPaymentMethod === 'card' ? 'Pay with Card' : 'Complete Sale'}
                         </>
                       )}
                     </button>

@@ -25,6 +25,7 @@ interface Order {
   totalAmount: number
   status: string
   paymentStatus: string
+  paymentMethod?: string
   items: OrderItem[]
   shippingAddress: {
     street: string
@@ -255,6 +256,27 @@ export default function OrderHistory() {
                   }`}>
                     {selectedOrder.status || 'pending'}
                   </span>
+                </div>
+
+                {/* Payment */}
+                <div className="p-4 rounded-xl glass-card">
+                  <p className="text-muted text-xs uppercase tracking-wider mb-3">Payment</p>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted">Method</span>
+                    <span className="text-sm text-heading font-medium capitalize">
+                      {selectedOrder.paymentMethod === 'card' ? 'Card Payment' : 'Cash on Delivery'}
+                    </span>
+                  </div>
+                  <div className="flex justify-between mt-2">
+                    <span className="text-sm text-muted">Status</span>
+                    <span className={`text-sm font-semibold ${
+                      selectedOrder.paymentStatus === 'completed' || selectedOrder.paymentStatus === 'paid'
+                        ? 'text-green-400' : 'text-yellow-400'
+                    }`}>
+                      {selectedOrder.paymentStatus === 'completed' || selectedOrder.paymentStatus === 'paid'
+                        ? 'Paid' : selectedOrder.paymentStatus || 'Pending'}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Items */}

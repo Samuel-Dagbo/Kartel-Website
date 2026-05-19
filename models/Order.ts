@@ -23,6 +23,8 @@ export interface IOrder extends Document {
   paymentStatus: 'pending' | 'completed' | 'failed'
   paymentMethod?: string
   stripePaymentId?: string
+  paystackReference?: string
+  paystackAccessCode?: string
   trackingNumber?: string
   createdAt: Date
   updatedAt: Date
@@ -90,6 +92,12 @@ const OrderSchema = new Schema<IOrder>(
       default: 'cod',
     },
     stripePaymentId: String,
+    paystackReference: {
+      type: String,
+      index: true,
+      sparse: true,
+    },
+    paystackAccessCode: String,
     trackingNumber: String,
   },
   {

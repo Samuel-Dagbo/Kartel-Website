@@ -21,7 +21,12 @@ export async function middleware(req: NextRequest) {
   }
 
   // Allow public API routes
-  if (path.startsWith('/api/products') || path.startsWith('/api/test-email') || path.startsWith('/api/upload')) {
+  if (path.startsWith('/api/products') || path.startsWith('/api/test-email') || path.startsWith('/api/upload') || path.startsWith('/api/paystack/webhook')) {
+    return NextResponse.next()
+  }
+
+  // Allow Paystack callback page
+  if (path.startsWith('/paystack/')) {
     return NextResponse.next()
   }
 
