@@ -6,6 +6,7 @@ export const dynamic = 'force-dynamic'
 export async function GET(req: NextRequest) {
   const uri = process.env.MONGODB_URI || ''
   const maskedUri = uri.replace(/\/\/[^:]+:[^@]+@/, '//***:***@')
+  const nextauthUrl = process.env.NEXTAUTH_URL || ''
 
   // Test MongoDB connection
   let dbStatus = 'not tested'
@@ -18,23 +19,26 @@ export async function GET(req: NextRequest) {
     dbStatus = `❌ failed: ${e.message?.slice(0, 100) || 'unknown error'}`
   }
 
+  const cleanUrl = nextauthUrl.replace(/\/+$/, '')
+  const callbackUrl = `${cleanUrl}/api/auth/callback/google`
+
   return NextResponse.json({
     environment: process.env.NODE_ENV,
-    mongodb: {
-      uri: maskedUri,
-      status: dbStatus,
+    nextauth_url: {
+      raw: nextauthUrl,
+      has_trailing_slash: nextauthUrl.endsWith('/'),
+      clean: cleanUrl,
     },
+    mongodb: { status: dbStatus },
     auth: {
-      nextauth_url: process.env.NEXTAUTH_URL,
-      nextauth_secret_set: !!process.env.NEXTAUTH_SECRET,
       google_client_id_set: !!process.env.GOOGLE_CLIENT_ID,
       google_client_secret_set: !!process.env.GOOGLE_CLIENT_SECRET,
-      expected_callback_url: `${process.env.NEXTAUTH_URL || 'NEXTAUTH_URL_NOT_SET'}/api/auth/callback/google`,
-      request_url: req.url,
+      nextauth_secret_set: !!process.env.NEXTAUTH_SECRET,
+      callback_url_used: callbackUrl,
     },
-    fix: {
-      mongo: 'Go to MongoDB Atlas → Network Access → Add 0.0.0.0/0',
-      google: 'Go to https://console.cloud.google.com/apis/credentials → Add redirect URI',
+    actions: {
+      fix_trailing_slash: 'Remove the trailing slash from NEXTAUTH_URL in Vercel env vars',
+      google_console: `Add this exact URL to Google Cloud Console → Authorized redirect URIs: ${callbackUrl}`,
     },
   })
 }

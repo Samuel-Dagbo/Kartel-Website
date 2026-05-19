@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
           user.role = existingUser.role
         } catch (error) {
           console.error('Google signIn callback error:', error)
-          return false
+          return `/login?error=OAuthCallback&details=${encodeURIComponent((error as Error).message)}`
         }
       }
       return true
