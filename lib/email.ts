@@ -7,7 +7,7 @@ import { Client } from 'node-mailjet'
 const FROM_EMAIL = 'perfumescarljones@gmail.com'
 const FROM_NAME = 'Carl Jones Perfumes'
 
-function getMailjet() {
+export function getMailjetClient() {
   return new Client({
     apiKey: process.env.MJ_APIKEY_PUBLIC,
     apiSecret: process.env.MJ_APIKEY_PRIVATE
@@ -22,7 +22,7 @@ interface EmailOptions {
 
 async function sendEmail({ to, subject, html }: EmailOptions) {
   try {
-    const mailjet = getMailjet()
+    const mailjet = getMailjetClient()
     const stripHtml = html.replace(/<[^>]*>/g, '')
     const result = await mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [

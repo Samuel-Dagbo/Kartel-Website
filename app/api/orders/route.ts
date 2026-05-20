@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const orderNumber = `KRT-${Date.now().toString(36).toUpperCase()}`
+    const orderNumber = `CJ-${Date.now().toString(36).toUpperCase()}`
 
     const orderData: any = {
       orderNumber,

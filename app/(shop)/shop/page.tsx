@@ -73,7 +73,7 @@ export default function ShopPage() {
   const clearFilters = () => {
     setCategory('all')
     setBrand('')
-    setPriceRange([0, 1000])
+    setPriceRange([0, 15000])
     setSearchQuery('')
   }
 

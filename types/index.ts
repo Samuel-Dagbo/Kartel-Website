@@ -37,7 +37,7 @@ export interface Product {
   quantity: number
   inStock: boolean
   featured: boolean
-  new?: boolean
+  new: boolean
   rating: number
   reviewCount: number
   tags: string[]

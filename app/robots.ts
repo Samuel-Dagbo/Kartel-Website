@@ -1,0 +1,16 @@
+import { MetadataRoute } from 'next'
+
+export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://carljonesperfumes.com'
+
+  return {
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/customer/'],
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
+  }
+}

@@ -57,7 +57,27 @@ export async function GET(req: NextRequest) {
       }, { status: 200 })
     }
 
-    for (const item of order.items) {
+    const updatedOrder = await Order.findOneAndUpdate(
+      { _id: order._id, paymentStatus: 'pending' },
+      { paymentStatus: 'completed', status: 'processing', paystackReference: reference },
+      { new: true }
+    )
+
+    if (!updatedOrder) {
+      console.error(`Race condition: Order ${order._id} already processed by webhook`)
+      return NextResponse.json({
+        success: true,
+        alreadyProcessed: true,
+        order: {
+          _id: order._id,
+          orderNumber: order.orderNumber,
+          status: 'processing',
+          paymentStatus: 'completed',
+        },
+      }, { status: 200 })
+    }
+
+    for (const item of updatedOrder.items) {
       const updated = await Product.findOneAndUpdate(
         { _id: item.product, quantity: { $gte: item.quantity } },
         { $inc: { quantity: -item.quantity } },
@@ -74,12 +94,7 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    order.status = 'processing'
-    order.paymentStatus = 'completed'
-    order.paystackReference = reference
-    await order.save()
-
-    const populatedOrder = await Order.findById(order._id)
+    const populatedOrder = await Order.findById(updatedOrder._id)
       .populate('items.product', 'name price')
 
     const itemDetails = (populatedOrder?.items || []).map((item: any) => ({
@@ -88,12 +103,12 @@ export async function GET(req: NextRequest) {
       price: item.price,
     }))
 
-    if (order.shippingAddress?.email) {
+    if (updatedOrder.shippingAddress?.email) {
       sendOrderConfirmationEmail(
-        order.shippingAddress.email,
-        order.shippingAddress.name || 'Customer',
-        order.orderNumber,
-        order.totalAmount,
+        updatedOrder.shippingAddress.email,
+        updatedOrder.shippingAddress.name || 'Customer',
+        updatedOrder.orderNumber,
+        updatedOrder.totalAmount,
         itemDetails,
       ).catch(err => console.error('Confirmation email failed:', err))
     }
@@ -101,11 +116,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       success: true,
       order: {
-        _id: order._id,
-        orderNumber: order.orderNumber,
-        status: order.status,
-        paymentStatus: order.paymentStatus,
-        totalAmount: order.totalAmount,
+        _id: updatedOrder._id,
+        orderNumber: updatedOrder.orderNumber,
+        status: updatedOrder.status,
+        paymentStatus: updatedOrder.paymentStatus,
+        totalAmount: updatedOrder.totalAmount,
       },
     }, { status: 200 })
   } catch (error: any) {

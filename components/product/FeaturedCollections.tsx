@@ -96,7 +96,7 @@ export function FeaturedCollections({ products = [] }: FeaturedCollectionsProps)
                       alt={collection.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[1.2s] ease-out brightness-90 group-hover:brightness-100"
+                      className="object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out brightness-90 group-hover:brightness-100"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50" />

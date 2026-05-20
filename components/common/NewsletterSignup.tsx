@@ -17,21 +17,26 @@ export function NewsletterSignup() {
     setIsSubmitting(true)
     setMessage(null)
 
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    if (email.includes('@') && email.includes('.')) {
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      if (!res.ok) throw new Error('Failed')
       setMessage({
         type: 'success',
         text: 'Welcome to CARL JONES. Expect extraordinary.',
       })
       setEmail('')
-    } else {
+    } catch {
       setMessage({
         type: 'error',
         text: 'Please enter a valid email address.',
       })
+    } finally {
+      setIsSubmitting(false)
     }
-    setIsSubmitting(false)
   }
 
   return (

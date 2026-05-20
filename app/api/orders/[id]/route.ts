@@ -68,15 +68,14 @@ export async function PUT(
 
     await order.save()
 
-    // Restore stock if order is cancelled
     if (status === 'cancelled' && previousStatus !== 'cancelled') {
       for (const item of order.items) {
         await Product.findByIdAndUpdate(item.product, {
-          $inc: { quantity: item.quantity, inStock: item.quantity > 0 ? 0 : 0 }
+          $inc: { quantity: item.quantity },
         })
         const product = await Product.findById(item.product)
-        if (product && product.quantity > 0) {
-          product.inStock = true
+        if (product) {
+          product.inStock = product.quantity > 0
           await product.save()
         }
       }
@@ -115,11 +114,24 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const order = await Order.findByIdAndDelete(params.id)
+    const order = await Order.findById(params.id)
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
     }
+
+    for (const item of order.items) {
+      await Product.findByIdAndUpdate(item.product, {
+        $inc: { quantity: item.quantity },
+      })
+      const product = await Product.findById(item.product)
+      if (product) {
+        product.inStock = product.quantity > 0
+        await product.save()
+      }
+    }
+
+    await Order.findByIdAndDelete(params.id)
 
     return NextResponse.json({ message: 'Order deleted successfully' }, { status: 200 })
   } catch (error) {

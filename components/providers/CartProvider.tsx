@@ -1,7 +1,9 @@
 'use client'
 
-import React, { createContext, useContext, useReducer, ReactNode } from 'react'
+import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react'
 import { CartItem } from '@/types'
+
+const CART_STORAGE_KEY = 'kartel-cart'
 
 interface CartState {
   items: CartItem[]
@@ -15,6 +17,7 @@ type CartAction =
   | { type: 'CLEAR_CART' }
   | { type: 'TOGGLE_CART' }
   | { type: 'SET_CART_OPEN'; payload: boolean }
+  | { type: 'HYDRATE'; payload: CartItem[] }
 
 const initialState: CartState = {
   items: [],
@@ -23,6 +26,9 @@ const initialState: CartState = {
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
+    case 'HYDRATE':
+      return { ...state, items: action.payload }
+
     case 'ADD_ITEM': {
       const existingItemIndex = state.items.findIndex(
         (item) => item.product._id === action.payload.product._id
@@ -91,6 +97,28 @@ const CartContext = createContext<CartContextState | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(CART_STORAGE_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          dispatch({ type: 'HYDRATE', payload: parsed })
+        }
+      }
+    } catch {
+      // Ignore invalid stored data
+    }
+  }, [])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.items))
+    } catch {
+      // Ignore storage errors
+    }
+  }, [state.items])
 
   const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0)
   const totalPrice = state.items.reduce(

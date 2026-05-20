@@ -41,11 +41,18 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Order not found' }, { status: 404 })
       }
 
-      if (order.paymentStatus === 'completed') {
+      const updatedOrder = await Order.findOneAndUpdate(
+        { _id: order._id, paymentStatus: 'pending' },
+        { paymentStatus: 'completed', status: 'processing', paystackReference: reference },
+        { new: true }
+      )
+
+      if (!updatedOrder) {
+        console.error(`Webhook race condition: Order ${order._id} already processed by verify`)
         return NextResponse.json({ message: 'Already processed' }, { status: 200 })
       }
 
-      for (const item of order.items) {
+      for (const item of updatedOrder.items) {
         const updated = await Product.findOneAndUpdate(
           { _id: item.product, quantity: { $gte: item.quantity } },
           { $inc: { quantity: -item.quantity } },
@@ -62,12 +69,7 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      order.status = 'processing'
-      order.paymentStatus = 'completed'
-      order.paystackReference = reference
-      await order.save()
-
-      const populatedOrder = await Order.findById(order._id)
+      const populatedOrder = await Order.findById(updatedOrder._id)
         .populate('items.product', 'name price')
 
       const itemDetails = (populatedOrder?.items || []).map((item: any) => ({
@@ -76,12 +78,12 @@ export async function POST(req: NextRequest) {
         price: item.price,
       }))
 
-      if (order.shippingAddress?.email) {
+      if (updatedOrder.shippingAddress?.email) {
         sendOrderConfirmationEmail(
-          order.shippingAddress.email,
-          order.shippingAddress.name || 'Customer',
-          order.orderNumber,
-          order.totalAmount,
+          updatedOrder.shippingAddress.email,
+          updatedOrder.shippingAddress.name || 'Customer',
+          updatedOrder.orderNumber,
+          updatedOrder.totalAmount,
           itemDetails,
         ).catch(err => console.error('Webhook email failed:', err))
       }

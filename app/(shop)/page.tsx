@@ -26,6 +26,7 @@ export default async function HomePage() {
     quantity: (p.quantity as number) || 0,
     inStock: (p.inStock as boolean) || true,
     featured: (p.featured as boolean) || false,
+    new: (p.new as boolean) || false,
     rating: (p.rating as number) || 0,
     reviewCount: (p.reviewCount as number) || 0,
     tags: (p.tags as string[]) || [],
